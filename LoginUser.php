@@ -1,7 +1,9 @@
 <?php
+session_start();
 // Include config file
 require'config.php';
 
+// Test PHP
 echo("Hallo");
 // Define variables and initialize with empty values
 $email = $password = "";
@@ -48,6 +50,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             save the email to the session */
                             session_start();
                             $_SESSION['email'] = $email;
+                            //$_SESSION['firstname'] = $firstname;
+                            //$_SESSION['lastname'] = $lastname;
+
                             header("location: index.php");
 
                         } else{

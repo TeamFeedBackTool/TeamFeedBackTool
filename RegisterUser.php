@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Include config file
 require 'config.php';
 
@@ -29,6 +31,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $email_err = "This email is already taken.";
                 } else{
                     $email = trim($_POST["email"]);
+                    //assigning SESSION Variables for later use, if is valid
+                    $_SESSION["email"] = trim($_POST["email"]);
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -56,6 +60,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                     $firstname = trim($_POST["firstname"]);
+                    //assigning SESSION Variables for later use, if is valid
+                    $_SESSION["firstname"] = trim($_POST["firstname"]);
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -81,6 +87,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 $surname = trim($_POST["surname"]);
+                //assigning SESSION Variables for later use, if is valid
+                $_SESSION["surname"] = trim($_POST["surname"]);
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -130,8 +138,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
-                // Redirect to login page
-                header("location: welcome.php");
+                // instantly logged in if everything was fine
+                header("location: ../HTML - Tests/index.php");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
