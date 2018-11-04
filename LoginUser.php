@@ -74,17 +74,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Close connection
     unset($pdo);
 
-/*
-    function setSessionVars($pdo)
-    {
-        session_start();
-        $stmt = $pdo->prepare("SELECT email, password, firstname, surname FROM users WHERE email = :email");
-        $stmt->execute();
-        if ($row = $stmt->fetch()) {
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['firstname'] = $row['firstname'];
-            $_SESSION['surname'] = $row['surname'];
-            echo("worked");
-        }
-    }*/
 }
