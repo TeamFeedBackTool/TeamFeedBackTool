@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT email, password FROM users WHERE email = :email";
+        $sql = "SELECT email, password, firstname, surname FROM users WHERE email = :email";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -38,6 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             // Set parameters
             $param_email = trim($_POST["email"]);
+
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -47,12 +48,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $hashed_password = $row['password'];
                         if(password_verify($password, $hashed_password)){
                             /* Password is correct, so start a new session and
-                            save the email to the session */
-                            session_start();
-                            $_SESSION['email'] = $email;
-                            //$_SESSION['firstname'] = $firstname;
-                            //$_SESSION['lastname'] = $lastname;
-
+                            save the email, firstname, surname to the session for later use*/
+                            $_SESSION['email'] = $row['email'];
+                            $_SESSION['firstname'] = $row['firstname'];
+                            $_SESSION['surname'] = $row['surname'];
                             header("location: index.php");
 
                         } else{
@@ -74,4 +73,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Close connection
     unset($pdo);
+
+/*
+    function setSessionVars($pdo)
+    {
+        session_start();
+        $stmt = $pdo->prepare("SELECT email, password, firstname, surname FROM users WHERE email = :email");
+        $stmt->execute();
+        if ($row = $stmt->fetch()) {
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['firstname'] = $row['firstname'];
+            $_SESSION['surname'] = $row['surname'];
+            echo("worked");
+        }
+    }*/
 }
