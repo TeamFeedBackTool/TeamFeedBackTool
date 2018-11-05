@@ -27,6 +27,7 @@
 
                 // echo a message to say the UPDATE succeeded
                 echo $stmt->rowCount() . " records UPDATED successfully";
+                //ssleep(5);
                 header("location:../HTML - Tests/TestUserProfile.php");
             }
         }
