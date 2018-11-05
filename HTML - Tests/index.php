@@ -14,6 +14,7 @@ session_start();
         </form>
 
         <form action="../Backend/CreateProject.php" method="POST">
+            <input type="text" name="projectName">
             <input type="submit" value="Create a new Project!">
         </form>
     </body>
