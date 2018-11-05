@@ -3,6 +3,9 @@ session_start();
 ?>
 <html>
     <body>
+    <?php
+    print_r($_SESSION);
+    ?>
         <form action="TestUserProfile.php" method="get">
             <input type="submit" value="Your Individual Profile!">
         </form>

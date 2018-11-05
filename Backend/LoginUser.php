@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT email, password, firstname, surname FROM users WHERE email = :email";
+        $sql = "SELECT pk_userId, email, password, firstname, surname FROM users WHERE email = :email";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -61,6 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION['email'] = $row['email'];
                             $_SESSION['firstname'] = $row['firstname'];
                             $_SESSION['surname'] = $row['surname'];
+                            $_SESSION['userId'] = $row['pk_userId'];
                             header("location: index.php");
 
                         } else{

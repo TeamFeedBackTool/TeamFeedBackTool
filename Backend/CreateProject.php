@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Set parameters
             $param_projectName = trim($_POST["projectName"]);
-
+            $param_userId = $_SESSION['userId'];
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
@@ -42,12 +42,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if(empty($projectName_err)){
 
             // Prepare an insert statement
-            $sql = "INSERT INTO project (projectname) VALUES (:projectName)";
+            $sql = "INSERT INTO project (projectname,fk_leaderId) VALUES (:projectName, :userId)";
 
             if($stmt = $pdo->prepare($sql)){
-
                 // Bind variables to the prepared statement as parameters
                 $stmt->bindParam(':projectName', $param_projectName, PDO::PARAM_STR);
+                $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+
                 // Set parameters
                 $projectName_email = $projectName;
 
