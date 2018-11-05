@@ -1,5 +1,5 @@
 <?php
-    //session_start();
+    session_start();
     require "config.php";
 
     try {
@@ -13,17 +13,17 @@
                 $email = trim($_SESSION['email']);
                 $surname = trim($_POST['surnameChange']);
                 $sql = ("UPDATE users
-                         SET surname = '" . $surname . "'
-                         WHERE email = '" . $email . "'" );
+                         SET surname = :name
+                         WHERE email = :email");
                 echo($sql);
                 // Prepare statement
                 $stmt = $pdo->prepare($sql);
+                $stmt->bindValue(':name', $surname);
+                $stmt->bindValue(':email', $email);
 
                 // execute the query
                 $stmt->execute();
-                echo("Hallo");
-                $row = $stmt->fetch();
-                $_SESSION['surname'] = $row['surname'];
+                $_SESSION['surname'] = $surname;
 
                 // echo a message to say the UPDATE succeeded
                 echo $stmt->rowCount() . " records UPDATED successfully";
