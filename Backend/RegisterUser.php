@@ -5,7 +5,7 @@ session_start();
 require 'config.php';
 
 // Define variables and initialize with empty values
-$firstname = $surname = $email = $password = $confirm_password = "";
+$date = $firstname = $surname = $email = $password = $confirm_password = "";
 $firstname_err = $surname_err = $email_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted

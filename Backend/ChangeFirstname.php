@@ -15,7 +15,7 @@ try {
             $sql = ("UPDATE users
                          SET firstname = :name
                          WHERE email = :email");
-            echo($sql);
+
             // Prepare statement
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':name', $firstname);

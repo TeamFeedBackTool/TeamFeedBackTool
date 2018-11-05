@@ -3,12 +3,21 @@ session_start();
 // Include config file
 require'config.php';
 
-// Test PHP
-echo("Hallo");
 // Define variables and initialize with empty values
 $email = $password = "";
 $email_err = $password_err = "";
-
+/*
+function setLatestDate($pdo){
+    $date = getdate();
+    $sql = ("UPDATE users
+                         SET lastLogin = :date
+                         WHERE email = :email");
+    // Prepare statement
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':date', $date);
+    // execute the query
+    $stmt->execute();
+}*/
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -73,5 +82,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Close connection
     unset($pdo);
+
 
 }

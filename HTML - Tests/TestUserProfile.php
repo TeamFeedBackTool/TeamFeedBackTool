@@ -1,11 +1,9 @@
 <?php
     session_start();
-    // require "../Backend/ChangeSurname.php";
 ?>
 
 
 <html>
-
     <body>
         <h2> Welcome to your personal Profile</h2>
         <?php
