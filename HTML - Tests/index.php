@@ -13,6 +13,9 @@ session_start();
             <input type="submit" value="Log Out Now!">
         </form>
 
+        <form action="../Backend/CreateProject.php" method="POST">
+            <input type="submit" value="Create a new Project!">
+        </form>
     </body>
 
 </html>

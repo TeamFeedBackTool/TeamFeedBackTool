@@ -8,8 +8,8 @@ CREATE TABLE Users (
   pk_userId INT PRIMARY KEY AUTO_INCREMENT,
   email  VARCHAR(60),
   firstname VARCHAR(30),
-  lastname  VARCHAR(30),
-  password  VARCHAR(20),
+  surname  VARCHAR(30),
+  password  VARCHAR(100),
   lastLogin DATE
 );
 

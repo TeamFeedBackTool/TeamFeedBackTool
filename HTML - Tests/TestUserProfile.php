@@ -32,5 +32,9 @@
             <input type="text" name="surnameChange">
             <input type="submit" value="Ändere deinen Nachnamen!">
         </form> <br>
+        <form action="index.php" method="get">
+            <input type="submit" value="Back to index!">
+        </form>
     </body>
+
 </html>
