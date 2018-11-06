@@ -6,18 +6,17 @@ require'config.php';
 // Define variables and initialize with empty values
 $email = $password = "";
 $email_err = $password_err = "";
-/*
+
 function setLatestDate($pdo){
-    $date = getdate();
-    $sql = ("UPDATE users
-                         SET lastLogin = :date
-                         WHERE email = :email");
-    // Prepare statement
+    $sql = "UPDATE users 
+              SET lastLogin = now()
+              WHERE email = :email";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':date', $date);
-    // execute the query
+    $stmt->bindValue(':email', $_SESSION['email']);
     $stmt->execute();
-}*/
+
+    $_SESSION['date'] = "yee";
+}
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -62,6 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION['firstname'] = $row['firstname'];
                             $_SESSION['surname'] = $row['surname'];
                             $_SESSION['userId'] = $row['pk_userId'];
+                            setLatestDate($pdo);
                             header("location: index.php");
 
                         } else{
