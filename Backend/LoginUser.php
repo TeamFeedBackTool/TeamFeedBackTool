@@ -14,8 +14,7 @@ function setLatestDate($pdo){
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':email', $_SESSION['email']);
     $stmt->execute();
-
-    $_SESSION['date'] = "yee";
+    $_SESSION['date'] = getdate();
 }
 
 // Processing form data when form is submitted
