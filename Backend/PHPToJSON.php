@@ -22,4 +22,18 @@ function PHPToJson()
     ));
 }
 
+function sendError($errorText){
+    echo json_encode(array(
+        'status' => '200',
+        'infotext' => $errorText
+    ));
+}
+
+function sendSuccess($successText){
+    echo json_encode(array(
+        'status' => '50x',
+        'infotext' => $successText
+    ));
+}
+
 
