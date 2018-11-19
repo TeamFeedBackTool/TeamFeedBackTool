@@ -16,7 +16,6 @@ function setLatestDate($pdo){
     $stmt->execute();
     $_SESSION['date'] = getdate();
 }
-
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 

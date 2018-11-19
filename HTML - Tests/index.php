@@ -17,6 +17,5 @@ session_start();
             <input type="text" name="projectName">
         </label>
         <input type="submit" value="Create a new Project!">
-        </form>
     </body>
 </html>

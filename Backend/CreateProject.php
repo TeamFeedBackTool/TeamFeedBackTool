@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Attempt to execute the prepared statement
                 if($stmt->execute()){
                     // instantly logged in if everything was fine
-                    header("location: ../HTML - Tests/index.php");
+                    //header("location: ../HTML - Tests/index.php");
                 } else{
                     echo "Something went wrong. Please try again later.";
                 }
@@ -65,6 +65,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         // Close statement
         unset($stmt);
     }
+
+
+    // Check input errors before inserting in database
+    if(empty($projectName_err)){
+        $param_projectName = trim($_POST["projectName"]);
+        $param_userId = $_SESSION['userId'];
+        // Prepare an insert statement
+        $sql = "INSERT INTO worksat (pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectName)";
+
+        if($stmt = $pdo->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(':projectName', $param_projectName, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+
+            // Set parameters
+            $projectName_email = $projectName;
+
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // instantly logged in if everything was fine
+                header("location: ../HTML - Tests/index.php");
+            } else{
+                echo "Something went wrong. Please try again later.";
+            }
+        }
+        unset($stmt);
+    }
+    // Close statement
+    unset($stmt);
+
 
 }
 

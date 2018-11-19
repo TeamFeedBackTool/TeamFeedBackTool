@@ -21,10 +21,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(':email', $param_email, PDO::PARAM_STR);
-
             // Set parameters
             $param_email = trim($_POST["email"]);
-
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 if($stmt->rowCount() == 1){
@@ -32,13 +30,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 } else{
                     $email = trim($_POST["email"]);
                     //assigning SESSION Variables for later use, if is valid
+                    echo("");
                     $_SESSION["email"] = trim($_POST["email"]);
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
         }
-
         // Close statement
         unset($stmt);
     }
