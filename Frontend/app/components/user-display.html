@@ -1,0 +1,27 @@
+<style>
+    .user-display .username {
+        font-size: 1rem;
+        color: #ffffff;
+        margin-right: 0.8rem;
+    }
+
+    .user-display {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .user-display .user-profile {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+    }
+
+</style>
+<div class="user-display" layout="row">
+    <span class="username">{{ $ctrl.username }}</span>
+    <img src="resources/baseline-person-24px.svg " class="user-profile"></img>
+</div>

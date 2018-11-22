@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Nato Sans';
+    url(https://fonts.googleapis.com/css?family=Noto+Sans);
+}
+
+* {
+    font-family: "Nato Sans", sans-serif;
+}
