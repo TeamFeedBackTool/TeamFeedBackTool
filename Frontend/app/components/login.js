@@ -1,24 +1,21 @@
-app.component("register", {
-    templateUrl: "components/register.html",
-    controller: "RegisterController"
+app.component("login", {
+    templateUrl: "components/login.html",
+    controller: "LoginController"
 });
 
-app.controller("RegisterController", function($http){
-    this.status = "Bitte Registrieren Sie sich";
+app.controller("LoginController", function($http){
+    this.status = "Bitte loggen Sie sich ein!";
 
     this.submit = () => {
-        if(this.frm_email === undefined || this.frm_firstname === undefined || this.frm_surname === undefined || this.frm_password === undefined){
-            this.status = "Fehler bei der Eingabe!";
+        if(this.frm_email === undefined || this.frm_password === undefined){
+            this.status = "Fehler bei der Eingabe";
         }else {
-            this.status = "Sie wurden erfolgreich registriert!"
+            this.status = "Sie wurden erfolgreich angemeldet"
 
             let parameter = JSON.stringify({
                 email: this.frm_email,
-                firstname: this.frm_firstname,
-                surname: this.frm_surname,
                 password: this.frm_password
             });
-
             let url = "../../Backend/RegisterUser.php";
 
             $http({
