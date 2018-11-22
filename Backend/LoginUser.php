@@ -2,9 +2,13 @@
 session_start();
 // Include config file
 require 'config.php';
+require 'JSONToPHP.php';
 
 // Define variables and initialize with empty values
 $email = $password = "";
+
+//JSON to $userdata for later use
+$userdata = registerJSONToPHP();
 
 function setLatestDate($pdo)
 {
@@ -17,8 +21,8 @@ function setLatestDate($pdo)
     $_SESSION['date'] = getdate();
 }
 
-$email = trim($_POST["email"]);
-$password = trim($_POST['password']);
+$email = trim($userdata["email"]);
+$password = trim($userdata['password']);
 
 // Prepare a select statement
 $sql = "SELECT pk_userId, email, password, firstname, surname FROM users WHERE email = :email";
@@ -28,7 +32,7 @@ if ($stmt = $pdo->prepare($sql)) {
     $stmt->bindParam(':email', $param_email, PDO::PARAM_STR);
 
     // Set parameters
-    $param_email = trim($_POST["email"]);
+    $param_email = trim($userdata["email"]);
 
     // Attempt to execute the prepared statement
     if ($stmt->execute()) {

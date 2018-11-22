@@ -2,8 +2,7 @@
 require "config.php";
 session_start();
 
-function SendUserData()
-{
+function SendUserData(){
     echo json_encode(array(
         'email' => $_SESSION['email'],
         'surname' => $_SESSION['surname'],
@@ -13,25 +12,16 @@ function SendUserData()
     ));
 }
 
-function PHPToJson()
-{
-    echo json_encode(array(
-        'surname' => $_SESSION['surname'],
-        'firstname' => $_SESSION['surname'],
-        'count' => 3
-    ));
-}
-
 function sendError($errorText){
     echo json_encode(array(
-        'status' => '200',
+        'status' => '50x',
         'infotext' => $errorText
     ));
 }
 
 function sendSuccess($successText){
     echo json_encode(array(
-        'status' => '50x',
+        'status' => '201',
         'infotext' => $successText
     ));
 }

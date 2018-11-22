@@ -1,0 +1,24 @@
+<form method="post" action="../../../Backend/RegisterUser.php">
+    <md-input-container class="md-block">
+        <label>Client Email</label>
+        <input required type="email" name="email" id="form_email" ng-model="$ctrl.frm_email"
+               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+    </md-input-container>
+    <md-input-container>
+        <label>Vorname</label>
+        <input type="text" id="form_firstname" name="firstname" ng-model="$ctrl.frm_firstname"/>
+    </md-input-container>
+    <md-input-container>
+        <label>Nachname</label>
+        <input type="text" id="form_surname" name="surname" ng-model="$ctrl.frm_surname"/>
+    </md-input-container>
+    <md-input-container>
+        <label>Passwort</label>
+        <input type="password" id="form_password" name="password" ng-model="$ctrl.frm_password"/>
+    </md-input-container>
+
+    <md-button class="md-raised md-primary" ng-click="$ctrl.submit()">
+        Registrieren
+    </md-button>
+</form>
+<div>{{ $ctrl.status }}</div>
