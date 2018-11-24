@@ -6,7 +6,7 @@ app.component("register", {
 app.controller("RegisterController", function($http, $window){
     this.submit = () => {
         if(this.frm_email === undefined){
-            this.info = "Bitte überprüfen Sie ihre Email-Addresse";
+            this.info = "Bitte überprüfen Sie ihre Email-Adresse";
         }else if(this.frm_firstname === undefined || this.frm_surname === undefined){
             this.info = "Bitte überprüfen Sie Ihren Vor- oder Nachnamen";
         }else if(this.frm_password === undefined){

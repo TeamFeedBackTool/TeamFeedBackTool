@@ -6,7 +6,7 @@ app.component("login", {
 app.controller("LoginController", function($http){
     this.submit = () => {
         if(this.frm_email === undefined){
-            this.info = "Bitte überprüfen Sie ihre Email-Addresse";
+            this.info = "Bitte überprüfen Sie ihre Email-Adresse";
         }else if(this.frm_password === undefined){
             this.info = "Ihr Passwort muss mindestens 6 Zeichen lang sein";
         }
