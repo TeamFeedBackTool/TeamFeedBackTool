@@ -2,8 +2,8 @@
 require_once 'config.php';
 require_once 'JSONToPHP.php';
 require_once 'PHPToJSON.php';
+require_once 'UsefulFunctions.php';
 session_start();
-
 
 writeIntoProject($pdo, createProjectInput());
 
@@ -42,9 +42,6 @@ function writeIntoProject(PDO $pdo,$userdata){
                         $stmt->bindParam(':projectName', $param_projectName, PDO::PARAM_STR);
                         $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
 
-                        // Set parameters
-                        $projectName_email = $projectName;
-
                         // Attempt to execute the prepared statement
                         if ($stmt->execute()) {
                             // instantly logged in if everything was fine
@@ -65,37 +62,6 @@ function writeIntoProject(PDO $pdo,$userdata){
 }
 
 
-/**
- * Inserts into "worksat" table, so we can know which user works on which project
- * @param PDO $pdo
- * @param $userdata
- */
-function writeIntoWorksAt(PDO $pdo, $userdata){
-    $param_projectName = trim($userdata["projectName"]);
-    $param_userId = $_SESSION['userId'];
-    // Prepare an insert statement
-    $sql = "INSERT INTO worksat (pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectName)";
-
-    if ($stmt = $pdo->prepare($sql)) {
-        // Bind variables to the prepared statement as parameters
-        $stmt->bindParam(':projectName', $param_projectName, PDO::PARAM_STR);
-        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
-
-        // Set parameters
-        $projectName_email = $userdata['projectName'];
-
-        // Attempt to execute the prepared statement
-        if ($stmt->execute()) {
-            // instantly logged in if everything was fine
-        } else {
-            sendError("Something went wrong. Please try again later.");
-        }
-    }
-// Close statement
-    unset($stmt);
-
-
-}
 
 
 

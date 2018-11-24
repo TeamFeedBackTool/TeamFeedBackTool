@@ -12,8 +12,7 @@ ChangeFirstname($pdo);
  * A simple Script that overwrites an entry in the database with the input of the user (firstname)
  * @param PDO $pdo
  */
-function ChangeFirstname(PDO $pdo)
-{
+function ChangeFirstname(PDO $pdo){
     //JSON to $userdata for later use
     $userdata = changeFirstnameInput();
 
@@ -22,9 +21,7 @@ function ChangeFirstname(PDO $pdo)
 
         $email = trim($_SESSION['email']);
         $firstname = trim($userdata['firstname']);
-        $sql = ("UPDATE users
-                         SET firstname = :name
-                         WHERE email = :email");
+        $sql = ("UPDATE users SET firstname = :name WHERE email = :email");
         // Prepare statement
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':name', $firstname);

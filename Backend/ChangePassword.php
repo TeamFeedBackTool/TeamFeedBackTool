@@ -12,8 +12,7 @@ ChangePassword($pdo);
  * changes Password in database to new password
  * @param PDO $pdo
  */
-function ChangePassword(PDO $pdo)
-{
+function ChangePassword(PDO $pdo){
     //JSON to $userdata for later use
     $userdata = changePasswordInput();
     if(checkOldPassword($pdo,$userdata) == true) {
@@ -33,7 +32,7 @@ function ChangePassword(PDO $pdo)
             $stmt->execute();
 
             // echo a message to say the UPDATE succeeded
-            sendSuccess($stmt->rowCount() . " records UPDATED successfully");
+            sendSuccess("Password successfully changed");
 
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -57,6 +56,7 @@ function checkOldPassword(PDO $pdo, $userdata)
     $sql = "SELECT pk_userId, email, password, firstname, surname FROM users WHERE email = :email";
     if ($stmt = $pdo->prepare($sql)) {
         // Bind variables to the prepared statement as parameters
+        $param_email = $_SESSION['email'];
         $stmt->bindParam(':email', $param_email, PDO::PARAM_STR);
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
@@ -64,7 +64,7 @@ function checkOldPassword(PDO $pdo, $userdata)
                 if ($row = $stmt->fetch()) {
                     $hashed_password = $row['password'];
                     if (password_verify($password, $hashed_password)) {
-                        sendSuccess("Old Password was correct");
+                        //sendSuccess("Old Password was correct");
                         return true;
                     } else {
                         // Send an error message if password is not valid

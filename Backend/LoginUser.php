@@ -3,10 +3,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include config file
+
 require_once 'config.php';
 require_once 'JSONToPHP.php';
 require_once 'PHPToJSON.php';
+require_once "UsefulFunctions.php";
 
 LoginUser($pdo);
 
@@ -52,7 +53,6 @@ function LoginUser(PDO $pdo){
             sendError("Oops! Something went wrong. Please try again later.");
         }
     }
-
     // Close connection
     unset($pdo);
 }

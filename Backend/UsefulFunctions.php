@@ -32,3 +32,30 @@ function saveIntoSession($row){
     $_SESSION['surname'] = $row['surname'];
     $_SESSION['userId'] = $row['pk_userId'];
 }
+
+/**
+ * Inserts into "worksat" table, so we can know which user works on which project
+ * @param PDO $pdo
+ * @param $userdata
+ */
+function writeIntoWorksAt(PDO $pdo, $userdata){
+    $param_projectName = trim($userdata["projectName"]);
+    $param_userId = $_SESSION['userId'];
+    // Prepare an insert statement
+    $sql = "INSERT INTO worksat (pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectName)";
+
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+        $stmt->bindParam(':projectName', $param_projectName, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+
+        // Attempt to execute the prepared statement
+        if ($stmt->execute()) {
+            // instantly logged in if everything was fine
+        } else {
+            sendError("Something went wrong. Please try again later.");
+        }
+    }
+    // Close statement
+    unset($stmt);
+}

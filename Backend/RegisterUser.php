@@ -2,7 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-// Include config file
+
+// Include important files
 require_once 'config.php';
 require_once 'JSONToPHP.php';
 require_once 'PHPToJSON.php';
@@ -11,16 +12,12 @@ require_once 'UsefulFunctions.php';
 
 registerUser($pdo);
 /**
- * register user if input is valid and user doesnt exist yet
+ * registers user if input is valid and user doesnt exist yet
  * @param PDO $pdo
  */
-function registerUser(PDO $pdo)
-{
+function registerUser(PDO $pdo){
 //reads JSON and writes it into $userdata
     $userdata = registerJSONToPHP();
-
-// Define variables and initialize with empty values
-    $date = $firstname = $surname = $email = $password = $confirm_password = "";
 
 // Prepare a select statement
     $sql = "SELECT pk_userId FROM users WHERE email = :email";
@@ -41,11 +38,11 @@ function registerUser(PDO $pdo)
         } else {
             sendError("Oops! Something went wrong. Please try again later.");
         }
-// Close statement
+        // Close statement
         unset($stmt);
     }
 
-// Prepare a select statement
+    // Prepare a select statement
     $sql = "SELECT pk_userId FROM users WHERE firstname = :firstname";
     if ($stmt = $pdo->prepare($sql)) {
         // Set parameters
@@ -65,7 +62,7 @@ function registerUser(PDO $pdo)
         unset($stmt);
     }
 
-// Prepare a select statement
+    // Prepare a select statement
     $sql = "SELECT pk_userId FROM users WHERE surname = :surname";
     if ($stmt = $pdo->prepare($sql)) {
         // Set parameters
@@ -120,7 +117,6 @@ function registerUser(PDO $pdo)
                     }
                 }
                 sendSuccess("you were registered");
-                // instantly logged in if everything was fine
             } else {
                 sendError("Something went wrong. Please try again later.");
             }

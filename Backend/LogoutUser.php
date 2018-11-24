@@ -1,10 +1,10 @@
 <?php
 LogoutUser();
+
 /**
  * a simple script to log the user out
  */
-function LogoutUser()
-{
+function LogoutUser(){
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }

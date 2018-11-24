@@ -4,7 +4,6 @@ require_once "config.php";
  * With this class we can read the input from the client-side in general, JSON->PHP
  */
 
-
 /**
  * reads necessary user data if the user wants to register themselves
  * returns an array with useful user-data (email, firstname, surname, password)
@@ -74,5 +73,16 @@ function changePasswordInput(){
     $obj = json_decode($json, true);
     $userdata = array("oldPassword" => $obj['oldPassword'],
         "newPassword" => $obj['newPassword']);
+    return $userdata;
+}
+
+/**
+ * gets Input to invite an employee
+ * @return array
+ */
+function inviteEmployeeInput(){
+    $json = file_get_contents('php://input');
+    $obj = json_decode($json, true);
+    $userdata = array("email" => $obj['email']);
     return $userdata;
 }

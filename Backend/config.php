@@ -1,13 +1,8 @@
 <?php
 
-/*
-//defines database configs and tries to connect to db
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'FeedbackTool');
-*/
-
+/**
+ * simple DB config to connect to DB
+ */
 $DB_SERVER = "localhost";
 $DB_USERNAME = "root";
 $DB_PASSWORD = "";

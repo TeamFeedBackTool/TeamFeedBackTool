@@ -21,9 +21,7 @@ function ChangeSurname(PDO $pdo)
 
         $email = trim($_SESSION['email']);
         $surname = trim($userdata['surname']);
-        $sql = ("UPDATE users
-                         SET surname = :name
-                         WHERE email = :email");
+        $sql = ("UPDATE users SET surname = :name WHERE email = :email");
         // Prepare statement
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':name', $surname);
