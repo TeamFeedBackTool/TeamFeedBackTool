@@ -48,7 +48,7 @@ if ($stmt = $pdo->prepare($sql)) {
                     $_SESSION['surname'] = $row['surname'];
                     $_SESSION['userId'] = $row['pk_userId'];
                     setLatestDate($pdo);
-                    header("location: index.php");
+                    //header("location: index.php");
 
                 } else {
                     // Display an error message if password is not valid
