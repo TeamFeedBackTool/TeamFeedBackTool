@@ -1,6 +1,7 @@
 <?php
-require "config.php";
-require "JSONToPHP.php";
+require_once 'config.php';
+require_once 'JSONToPHP.php';
+require_once 'PHPToJSON.php';
 session_start();
 
 

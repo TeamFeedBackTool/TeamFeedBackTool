@@ -2,9 +2,9 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require "config.php";
-require "PHPToJSON.php";
-require "JSONToPHP.php";
+require_once 'config.php';
+require_once 'JSONToPHP.php';
+require_once 'PHPToJSON.php';
 
 ChangeSurname($pdo);
 
