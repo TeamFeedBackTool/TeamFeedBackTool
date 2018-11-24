@@ -1,11 +1,17 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require "config.php";
 require "PHPToJSON.php";
 require "JSONToPHP.php";
 
 ChangeSurname($pdo);
-//A simple Script that overwrites an entry in the database with the input of the user (Surname)
+
+/**
+ * A simple Script that overwrites an entry in the database with the input of the user (Surname)
+ * @param PDO $pdo
+ */
 function ChangeSurname(PDO $pdo)
 {
     //JSON to $userdata for later use

@@ -64,3 +64,15 @@ function createProjectInput(){
     $userdata = array("projectName" => $obj['projectName']);
     return $userdata;
 }
+
+/**
+ * gets Input for changePassword
+ * @return array
+ */
+function changePasswordInput(){
+    $json = file_get_contents('php://input');
+    $obj = json_decode($json, true);
+    $userdata = array("oldPassword" => $obj['oldPassword'],
+        "newPassword" => $obj['newPassword']);
+    return $userdata;
+}

@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // Include config file
 require 'config.php';
 require 'JSONToPHP.php';
@@ -8,7 +10,6 @@ require 'PHPToJSON.php';
 
 //reads JSON and writes it into $userdata
 $userdata = registerJSONToPHP();
-
 
 // Define variables and initialize with empty values
 $date = $firstname = $surname = $email = $password = $confirm_password = "";
@@ -103,9 +104,8 @@ if ($stmt = $pdo->prepare($sql)) {
 
     // Attempt to execute the prepared statement
     if ($stmt->execute()) {
-        sendSuccess("OKK");
+        sendSuccess("You were successfully registered");
         // instantly logged in if everything was fine
-        // header("location: ../HTML - Tests/index.php");
     } else {
         sendError("Something went wrong. Please try again later.");
     }

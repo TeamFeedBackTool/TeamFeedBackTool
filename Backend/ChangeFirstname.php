@@ -1,12 +1,17 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require "config.php";
 require "PHPToJSON.php";
 require "JSONToPHP.php";
 
 ChangeFirstname($pdo);
 
-//A simple Script that overwrites an entry in the database with the input of the user (Firstname)
+/**
+ * A simple Script that overwrites an entry in the database with the input of the user (firstname)
+ * @param PDO $pdo
+ */
 function ChangeFirstname(PDO $pdo)
 {
     //JSON to $userdata for later use
@@ -27,7 +32,7 @@ function ChangeFirstname(PDO $pdo)
 
         // execute the query
         $stmt->execute();
-        $_SESSION['surname'] = $firstname;
+        $_SESSION['firstn'] = $firstname;
 
         // echo a message to say the UPDATE succeeded
         sendSuccess( $stmt->rowCount() . " records UPDATED successfully");

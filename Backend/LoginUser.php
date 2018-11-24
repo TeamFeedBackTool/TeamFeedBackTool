@@ -7,11 +7,15 @@ if (session_status() == PHP_SESSION_NONE) {
 require 'config.php';
 require 'JSONToPHP.php';
 require 'PHPToJSON.php';
+
 LoginUser($pdo);
 
-function LoginUser(PDO $pdo)
-{
-
+/**
+ * Simple script that takes user json input, looks user up, if exists and everything good
+ * logs user in
+ * @param PDO $pdo
+ */
+function LoginUser(PDO $pdo){
 //JSON to $userdata for later use
     $userdata = loginJSONToPHP();
     $password = trim($userdata['password']);
