@@ -9,6 +9,7 @@ require 'PHPToJSON.php';
 //reads JSON and writes it into $userdata
 $userdata = registerJSONToPHP();
 
+
 // Define variables and initialize with empty values
 $date = $firstname = $surname = $email = $password = $confirm_password = "";
 
