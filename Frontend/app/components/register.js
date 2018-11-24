@@ -5,9 +5,16 @@ app.component("register", {
 
 app.controller("RegisterController", function($http, $window){
     this.submit = () => {
-        if(this.frm_email === undefined || this.frm_firstname === undefined || this.frm_surname === undefined || this.frm_password === undefined){
-            this.info = "Fehler bei der Eingabe!";
-        }else {
+        if(this.frm_email === undefined){
+            this.info = "Bitte überprüfen Sie ihre Email-Addresse";
+        }else if(this.frm_firstname === undefined || this.frm_surname === undefined){
+            this.info = "Bitte überprüfen Sie Ihren Vor- oder Nachnamen";
+        }else if(this.frm_password === undefined){
+            this.info = "Ihr Passwort muss mindestens 6 Zeichen lang sein";
+        }else if(this.frm_password !== this.frm_passwordcheck){
+            this.info = "Ihre Passwörter stimmen nicht überein";
+        }
+        else {
             let parameter = JSON.stringify({
                 email: this.frm_email,
                 firstname: this.frm_firstname,
