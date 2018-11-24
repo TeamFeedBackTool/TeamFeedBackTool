@@ -34,7 +34,7 @@ function ChangeSurname(PDO $pdo)
         $_SESSION['surname'] = $surname;
 
         // echo a message to say the UPDATE succeeded
-        sendSuccess( $stmt->rowCount() . " records UPDATED successfully");
+        sendSuccess( "ging bruda");
 
     } catch (PDOException $e) {
         echo $e->getMessage();

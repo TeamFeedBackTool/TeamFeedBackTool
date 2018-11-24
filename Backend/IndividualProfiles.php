@@ -7,4 +7,5 @@ if (session_status() == PHP_SESSION_NONE) {
 /**
  * Calls SendUserData(), which sends the data the front end needs
  */
+
 SendUserData();

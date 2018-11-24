@@ -70,11 +70,12 @@ function checkOldPassword(PDO $pdo, $userdata)
                         // Send an error message if password is not valid
                         sendError('The old password you entered was not valid.');
                         return false;
-
                     }
                 }
         }
     }
-    sendError("Something went wrong");
-    return false;
+    else {
+        sendError("Something went wrong");
+        return false;
+    }
 }

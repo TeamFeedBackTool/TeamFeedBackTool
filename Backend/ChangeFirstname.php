@@ -32,11 +32,11 @@ function ChangeFirstname(PDO $pdo)
 
         // execute the query
         $stmt->execute();
-        $_SESSION['firstn'] = $firstname;
+        $_SESSION['firstname'] = $firstname;
 
         // echo a message to say the UPDATE succeeded
-        sendSuccess( $stmt->rowCount() . " records UPDATED successfully");
-
+        sendSuccess("ging bruda");
+        sendUserData();
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
