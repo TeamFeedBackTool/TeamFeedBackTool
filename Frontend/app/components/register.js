@@ -3,15 +3,11 @@ app.component("register", {
     controller: "RegisterController"
 });
 
-app.controller("RegisterController", function($http){
-    this.status = "Bitte Registrieren Sie sich";
-
+app.controller("RegisterController", function($http, $window){
     this.submit = () => {
         if(this.frm_email === undefined || this.frm_firstname === undefined || this.frm_surname === undefined || this.frm_password === undefined){
-            this.status = "Fehler bei der Eingabe!";
+            this.info = "Fehler bei der Eingabe!";
         }else {
-            this.status = "Sie wurden erfolgreich registriert!"
-
             let parameter = JSON.stringify({
                 email: this.frm_email,
                 firstname: this.frm_firstname,
@@ -28,7 +24,11 @@ app.controller("RegisterController", function($http){
             }).then(
                 (response) => {
                     console.log(response);
-                    this.status = response.data.infotext;
+                    this.info = response.data.infotext;
+                    let statusCode = response.data.status;
+                    if(statusCode === "201"){
+                        $window.location.href = 'test.html';
+                    }
                 }, function (error) {
                     console.log(error);
                 });

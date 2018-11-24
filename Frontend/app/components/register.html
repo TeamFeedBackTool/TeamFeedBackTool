@@ -23,6 +23,10 @@
         color: rgba(133, 0, 59, 1);
     }
 
+    .register .info{
+
+    }
+
 </style>
 
 <form method="post" action="../../../Backend/RegisterUser.php">
@@ -51,6 +55,10 @@
         <md-button class="md-raised register-button" ng-click="$ctrl.submit()">
             Registrieren
         </md-button>
+        <div class="info">
+            <br>
+            {{$ctrl.info}}
+        </div>
     </div>
 </form>
 
