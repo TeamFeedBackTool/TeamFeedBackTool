@@ -9,7 +9,7 @@ CREATE TABLE Users (
   email  VARCHAR(60),
   firstname VARCHAR(30),
   surname  VARCHAR(30),
-  password  VARCHAR(100),
+  password  VARCHAR(150),
   lastLogin DATE
 );
 
@@ -36,17 +36,11 @@ CREATE TABLE Feedback (
   fk_userId     INT,
   fk_projectId  INT,
   date          DATE,
-  data          VARCHAR(50),
+  sliderValue_stress INT(2),
+  sliderValue_motivation INT(2),
+  work_performance_satisfied BOOLEAN,
+  technicalSkills BOOLEAN,
 
   CONSTRAINT FOREIGN KEY fk_userId(fk_userId) REFERENCES Users (pk_userId),
   CONSTRAINT FOREIGN KEY fk_projectId(fk_projectId) REFERENCES Project (pk_projectId)
-);
-
-CREATE TABLE GroupFeedback (
-  pk_groupFeedbackId INT PRIMARY KEY AUTO_INCREMENT,
-  fk_projectId       INT,
-  date               DATE,
-  data               VARCHAR(50),
-
-  CONSTRAINT FOREIGN KEY fk_projectId1(fk_projectId) REFERENCES Project (pk_projectId)
 );
