@@ -10,9 +10,15 @@ app.controller("createProjectController", function($http){
         } else {
             this.status = "Ihr Projekt wurde erfolgreich erstellt!"
 
+            let a = document.cookie.split(",");
+
+            let b = a.indexOf("pk_userId:*");
+
+            let c = a[b].split(":");
+
             let parameter = JSON.stringify({
                 projectName: this.frm_projectName,
-
+                fk_leaderId: c[1]
             });
 
             let url = "../../Backend/CreateProject.php";
