@@ -3,22 +3,38 @@ app.component("createProject", {
     controller: "createProjectController"
 });
 
-app.controller("createProjectController", function($http){
+app.controller("createProjectController", function ($http) {
+    $scope.result1 = "Default";
+
+    $scope.showPrompt = function (ev) {
+        var confirm = $mdDialog.prompt()
+            .title('Geben Sie eine Projektnamen ein!')
+            .placeholder('Projektname')
+            .ariaLabel('Projektname')
+            .targetEvent(ev)
+            .required(true)
+            .ok('Okay!')
+            .cancel('Abbrechen');
+
+        $mdDialog.show(confirm).then(function (result) {
+            $scope.result1 = ' ' + result;
+        });
+    };
+
     this.submit = () => {
-        if(this.frm_projectName === undefined){
+        if (this.frm_projectName === undefined) {
             this.status = "Fehler bei der Eingabe!";
         } else {
             this.status = "Ihr Projekt wurde erfolgreich erstellt!"
 
             let a = document.cookie.split(",");
 
-            let b = a.indexOf("pk_userId:*");
+            let b = a.indexOf("");
 
             let c = a[b].split(":");
 
             let parameter = JSON.stringify({
-                projectName: this.frm_projectName,
-                fk_leaderId: c[1]
+                projectName: "Bitte"
             });
 
             let url = "../../Backend/CreateProject.php";
