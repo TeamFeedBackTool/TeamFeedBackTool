@@ -3,9 +3,8 @@ app.component("createProject", {
     controller: "createProjectController"
 });
 
-app.controller("createProjectController", function ($http) {
-    $scope.result1 = "Default";
-
+app.controller("createProjectController", function ($http, $scope, $mdDialog) {
+    $scope.status = '  ';
     $scope.showPrompt = function (ev) {
         var confirm = $mdDialog.prompt()
             .title('Geben Sie eine Projektnamen ein!')
@@ -17,7 +16,7 @@ app.controller("createProjectController", function ($http) {
             .cancel('Abbrechen');
 
         $mdDialog.show(confirm).then(function (result) {
-            $scope.result1 = ' ' + result;
+            $scope.status = ' ' + result;
         });
     };
 
