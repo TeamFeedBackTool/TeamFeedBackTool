@@ -5,11 +5,13 @@
         position: relative;
         float: right;
         align-items: center;
-        width: 12rem;
+        width: 13rem;
         padding-right: 0.5rem;
         padding-bottom: 1rem;
-        background-color: rgba(133, 0, 59, 0.15);
-        border-bottom-left-radius: 1rem;
+    }
+
+    .login .info {
+        text-align: center;
     }
 
     .login .login-button{
@@ -22,16 +24,27 @@
     .login .login-button:hover{
         color: rgba(133, 0, 59, 1);
     }
+
+    .login .funktions-spezifikation {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .register .input-container {
+        margin: 0.5rem 1rem 0 1rem;
+    }
+
 </style>
 
 <form method="post" action="../../../Backend/LoginUser.php">
     <div class="login">
-        <md-input-container>
+        <span class="funktions-spezifikation">Anmelden</span>
+        <md-input-container class="input-container">
             <label>Email</label>
             <input type="email" name="email" ng-model="$ctrl.frm_email"
                    minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
         </md-input-container>
-        <md-input-container>
+        <md-input-container class="input-container">
             <label>Passwort</label>
             <input type="password" name="password" ng-model="$ctrl.frm_password"
                    minlength="6" maxlength="100"/>

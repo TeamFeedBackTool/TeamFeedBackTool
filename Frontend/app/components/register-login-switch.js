@@ -4,8 +4,7 @@ app.component("registerLoginSwitch", {
     templateUrl: "components/register-login-switch.html",
     controller: "registerLoginSwitchController",
     bindings: {
-        toggleText: "@",
-        funktionsSpezifikation: "@"
+        toggleText: "@"
     }
 });
 
@@ -16,7 +15,6 @@ app.controller("registerLoginSwitchController", function ($log, $scope) {
     this.$onInit = function () {
         $scope.registerLoginSwitch = {register: false, login: true};
         this.toggleText = 'Erstellen Sie Ihr Konto';
-        this.funktionsSpezifikation = 'Anmelden';
     };
 
     this.toggleSwitch = () => {
@@ -24,12 +22,10 @@ app.controller("registerLoginSwitchController", function ($log, $scope) {
             $scope.registerLoginSwitch.register = true;
             $scope.registerLoginSwitch.login = false;
             this.toggleText = 'Melden Sie sich hier an';
-            this.funktionsSpezifikation = 'Registrieren';
         } else {
             $scope.registerLoginSwitch.register = false;
             $scope.registerLoginSwitch.login = true;
             this.toggleText = 'Erstellen Sie Ihr Konto';
-            this.funktionsSpezifikation = 'Anmelden';
         }
     };
 
