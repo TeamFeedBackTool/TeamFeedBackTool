@@ -38,7 +38,6 @@ function saveIntoSession($row)
 /**
  * Inserts into "worksat" table, so we can know which user works on which project
  * @param PDO $pdo
- * @param $userdata
  */
 function writeIntoWorksAt(PDO $pdo)
 {
@@ -125,7 +124,7 @@ function projectIdsToNames(PDO $pdo)
             }
         }
     }
-
+    return $projectNames;
 }
 
 /**

@@ -42,12 +42,3 @@ CREATE TABLE Feedback (
   CONSTRAINT FOREIGN KEY (fk_userId) REFERENCES Users (pk_userId),
   CONSTRAINT FOREIGN KEY (fk_projectId) REFERENCES Project (pk_projectId)
 );
-
-INSERT INTO users (email, password, firstname, surname) VALUES ("test@gmail.com", "test", "max", "gross");
-SELECT * FROM Users;
-
-INSERT INTO project (projectname,fk_leaderId) VALUES ("Name eines rdm Projekt", 2);
-SELECT * FROM Project;
-
-INSERT INTO worksat(pk_fk_userId, pk_fk_projectId) VALUES (2, 2);
-SELECT * FROM worksAt;

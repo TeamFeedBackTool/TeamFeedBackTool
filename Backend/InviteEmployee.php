@@ -43,10 +43,11 @@ function doesUserExist(PDO $pdo, $userdata){
  * @param PDO $pdo
  * @param $userdata
  */
+
 function inviteEmployee(PDO $pdo, $userdata){
     if(doesUserExist($pdo,$userdata) == true){
         writeIntoWorksAt($pdo,$userdata);
-        sendSuccess("The user got added.");
+        sendProjects($pdo);
     }
     else{
         sendError("User does not exist.");
