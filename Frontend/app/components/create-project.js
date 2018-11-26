@@ -3,31 +3,42 @@ app.component("createProject", {
     controller: "createProjectController"
 });
 
-app.controller("createProjectController", function($http){
-    this.submit = () => {
-        if(this.frm_projectName === undefined){
-            this.status = "Fehler bei der Eingabe!";
-        } else {
-            this.status = "Ihr Projekt wurde erfolgreich erstellt!"
+app.controller("createProjectController", function ($http, $scope, $mdDialog) {
+    $scope.status = ' ';
+    $scope.showPrompt = function (ev) {
+        var confirm = $mdDialog.prompt()
+            .title('Geben Sie eine Projektnamen ein!')
+            .placeholder('Projektname')
+            .ariaLabel('Projektname')
+            .targetEvent(ev)
+            .required(true)
+            .ok('Okay!')
+            .cancel('Abbrechen');
 
-            let parameter = JSON.stringify({
-                projectName: this.frm_projectName,
+        $mdDialog.show(confirm).then(function (result) {
+                let a = document.cookie.split(",");
 
-            });
+                let b = a.indexOf("");
 
-            let url = "../../Backend/CreateProject.php";
+                let c = a[b].split(":");
 
-            $http({
-                method: 'POST',
-                url: url,
-                data: parameter
-            }).then(
-                (response) => {
-                    console.log(response);
-                    this.status = response.data.infotext;
-                }, function (error) {
-                    console.log(error);
+                let parameter = JSON.stringify({
+                    projectName: result,
+                    userId: 1
                 });
-        }
-    }
+
+                let url = "../../Backend/CreateProject.php";
+
+                $http({
+                    method: 'POST',
+                    url: url,
+                    data: parameter
+                }).then(
+                    (response) => {
+                        console.log(response);
+                    }, function (error) {
+                        console.log(error);
+                    });
+        });
+    };
 });
