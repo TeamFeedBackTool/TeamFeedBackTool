@@ -4,41 +4,33 @@ app.component("createProject", {
 });
 
 app.controller("createProjectController", function ($http, $scope, $mdDialog) {
-    $scope.status = ' ';
-    $scope.showPrompt = function (ev) {
+
+    $scope.showPrompt = function(ev) {
         var confirm = $mdDialog.prompt()
             .title('Geben Sie eine Projektnamen ein!')
             .placeholder('Projektname')
-            .ariaLabel('Projektname')
             .targetEvent(ev)
             .required(true)
             .ok('Okay!')
-            .cancel('Abbrechen');
+            .cancel('Abbrechen')
 
         $mdDialog.show(confirm).then(function (result) {
-                let a = document.cookie.split(",");
+            let parameter = JSON.stringify({
+                projectName: result
+            });
 
-                let b = a.indexOf("");
+            let url = "../../Backend/CreateProject.php";
 
-                let c = a[b].split(":");
-
-                let parameter = JSON.stringify({
-                    projectName: result,
-                    userId: 1
+            $http({
+                method: 'POST',
+                url: url,
+                data: parameter
+            }).then(
+                (response) => {
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
                 });
-
-                let url = "../../Backend/CreateProject.php";
-
-                $http({
-                    method: 'POST',
-                    url: url,
-                    data: parameter
-                }).then(
-                    (response) => {
-                        console.log(response);
-                    }, function (error) {
-                        console.log(error);
-                    });
         });
     };
 });
