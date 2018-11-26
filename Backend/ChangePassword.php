@@ -50,8 +50,7 @@ function ChangePassword(PDO $pdo){
  * @param $userdata
  * @return bool returns true if old password was correct
  */
-function checkOldPassword(PDO $pdo, $userdata)
-{
+function checkOldPassword(PDO $pdo, $userdata){
     $password = trim($userdata['oldPassword']);
     $sql = "SELECT pk_userId, email, password, firstname, surname FROM users WHERE email = :email";
     if ($stmt = $pdo->prepare($sql)) {

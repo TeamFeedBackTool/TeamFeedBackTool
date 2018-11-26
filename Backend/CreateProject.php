@@ -3,8 +3,9 @@ require_once 'config.php';
 require_once 'JSONToPHP.php';
 require_once 'PHPToJSON.php';
 require_once 'UsefulFunctions.php';
-session_start();
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 writeIntoProject($pdo, createProjectInput());
 
 /**
@@ -12,7 +13,7 @@ writeIntoProject($pdo, createProjectInput());
  * @param PDO $pdo
  * @param $userdata
  */
-function writeIntoProject(PDO $pdo,$userdata){
+function writeIntoProject(PDO $pdo, $userdata){
     if (empty(trim($userdata["projectName"]))) {
         sendError("Please enter a projectName.");
     } else {
@@ -31,7 +32,6 @@ function writeIntoProject(PDO $pdo,$userdata){
                 if ($stmt->rowCount() == 1) {
                     sendError("This projectName is already taken.");
                 } else {
-
                     $_SESSION["projectName"] = $projectName;
 
                     // Prepare an insert statement
@@ -45,7 +45,7 @@ function writeIntoProject(PDO $pdo,$userdata){
                         // Attempt to execute the prepared statement
                         if ($stmt->execute()) {
                             // instantly logged in if everything was fine
-                            writeIntoWorksAt($pdo,$userdata);
+                            writeIntoWorksAt($pdo, $userdata);
 
                         } else {
                             sendError("Something went wrong. Please try again later.");
@@ -57,7 +57,6 @@ function writeIntoProject(PDO $pdo,$userdata){
                 sendError("Oops! Something went wrong. Please try again later.");
             }
         }
-
     }
 }
 

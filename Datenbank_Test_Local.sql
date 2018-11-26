@@ -18,17 +18,15 @@ CREATE TABLE Project (
   projectname  VARCHAR(40),
   fk_leaderId  INT,
 
-  CONSTRAINT FOREIGN KEY fk_leaderId(fk_leaderId) REFERENCES Users (pk_userId)
+  CONSTRAINT FOREIGN KEY (fk_leaderId) REFERENCES Users (pk_userId)
 );
 
 CREATE TABLE worksAt (
   pk_fk_userId    INT,
   pk_fk_projectId INT,
 
-  CONSTRAINT FOREIGN KEY pk_fk_userId(pk_fk_userId) REFERENCES Users (pk_userId),
-  CONSTRAINT FOREIGN KEY pk_fk_projectId(pk_fk_projectId) REFERENCES Project (pk_projectId),
-
-  CONSTRAINT PRIMARY KEY pk_fk_userId(pk_fk_projectId)
+  CONSTRAINT FOREIGN KEY (pk_fk_userId) REFERENCES Users (pk_userId),
+  CONSTRAINT FOREIGN KEY (pk_fk_projectId) REFERENCES Project (pk_projectId)
 );
 
 CREATE TABLE Feedback (
@@ -41,6 +39,15 @@ CREATE TABLE Feedback (
   work_performance_satisfied BOOLEAN,
   technicalSkills BOOLEAN,
 
-  CONSTRAINT FOREIGN KEY fk_userId(fk_userId) REFERENCES Users (pk_userId),
-  CONSTRAINT FOREIGN KEY fk_projectId(fk_projectId) REFERENCES Project (pk_projectId)
+  CONSTRAINT FOREIGN KEY (fk_userId) REFERENCES Users (pk_userId),
+  CONSTRAINT FOREIGN KEY (fk_projectId) REFERENCES Project (pk_projectId)
 );
+
+INSERT INTO users (email, password, firstname, surname) VALUES ("test@gmail.com", "test", "max", "gross");
+SELECT * FROM Users;
+
+INSERT INTO project (projectname,fk_leaderId) VALUES ("Name eines rdm Projekt", 2);
+SELECT * FROM Project;
+
+INSERT INTO worksat(pk_fk_userId, pk_fk_projectId) VALUES (2, 2);
+SELECT * FROM worksAt;

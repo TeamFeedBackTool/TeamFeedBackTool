@@ -41,8 +41,12 @@ function sendSuccess($successText){
 
 /**
  * send all projects for one user
+ * @param $pdo
  */
-function sendProjects(){
-
+function sendProjects($pdo){
+    echo json_encode(array(
+        'projectIds' => readProjectsForUser($pdo),
+        'projectNames' => projectIdsToNames($pdo)
+    ));
 }
 

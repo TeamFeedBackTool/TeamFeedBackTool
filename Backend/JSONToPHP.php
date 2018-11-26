@@ -9,13 +9,14 @@ require_once "config.php";
  * returns an array with useful user-data (email, firstname, surname, password)
  */
 
-function registerJSONToPHP(){
+function registerJSONToPHP()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("email" => $obj['email'],
-                      "firstname" => $obj['firstname'],
-                      "surname" => $obj['surname'],
-                      "password" => $obj['password']);
+        "firstname" => $obj['firstname'],
+        "surname" => $obj['surname'],
+        "password" => $obj['password']);
     return $userdata;
 }
 
@@ -23,11 +24,12 @@ function registerJSONToPHP(){
  * reads necessary user data if the user wants to login
  * returns email and password in array
  */
-function loginJSONToPHP(){
+function loginJSONToPHP()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("email" => $obj['email'],
-                        "password" => $obj['password']);
+        "password" => $obj['password']);
     return $userdata;
 }
 
@@ -35,7 +37,8 @@ function loginJSONToPHP(){
  * reads necessary user data if the user wants to change their surname
  * returns (new) surname in array
  */
-function changeSurnameInput(){
+function changeSurnameInput()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("surname" => $obj['surname']);
@@ -46,7 +49,8 @@ function changeSurnameInput(){
  * reads necessary user data if the user wants to change their firstname
  * returns (new) firstname in array
  */
-function changeFirstnameInput(){
+function changeFirstnameInput()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("firstname" => $obj['firstname']);
@@ -57,7 +61,8 @@ function changeFirstnameInput(){
  * reads project name if the user wants to create a project
  * returns project name in array
  */
-function createProjectInput(){
+function createProjectInput()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("projectName" => $obj['projectName']);
@@ -68,7 +73,8 @@ function createProjectInput(){
  * gets Input for changePassword
  * @return array
  */
-function changePasswordInput(){
+function changePasswordInput()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("oldPassword" => $obj['oldPassword'],
@@ -80,7 +86,8 @@ function changePasswordInput(){
  * gets Input to invite an employee
  * @return array with relevant userdata
  */
-function inviteEmployeeInput(){
+function inviteEmployeeInput()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("email" => $obj['email']);
@@ -91,13 +98,14 @@ function inviteEmployeeInput(){
  * gets Input to give Feedback
  * @return array with relevant userdata
  */
-function giveFeedbackInput(){
+function giveFeedbackInput()
+{
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("projectId" => $obj['projectId'],
-                      "sliderValue_stress" => $obj['sliderValue_stress'],
-                      "sliderValue_motivation" => $obj['sliderValue_motivation'],
-                      "work_performance_satisfied" => $obj['work_performance_satisfied'],
-                      "technicalSkills" => $obj['technicalSkills']);
+        "sliderValue_stress" => $obj['sliderValue_stress'],
+        "sliderValue_motivation" => $obj['sliderValue_motivation'],
+        "work_performance_satisfied" => $obj['work_performance_satisfied'],
+        "technicalSkills" => $obj['technicalSkills']);
     return $userdata;
 }
