@@ -5,13 +5,13 @@ app.component("createProject", {
 
 app.controller("createProjectController", function ($http, $scope, $mdDialog) {
 
-    $scope.showPrompt = function(ev) {
+    $scope.showPrompt = function (ev) {
         var confirm = $mdDialog.prompt()
             .title('Geben Sie eine Projektnamen ein!')
             .placeholder('Projektname')
             .targetEvent(ev)
             .required(true)
-            .ok('Okay!')
+            .ok('Hinzufügen!')
             .cancel('Abbrechen')
 
         $mdDialog.show(confirm).then(function (result) {
@@ -28,9 +28,11 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
             }).then(
                 (response) => {
                     console.log(response);
-                }, function (error) {
-                    console.log(error);
                 });
+            document.getElementById("working").style = "display: block; transition:";
+            new Promise((resolve) => setTimeout(resolve, 5000)).then(() => {
+                document.getElementById("working").style = "display: none";
+            });
         });
-    };
+    }
 });

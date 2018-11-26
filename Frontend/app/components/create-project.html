@@ -7,16 +7,34 @@
         right: 0;
     }
 
-    .funktioniert {
+    #working {
+        display: none;
+        margin-right: 5em;
+        margin-bottom: 1.5em;
         position: absolute;
         bottom: 0;
         right: 0;
+        background: #56e833;
+        padding: 5px;
+        border-radius: 20px;
+    }
+
+    #alreadyTaken {
+        display: none;
+        margin-right: 5em;
+        margin-bottom: 1.5em;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #e81628;
     }
 
 </style>
 
-<div class="green funktioniert"> Ihr Project wurde erstellt.</div>
+<div id="alreadyTaken"> Ihr Projektname wird bereits genutzt.</div>
 
-<md-button class="md-fab" style="background: #85003b; color: white;" ng-click="showPrompt($event)">
+<div id="working"> Ihr Project wurde erstellt.</div>
+
+<md-button class="md-fab" style="background: #85003b; color: white; text-align: center" ng-click="showPrompt($event)">
     +
 </md-button>
