@@ -1,10 +1,4 @@
 <style>
-    .user-display .username {
-        font-size: 1rem;
-        color: #ffffff;
-        margin-right: 0.8rem;
-    }
-
     .user-display {
         display: flex;
         justify-content: space-between;
@@ -20,8 +14,11 @@
         border: 1px solid #000000;
     }
 
+    .user-display .user-profile:hover {
+        cursor: pointer;
+    }
+
 </style>
 <div class="user-display" layout="row">
-    <span class="username">{{ $ctrl.username }}</span>
-    <img src="resources/baseline-person-24px.svg " class="user-profile"></img>
+    <img src="resources/baseline-person-24px.svg" class="user-profile" ng-click="$ctrl.toggleProfileMenue()">
 </div>

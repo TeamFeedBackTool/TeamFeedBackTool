@@ -1,0 +1,19 @@
+<style>
+    .user-display-username .username {
+        font-size: 1rem;
+        color: #ffffff;
+        margin-right: 0.8rem;
+    }
+
+    .user-display-username {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+</style>
+<div class="user-display-username" layout="row">
+    <span class="username">{{ $ctrl.username }}</span>
+    <user-display></user-display>
+</div>

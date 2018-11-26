@@ -6,12 +6,15 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        flex-grow: 1;
+        flex-shrink: 1;
     }
 
     .subheader .whereAmI {
         transform: translateX(2rem);
     }
+
 </style>
 <div class="subheader">
-    <span class="whereAmI">{{ $ctrl.whereAmI }}</span>
+    <ng-transclude class="whereAmI"></ng-transclude>
 </div>

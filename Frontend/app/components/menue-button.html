@@ -18,8 +18,8 @@
     .menue-icon-X.button-active span:after {bottom: 0; transform: rotate(-45deg);}
     .menue-icon-X.button-active span:before, .menue-icon-X.button-active span:after {transition-delay: 0s, 0.3s;}
 </style>
-<div id="menue-div">
-    <button class="menue-icon menue-icon-X" ng-click="$ctrl.toggle_menu()">
+<div id="menue-div" ng-click="$ctrl.toggle_menu()">
+    <button class="menue-icon menue-icon-X" >
         <span></span>
     </button>
 </div>

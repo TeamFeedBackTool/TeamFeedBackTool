@@ -9,12 +9,15 @@ app.component("userDisplay", {
 });
 
 
-app.controller("UserDisplayController", function ($log) {
+app.controller("UserDisplayController", function ($log, $rootScope) {
     $log.debug("UserDisplayController()");
 
-    this.$onInit = function() {
-        this.username = "Florian Gödel";
-        // usernamen holen und setzen
-    }
+    this.$onInit = function () {
+        $rootScope.profileVisibility = false;
+    };
+
+    this.toggleProfileMenue = () => {
+        $rootScope.profileVisibility = !$rootScope.profileVisibility;
+    };
 
 });

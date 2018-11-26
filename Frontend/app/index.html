@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
     <title>Vorlage</title>
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="favicon.png">
   
     <link rel="stylesheet" href="vendor/material-icons-3.0.1/material-icons.css">
     <link rel="stylesheet" href="vendor/roboto/roboto.css">
@@ -32,13 +32,21 @@
     <script src="app.js"></script>
     <script src="components/menue-button.js"></script>
     <script src="components/header.js"></script>
-    <script src="components/user-display.js"></script>
+    <script src="components/header-not-logged-in.js"></script>
     <script src="components/subheader.js"></script>
+    <script src="components/user-display.js"></script>
+    <script src="components/user-display-username.js"></script>
+    <script src="components/cookie-display.js"></script>
+    <script src="components/register-login-switch.js"></script>
+    <script src="components/login.js"></script>
     <script src="components/register.js"></script>
   </head>
   <body layout="column" ng-cloak>
-    <header></header>
-    <subheader where-am-i="Startseite"></subheader>
-    <register></register>
+    <header-not-logged-in></header-not-logged-in>
+    <subheader>
+      <a href="#">Startseite</a>
+    </subheader>
+    <register-login-switch></register-login-switch>
+    <cookie-display></cookie-display>
   </body>
 </html>

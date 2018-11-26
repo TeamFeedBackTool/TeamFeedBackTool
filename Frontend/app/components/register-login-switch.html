@@ -1,0 +1,31 @@
+<style>
+    .register-login-switch {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 1;
+        flex-grow: 1;
+        width: 15rem;
+        position: absolute;
+        top: 5.9rem;
+        right: 0;
+    }
+
+    .register-login-switch .switchButton {
+        max-width: 12rem;
+        background-color: lightgrey;
+    }
+
+    .register-login-switch .funktions-spezifikation {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+</style>
+<md-whiteframe class="md-whiteframe-4dp register-login-switch" ng-show="$root.profileVisibility">
+    <span class="funktions-spezifikation">{{ $ctrl.funktionsSpezifikation }}</span>
+    <register class="register" ng-show="registerLoginSwitch.register"></register>
+    <login class="login" ng-show="registerLoginSwitch.login"></login>
+    <md-button class="switchButton" ng-click="$ctrl.toggleSwitch()">{{ $ctrl.toggleText }}</md-button>
+</md-whiteframe>
