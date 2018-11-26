@@ -78,11 +78,26 @@ function changePasswordInput(){
 
 /**
  * gets Input to invite an employee
- * @return array
+ * @return array with relevant userdata
  */
 function inviteEmployeeInput(){
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
     $userdata = array("email" => $obj['email']);
+    return $userdata;
+}
+
+/**
+ * gets Input to give Feedback
+ * @return array with relevant userdata
+ */
+function giveFeedbackInput(){
+    $json = file_get_contents('php://input');
+    $obj = json_decode($json, true);
+    $userdata = array("projectId" => $obj['projectId'],
+                      "sliderValue_stress" => $obj['sliderValue_stress'],
+                      "sliderValue_motivation" => $obj['sliderValue_motivation'],
+                      "work_performance_satisfied" => $obj['work_performance_satisfied'],
+                      "technicalSkills" => $obj['technicalSkills']);
     return $userdata;
 }

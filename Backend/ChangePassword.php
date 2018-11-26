@@ -18,7 +18,7 @@ function ChangePassword(PDO $pdo){
     if(checkOldPassword($pdo,$userdata) == true) {
         try {
             $email = trim($_SESSION['email']);
-            $password = trim($userdata['newPassword']);
+            $password = password_hash($userdata['newPassword'], PASSWORD_DEFAULT);
             $sql = ("UPDATE users
                          SET password = :password
                          WHERE email = :email");
@@ -78,4 +78,6 @@ function checkOldPassword(PDO $pdo, $userdata)
         sendError("Something went wrong");
         return false;
     }
+    sendError("Something went wrong");
+    return false;
 }

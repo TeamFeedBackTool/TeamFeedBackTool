@@ -39,4 +39,10 @@ function sendSuccess($successText){
     ));
 }
 
+/**
+ * send all projects for one user
+ */
+function sendProjects(){
+
+}
 

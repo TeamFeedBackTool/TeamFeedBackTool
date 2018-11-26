@@ -26,7 +26,6 @@ function doesUserExist(PDO $pdo, $userdata){
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
             if ($stmt->rowCount() == 1) {
-                sendSuccess("The user got added.");
                 return true;
             }
         } else {
@@ -47,6 +46,7 @@ function doesUserExist(PDO $pdo, $userdata){
 function inviteEmployee(PDO $pdo, $userdata){
     if(doesUserExist($pdo,$userdata) == true){
         writeIntoWorksAt($pdo,$userdata);
+        sendSuccess("The user got added.");
     }
     else{
         sendError("User does not exist.");

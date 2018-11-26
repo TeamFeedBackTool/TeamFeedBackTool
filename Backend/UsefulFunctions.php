@@ -59,3 +59,10 @@ function writeIntoWorksAt(PDO $pdo, $userdata){
     // Close statement
     unset($stmt);
 }
+
+/**
+ *
+ */
+function readFromWorksAt(PDO $pdo, $userdata){
+
+}

@@ -1,14 +1,42 @@
 <style>
+    .createProject{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        float: right;
+        align-items: center;
+        width: 12rem;
+        padding-right: 0.5rem;
+        padding-bottom: 1rem;
+        background-color: rgba(133, 0, 59, 0.15);
+        border-bottom-left-radius: 1rem;
+    }
 
-    .md-fab {
-        font-size: 40px;
-        position: absolute;
-        bottom: 0;
-        right: 0;
+    .createProject .createProject-button{
+        margin: 0;
+        background-color: rgba(133, 0, 59, 1);
+        color: white;
+        border-radius: 0.5rem;
+    }
+
+    .createProject .createProject-button:hover{
+        color: rgba(133, 0, 59, 1);
     }
 
 </style>
 
-<md-button class="md-fab" style="background: #85003b; color: white;" ng-click="showPrompt($event)">
-    +
-</md-button>
+<form method="post" action="../../../Backend/RegisterUser.php">
+    <div class="createProject">
+        <md-input-container>
+        <md-input-container>
+            <label>Projektname</label>
+            <input type="text" name="projectName" ng-model="$ctrl.frm_projectName"
+                   minlength="3" maxlength="100" ng-pattern=""/>
+        </md-input-container>
+
+        <md-button class="md-raised createProject-button" ng-click="$ctrl.submit()">
+            Projekt erstellen
+        </md-button>
+    </div>
+</form>
+<div>{{ $ctrl.status }}</div>
