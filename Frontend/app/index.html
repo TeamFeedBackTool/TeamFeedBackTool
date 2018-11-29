@@ -40,10 +40,15 @@
     <script src="components/register-login-switch.js"></script>
     <script src="components/login.js"></script>
     <script src="components/register.js"></script>
-    <script src="components/create-project.js"></script>
+    <script src="components/project-menue.js"></script>
   </head>
   <body layout="column" ng-cloak>
-<register></register>
-  <create-project></create-project>
+    <header-not-logged-in></header-not-logged-in>
+    <subheader>
+      <a href="#">Startseite</a>
+    </subheader>
+    <project-menue></project-menue>
+    <register-login-switch></register-login-switch>
+    <cookie-display></cookie-display>
   </body>
 </html>

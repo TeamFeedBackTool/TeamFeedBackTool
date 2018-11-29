@@ -1,5 +1,5 @@
 <style>
-    .subheader {
+    .subheader-without-project-menue {
         width: 100%;
         height: 2.5rem;
         background-color: rgba(133, 0, 59, 0.15);
@@ -8,13 +8,30 @@
         align-items: center;
         flex-grow: 1;
         flex-shrink: 1;
+        position: absolute;
+        top: 3.4rem;
+        right: 0;
+        transition: 500ms;
     }
 
-    .subheader .whereAmI {
+    .subheader-with-project-menue {
+        width: calc(100% - 16rem);
+        height: 2.5rem;
+        background-color: rgba(133, 0, 59, 0.15);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-grow: 1;
+        flex-shrink: 1;
+        margin-left: 16rem;
+        transition: 500ms;
+    }
+
+    .whereAmI {
         transform: translateX(2rem);
     }
 
 </style>
-<div class="subheader">
+<div class="subheader-without-project-menue">
     <ng-transclude class="whereAmI"></ng-transclude>
 </div>

@@ -1,17 +1,17 @@
 <style>
     .register-login-switch {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 1;
-        flex-grow: 1;
-        width: auto;
-        position: absolute;
-        top: 5.9rem;
-        right: 0;
-        border-bottom-left-radius: 1rem;
-        background-color: rgba(133, 0, 59, 0.15);
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         flex-shrink: 1;
+         flex-grow: 1;
+         width: auto;
+         position: absolute;
+         top: 5.9rem;
+         right: 0;
+         border-bottom-left-radius: 1rem;
+         background-color: rgba(133, 0, 59, 0.15);
     }
 
     .register-login-switch .switchButton {
@@ -20,7 +20,7 @@
     }
 
 </style>
-<div class="register-login-switch" ng-show="$root.profileVisibility">
+<div class="register-login-switch">
     <register ng-show="registerLoginSwitch.register"></register>
     <login ng-show="registerLoginSwitch.login"></login>
     <md-button class="switchButton" ng-click="$ctrl.toggleSwitch()">{{ $ctrl.toggleText }}</md-button>
