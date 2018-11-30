@@ -1,0 +1,11 @@
+<div class="invite-employee">
+    <md-input-container>
+        <label>Mitarbeiter-Email</label>
+        <input type="email" name="email" ng-model="$ctrl.frm_employee_email"
+               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+    </md-input-container>
+    <md-button class="md-raised" ng-click="$ctrl.submitEmployee()">
+        Mitarbeiter hinzufügen
+    </md-button>
+    <p>{{$ctrl.info}}</p>
+</div>
