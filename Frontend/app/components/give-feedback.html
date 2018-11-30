@@ -1,0 +1,43 @@
+<style>
+    .slider {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5em;
+    }
+</style>
+
+<div class="slider">
+
+    <div>
+
+        <h3>Rating: {{rating1}}/10 - demo of theming classes</h3>
+
+        <md-slider md-discrete ng-model="rating1" step="1" min="0" max="10" aria-label="rating"></md-slider>
+
+        <h3>Rating: {{rating2}}/10 - demo of theming classes</h3>
+
+        <md-slider md-discrete ng-model="rating2" step="1" min="0" max="10" aria-label="rating"></md-slider>
+
+        <h3>Selected Value: {{ data.group1 }} </h3>
+
+        <md-radio-group ng-model="data.group1">
+
+            <md-radio-button value="Ja"> Ja</md-radio-button>
+            <md-radio-button value="Nein"> Nein</md-radio-button>
+
+        </md-radio-group>
+
+        <h3>Selected Value: {{ data.group2 }} </h3>
+
+        <md-radio-group ng-model="data.group2">
+
+            <md-radio-button value="Ja"> Ja</md-radio-button>
+            <md-radio-button value="Nein"> Nein</md-radio-button>
+
+        </md-radio-group>
+
+    </div>
+
+</div>
