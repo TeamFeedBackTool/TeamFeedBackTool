@@ -7,9 +7,23 @@ app.component("projectMenue", {
 });
 
 
-app.controller("ProjectMenueController", function ($log, $rootScope) {
+app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
     $log.debug("ProjectMenueController()");
 
+    this.$onInit = function () {
+        let url = "../../Backend/uncalledPHPData.php";
+
+        $http({
+            method: 'POST',
+            url: url
+        }).then(
+            (response) => {
+                // JSON durchgehen und mittels jQuery's .after() in das Dokument legen
+            }, function (error) {
+                console.log(error);
+            });
+    };
+    
     $rootScope.$watch('projectMenueVisibility', () => {
         if ($rootScope.projectMenueVisibility) {
             let element = angular.element(document.querySelector('.project-menue-closed'));
@@ -21,6 +35,8 @@ app.controller("ProjectMenueController", function ($log, $rootScope) {
             element.removeClass('project-menue-opened');
         }
     });
+
+
 
 
 

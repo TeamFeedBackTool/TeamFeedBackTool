@@ -14,27 +14,19 @@ app.controller("UserDisplayUsernameController", function ($http, $log) {
 
     this.$onInit = function() {
 
-        let parameter = JSON.stringify({
-            email: this.frm_email,
-            surname: this.frm_password,
-            firstname: this.frm_firstname,
-            userId: this.frm_userId,
-            lastLogin: this.frm_lastLogin
-        });
+        let url = "../../Backend/IndividualProfile.php";
 
-        // Korrekten Link später einfügen
-        let url = "../../Backend/SendUserData.php";
-
-        // ToFix: [$http:badreq]
-        $http.get({
-            url: url,
-            data: parameter
+        $http({
+            method: 'POST',
+            url: url
         }).then(
             (response) => {
-                this.username = this.frm_firstname + this.frm_surname;
+                this.username = response.data.firstname + ' ' + response.data.surname;
             }, function (error) {
                 console.log(error);
             });
+
+
     }
 
 });

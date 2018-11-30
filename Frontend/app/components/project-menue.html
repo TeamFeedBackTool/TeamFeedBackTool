@@ -33,12 +33,43 @@
         flex-direction: column;
         flex-grow: 1;
         flex-shrink: 1;
+        border-bottom: 1px solid white;
+    }
+
+    .project-block {
+        width: 100%;
+        height: 3rem;
+        margin-top: 0.5rem;
+        padding: 0 1rem 0 1rem;
+        transform: translateX(-1rem);
+    }
+
+    .project-block:hover {
+        background-color: rgba(133, 0, 59, 0.34);
+        cursor: pointer;
+        transition-duration: 0.5s;
+    }
+
+    .project-name {
+        font-size: 1rem;
+        transform: translateX(0.5rem);
     }
 
 
 </style>
 <div class="project-menue-closed">
     <div class="project-heading-block">
-        <span class="project-heading" ng-scrollbar>Projekte</span>
+        <span class="project-heading">Projekte</span>
+    </div>
+    <div class="project-names">
+        <div class="project-block">
+            <span class="project-name">Team-Feedback Tool</span>
+        </div>
+        <div class="project-block">
+            <span class="project-name">Moodle Redesign</span>
+        </div>
+        <div class="project-block">
+            <span class="project-name">Anderes cooles Projekt</span>
+        </div>
     </div>
 </div>
