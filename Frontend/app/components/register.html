@@ -47,14 +47,13 @@
         margin: 0.5rem 1rem 0 1rem;
     }
 
-    .register .messages{
-        margin-bottom: 1rem;
+    .register .messages div{
+        padding-bottom: 1rem;
     }
 
     .register .info {
         text-align: center;
     }
-
 </style>
 
 <form name="$ctrl.register" method="post" action="../../../Backend/RegisterUser.php">
@@ -113,7 +112,7 @@
         </md-input-container>
         <md-input-container class="input-container">
             <label>Passwort</label>
-            <input type="password" name="password" ng-model="$ctrl.frm_password"
+            <input required type="password" name="password" ng-model="$ctrl.frm_password"
                    minlength="6" maxlength="100"/>
             <div class="messages" ng-messages="$ctrl.register.password.$error">
                 <div ng-message="minlength">
@@ -122,11 +121,14 @@
                 <div ng-message="maxlength">
                     Ihr Passwort darf maximal 100 Zeichen lang sein
                 </div>
+                <div ng-message="required">
+                    Bitte geben Sie ein Passwort ein
+                </div>
             </div>
         </md-input-container>
         <md-input-container class="input-container">
             <label>Passwort wiederholen</label>
-            <input type="password" name="passwordcheck" ng-model="$ctrl.frm_passwordcheck"
+            <input required type="password" name="passwordcheck" ng-model="$ctrl.frm_passwordcheck"
                    minlength="6" maxlength="100"/>
             <div class="messages" ng-messages="$ctrl.register.passwordcheck.$error">
                 <div ng-message="minlength">
@@ -135,9 +137,12 @@
                 <div ng-message="maxlength">
                     Ihr Passwort darf maximal 100 Zeichen lang sein
                 </div>
+                <div ng-message="required">
+                    Bitte verifizieren Sie Ihr Passwort
+                </div>
             </div>
         </md-input-container>
-        <md-button class="md-raised register-button" ng-click="$ctrl.submit()">
+        <md-button class="md-raised register-button" ng-disabled="$ctrl.register.$invalid" ng-click="$ctrl.submit()">
             Registrieren
         </md-button>
         <div class="info">
