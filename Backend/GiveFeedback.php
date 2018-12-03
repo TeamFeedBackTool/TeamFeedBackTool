@@ -9,6 +9,7 @@ require_once 'PHPToJSON.php';
 require_once "UsefulFunctions.php";
 
 giveFeedback($pdo);
+//checkIfWorks($pdo);
 /**
  * @param PDO $pdo
  * for better overview
@@ -17,55 +18,135 @@ function giveFeedback(PDO $pdo)
 {
     if (checkIfOneWeekOver($pdo) == true) {
         insertIntoFeedback($pdo);
-        sendSuccess("Feedback has been submitted");
     } else {
         sendError("You gotta wait a week buddy");
     }
-
 }
 
 /**
  * @param PDO $pdo
- * checks if user hasnt submitted a feedback in the last seven days
+ * checks if user has not submitted a feedback in the last seven days
  * @return bool
  */
-function checkIfOneWeekOver(PDO $pdo)
+
+/*function checkIfOneWeekOver(PDO $pdo)
 {
-    $sql = "SELECT MAX(date) FROM feedback WHERE fk_userId = :userId";
+    $userdata = giveFeedbackInput();
+    //$sql = "SELECT MAX(date) FROM feedback WHERE (fk_userId = :userId AND fk_projectId = :projectId)";
+    $sql = "SELECT * FROM feedback";
+    $sql1 = "SELECT MAX(date) FROM feedback WHERE fk_userId = :userId AND fk_projectId = :projectId";
     if ($stmt = $pdo->prepare($sql)) {
-        // Bind variables to the prepared statement as parameters
-        $param_userId = $_SESSION['userId'];
-        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
-        if ($stmt->execute()) {
-            // Check if they have alreaday submitted a feedback
-            if ($stmt->rowCount() == 1) {
-                if ($row = $stmt->fetch()) {
-                    $dateLogin = strtotime($_SESSION['date']);
-                    $dateDB = strtotime($row['date']);
-                    //604800 = secs to days * 7 for 7 days apart
-                    if ($dateLogin - $dateDB >= 604800) {
+        if ($stmt1 = $pdo->prepare($sql1)) {
+            // Bind variables to the prepared statement as parameters
+            $param_userId = $_SESSION['userId'];
+            $param_projectId = $userdata['projectId'];
+
+            $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+            $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+
+            $stmt1->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+            $stmt1->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+
+            if ($stmt1->execute()) {
+                // Check if they have already submitted a feedback
+                if ($stmt1->rowCount() == 1 && $stmt->rowCount() == 0) {
+                    if ($row = $stmt->fetch()) {
+                        sendSuccess($row['date']);
                         return true;
+                    }
+                } else if ($stmt->rowCount() == 1 || ($stmt->rowCount() > 1 && $stmt1->rowCount() == 1)) {
+                    if ($row = $stmt->fetch()) {
+                        //sendSuccess($row['date']);
+                        $dateLogin = strtotime($_SESSION['date']['year']);
+                        $dateDB = strtotime($row['lastLogin']);
+                        //604800 = secs to days * 7 for 7 days apart
+                        if ($dateLogin - $dateDB >= 10) {
+                            return true;
+                        } else {
+                            sendError("test2");
+                            return false;
+                        }
                     } else {
+                        sendError("test1");
                         return false;
                     }
                 }
-            } else {
-                return true;
             }
+        } else {
+            sendError("second statement did not go well");
+            return false;
         }
     }
-    return false;
+    else{
+        sendError("first statement did not go well");
+        return false;
+    }
+}*/
+
+function checkIfOneWeekOver(PDO $pdo){
+    $userdata = giveFeedbackInput();
+    $sql = "SELECT date FROM feedback WHERE fk_userId = :userId AND fk_projectId = :projectId";
+    $sql1 = "SELECT MAX(date) FROM feedback WHERE fk_userId = :userId AND fk_projectId = :projectId";
+
+    if ($stmt = $pdo->prepare($sql)) {
+        $stmt1 = $pdo->prepare($sql1);
+
+        $param_userId = $_SESSION['userId'];
+        $param_projectId = $userdata['projectId'];
+
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+
+        $stmt1->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        $stmt1->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+
+        if ($stmt1->execute()) {
+            $stmt->execute();
+            if ($stmt->rowCount() == 0 && $stmt1->rowCount() == 1) {
+                    sendSuccess($stmt->rowCount() . " Reihen im 1. Stmt");
+                    return true;
+            }
+            elseif ($stmt->rowCount() == 1 || ($stmt->rowCount() > 1 && $stmt1->rowCount() == 1)) {
+                if ($row = $stmt->fetch()) {
+                    $dateNow = strtotime(date("Y-m-d"));
+                    $dateDB = strtotime($row['date']);
+                    //604800 = secs to days * 7 for 7 days apart
+                    sendSuccess($dateNow . " " .  $dateDB);
+                    if ($dateNow - $dateDB >= 604800) {
+                        return true;
+                    } else {
+                        //sendError($dateDB);
+                       return false;
+                    }
+                } else {
+                    sendError("test1");
+                    return false;
+                }
+            }
+            else{
+                sendError("Didnt go into if/elseif");
+                return false;
+            }
+
+        } else {
+            sendError("didnt execute");
+            return false;
+        }
+    }
+    else{
+        sendError("didnt prepare");
+        return false;
+    }
 }
 
 /**
  * @param PDO $pdo
  * takes input and writes it into the db
  */
-function insertIntoFeedback(PDO $pdo)
-{
+function insertIntoFeedback(PDO $pdo){
     $userdata = giveFeedbackInput();
 
-    $sql = "INSERT INTO feedback (fk_userId, fk_projectId, sliderValue_stress, sliderValue_motivation, work_performance_satisfied, technicalSkills) VALUES (:userId,:projectId,:stress,:motivation,:satisfied,:technicalSkills)";
+    $sql = "INSERT INTO feedback (fk_userId, fk_projectId, sliderValue_stress, sliderValue_motivation, work_performance_satisfied, technicalSkills, date) VALUES (:userId,:projectId,:stress,:motivation,:satisfied,:technicalSkills, CURRENT_DATE)";
 
     if ($stmt = $pdo->prepare($sql)) {
         $param_userId = $_SESSION['userId'];
@@ -84,13 +165,11 @@ function insertIntoFeedback(PDO $pdo)
 
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
-            sendSuccess("Nice i guess wtf");
+            //sendSuccess("Feedback submitted");
         } else {
             sendError("Something went wrong. Please try again later.");
         }
         unset($stmt);
 
     }
-
-
 }

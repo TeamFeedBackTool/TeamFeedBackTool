@@ -9,7 +9,7 @@ require_once 'JSONToPHP.php';
 require_once 'PHPToJSON.php';
 
 /**
- * A simple script to write the current date into db as lastLogin
+ * A simple script to write the current date into users table as lastLogin
  * @param $pdo
  */
 function setLatestDate(PDO $pdo){
@@ -19,8 +19,9 @@ function setLatestDate(PDO $pdo){
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':email', $_SESSION['email']);
     $stmt->execute();
-    $_SESSION['date'] = getdate();
+    $_SESSION['date'] = date("Y-m-d");
 }
+
 
 /**
  * sets $_SESSION array with current relevant userdata

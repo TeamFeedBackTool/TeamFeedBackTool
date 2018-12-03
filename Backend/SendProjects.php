@@ -5,4 +5,5 @@ if (session_status() == PHP_SESSION_NONE) {
 include_once "config.php";
 include_once "PHPToJSON.php";
 include_once "UsefulFunctions.php";
+
 sendProjects($pdo);

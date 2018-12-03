@@ -17,6 +17,7 @@ LoginUser($pdo);
  * @param PDO $pdo
  */
 function LoginUser(PDO $pdo){
+
 //JSON to $userdata for later use
     $userdata = loginJSONToPHP();
     $password = trim($userdata['password']);

@@ -44,10 +44,10 @@ function sendSuccess($successText){
  * @param $pdo
  */
 function sendProjects($pdo){
-    echo json_encode(array(
-        'projectIds' => readProjectsForUser($pdo),
-        'projectNames' => projectIdsToNames($pdo)
-    ));
+        echo json_encode(array(
+            'projectIds' => readProjectsForUser($pdo),
+            'projectNames' => projectIdsToNames($pdo)
+        ));
 }
 
 /**
@@ -58,8 +58,16 @@ function sendProjectInformation($pdo){
     echo json_encode((array(
         'projectname' => projectIdsToNames($pdo),
         'fk_leaderId' =>  getLeaderIdFromProjectId($pdo)
-        //TODO Beschreibung need to be added to DB, than a function
-        //TODO has to be written to actually get it from DB
      )));
+}
 
+/**
+ * sends all information for one project to display for Leader(including Feedbacks)
+ * @param $pdo
+ */
+function sendProjectInformationLeader($pdo){
+    echo json_encode((array(
+        'projectname' => projectIdsToNames($pdo),
+        'fk_leaderId' =>  getLeaderIdFromProjectId($pdo)
+    )));
 }
