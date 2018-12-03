@@ -12,8 +12,7 @@ require_once 'PHPToJSON.php';
  * A simple script to write the current date into db as lastLogin
  * @param $pdo
  */
-function setLatestDate(PDO $pdo)
-{
+function setLatestDate(PDO $pdo){
     $sql = "UPDATE users 
               SET lastLogin = now()
               WHERE email = :email";
@@ -38,11 +37,11 @@ function saveIntoSession($row)
 /**
  * Inserts into "worksat" table, so we can know which user works on which project
  * @param PDO $pdo
+ * @param $userId
  */
-function writeIntoWorksAt(PDO $pdo)
-{
+function writeIntoWorksAt(PDO $pdo,$userId){
     $param_projectId = projectnameToIds($pdo);
-    $param_userId = $_SESSION['userId'];
+    $param_userId = $userId;
     // Prepare an insert statement
 
     $sql = "INSERT INTO worksat(pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectId)";
@@ -83,7 +82,7 @@ function readProjectsForUser(PDO $pdo)
 
             return $toProjectNames;
         } else {
-            sendError("Oops! Something went wrong. Please try again later.");
+            sendError("A loop failed in readProjectsForUser().");
 
         }
     }
@@ -156,4 +155,38 @@ function projectnameToIds(PDO $pdo)
         }
     }
     return $projectId;
+}
+
+/**
+ * returns the leaderId of the projectId provided by the Frontend.
+ * Frontend needs these informations to display the project the
+ * user clicked on
+ * @param PDO $pdo
+ * @return string
+ */
+function getLeaderIdFromProjectId(PDO $pdo){
+    //deletes last char since its an ";"
+    $projectId = readProjectsForUser($pdo);
+    $leaderId = "";
+
+        $sql = "SELECT fk_leaderId FROM project WHERE pk_projectId = :projectId";
+        if ($stmt = $pdo->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $param_projectId = $projectId;
+            $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    if ($row = $stmt->fetch()) {
+                        $leaderId = $row['fk_leaderId'];
+                    }
+                    sendSuccess("Erfolgreich von projektid zu namen");
+                    return $leaderId;
+                } else {
+                    sendError("wait what");
+                    return $leaderId;
+                }
+            }
+    }
+    return $leaderId;
+
 }

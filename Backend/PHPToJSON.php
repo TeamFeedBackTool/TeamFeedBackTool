@@ -50,3 +50,16 @@ function sendProjects($pdo){
     ));
 }
 
+/**
+ * sends all information for one project to display
+ * @param $pdo
+ */
+function sendProjectInformation($pdo){
+    echo json_encode((array(
+        'projectname' => projectIdsToNames($pdo),
+        'fk_leaderId' =>  getLeaderIdFromProjectId($pdo)
+        //TODO Beschreibung need to be added to DB, than a function
+        //TODO has to be written to actually get it from DB
+     )));
+
+}

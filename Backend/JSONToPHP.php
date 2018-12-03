@@ -86,11 +86,11 @@ function changePasswordInput()
  * gets Input to invite an employee
  * @return array with relevant userdata
  */
-function inviteEmployeeInput()
-{
+function inviteEmployeeInput(){
     $json = file_get_contents('php://input');
     $obj = json_decode($json, true);
-    $userdata = array("email" => $obj['email']);
+    $userdata = array("email" => $obj['email'],
+                      "projectId" => $obj['projectId']);
     return $userdata;
 }
 

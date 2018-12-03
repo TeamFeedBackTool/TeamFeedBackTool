@@ -45,7 +45,7 @@ function writeIntoProject(PDO $pdo, $userdata){
                         // Attempt to execute the prepared statement
                         if ($stmt->execute()) {
                             // instantly logged in if everything was fine
-                            writeIntoWorksAt($pdo, $userdata);
+                            writeIntoWorksAt($pdo, $_SESSION['email']);
 
                         } else {
                             sendError("Something went wrong. Please try again later.");

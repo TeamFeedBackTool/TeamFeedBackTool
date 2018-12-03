@@ -8,6 +8,7 @@ require_once 'JSONToPHP.php';
 require_once 'PHPToJSON.php';
 require_once "UsefulFunctions.php";
 
+giveFeedback($pdo);
 /**
  * @param PDO $pdo
  * for better overview
