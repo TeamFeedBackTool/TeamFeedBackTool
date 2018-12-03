@@ -1,10 +1,9 @@
 <style>
     .project-menue-closed {
-        width: 14rem;
-        height: calc(100% - 5.9rem);
-        padding: 0 1rem 0 1rem;
+        width: 16rem;
+        height: calc(100% - 3.4rem);
         background-color: rgba(133, 0, 59, 0.5);
-        position: absolute;
+        position: fixed;
         top: 3.4rem;
         left: -16rem;
         color: #ffffff;
@@ -12,11 +11,10 @@
     }
 
     .project-menue-opened {
-        width: 14rem;
-        height: calc(100% - 5.9rem);
-        padding: 0 1rem 0 1rem;
+        width: 16rem;
+        height: calc(100% - 3.4rem);
         background-color: rgba(133, 0, 59, 0.5);
-        position: absolute;
+        position: fixed;
         top: 3.4rem;
         left: 0;
         color: #ffffff;
@@ -25,7 +23,6 @@
 
     .project-heading-block {
         font-size: 1.2rem;
-        width: 100%;
         height: 3rem;
         display: flex;
         justify-content: center;
@@ -34,14 +31,18 @@
         flex-grow: 1;
         flex-shrink: 1;
         border-bottom: 1px solid white;
+        margin: 0 1rem 0 1rem;
     }
 
     .project-block {
-        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex-shrink: 1;
         height: 3rem;
         margin-top: 0.5rem;
-        padding: 0 1rem 0 1rem;
-        transform: translateX(-1rem);
     }
 
     .project-block:hover {
@@ -50,9 +51,37 @@
         transition-duration: 0.5s;
     }
 
+    .project-names {
+        height: calc(100% - 5rem);
+        overflow-y: scroll;
+        overflow-x: hidden;
+        transform: translateY(1rem);
+        margin-right: 0.5rem;
+    }
+
+    .project-names::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .project-names::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+
+    .project-names::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
     .project-name {
         font-size: 1rem;
-        transform: translateX(0.5rem);
+        transform: translateX(1rem);
+        /* make this item unselectable */
+        -webkit-user-select: none; /* Chrome Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+        -o-user-select: none;
+        user-select: none;
     }
 
 
@@ -62,14 +91,8 @@
         <span class="project-heading">Projekte</span>
     </div>
     <div class="project-names">
-        <div class="project-block">
-            <span class="project-name">Team-Feedback Tool</span>
-        </div>
-        <div class="project-block">
-            <span class="project-name">Moodle Redesign</span>
-        </div>
-        <div class="project-block">
-            <span class="project-name">Anderes cooles Projekt</span>
+        <div class="project-block" ng-click="$ctrl.clickedOnProjectTitle($event)" ng-repeat="project in $ctrl.projects track by $index" project-id="{{ project.id }}" >
+            <span class="project-name">{{ project.name }}</span>
         </div>
     </div>
 </div>

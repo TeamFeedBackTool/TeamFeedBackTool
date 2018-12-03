@@ -25,8 +25,10 @@ app.controller("UserDisplayUsernameController", function ($http, $log) {
             }, function (error) {
                 console.log(error);
             });
-
-
     }
+
+    this.toggleProfileMenue = () => {
+        $rootScope.profileVisibility = !$rootScope.profileVisibility;
+    };
 
 });
