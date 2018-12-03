@@ -5,11 +5,11 @@ app.component("individualProfile", {
 
 
 app.controller("IndividualProfileController", function ($http) {
-    let url = "../../Backend/IndividualProfile.php";
+    let receivingUrl = "../../Backend/IndividualProfile.php";
 
     $http({
         method: 'POST',
-        url: url
+        url: receivingUrl
     }).then(
         (response) => {
             console.log(response);

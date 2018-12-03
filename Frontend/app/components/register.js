@@ -34,5 +34,5 @@ app.controller("RegisterController", function($http, $window) {
                     console.log(error);
                 });
         }
-    }
+    };
 });
