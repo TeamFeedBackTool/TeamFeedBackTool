@@ -291,3 +291,30 @@ function getTechnicalSkillsForUserIdAndProjectId(PDO $pdo){
     }
     return $technicalSkills;
 }
+
+
+
+/**
+ * gets all dates of one feedback user and one project and returns them
+ * @param PDO $pdo
+ * @return bool|string
+ */
+function getDatesForUserIdAndProjectId(PDO $pdo){
+    $dates = "";
+    $userdata = getUserIdProjectId();
+    $sql = "SELECT date FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+        $param_projectId = $userdata['projectId'];
+        $param_userId = $userdata['userId'];
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            foreach ($stmt as $row) {
+                $dates .= $row['technicalSkills'] .= ";";
+            }
+            $dates = substr($dates, 0, -1);
+        }
+    }
+    return $dates;
+}

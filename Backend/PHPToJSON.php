@@ -81,6 +81,7 @@ function sendFeedbacksForId($pdo){
         'stress' => getStressForUserIdAndProjectId($pdo),
         'motivation' =>  getMotivationForUserIdAndProjectId($pdo),
         'work_performance_satisfied' =>  getWorkPerformanceForUserIdAndProjectId($pdo),
-        'technicalSkills' =>  getTechnicalSkillsForUserIdAndProjectId($pdo)
+        'technicalSkills' =>  getTechnicalSkillsForUserIdAndProjectId($pdo),
+        'dates' => getDatesForUserIdAndProjectId($pdo)
     )));
 }
