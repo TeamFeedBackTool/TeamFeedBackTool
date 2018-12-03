@@ -1,5 +1,5 @@
 <style>
-    .flexbox {
+    .giveFeedback {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -7,42 +7,42 @@
         padding: 5em;
     }
 
-    .fragen {
+    .giveFeedback .fragen {
         width: 25em;
     }
 
-    #done {
+    .giveFeedback #done {
         display: none;
         color: green;
     }
 </style>
 
-<div class="flexbox">
+<div class="giveFeedback">
 
     <div class="fragen">
 
-        <h3>Wie gestresst fühlen Sie sich? - {{rating1}}/10</h3>
+        <h3>Wie gestresst fühlen Sie sich? {{stress}}/10</h3>
 
-        <md-slider md-discrete ng-model="rating1" step="1" min="0" max="10" aria-label="rating"></md-slider>
+        <md-slider md-discrete ng-model="stress" step="1" min="0" max="10" aria-label="rating"></md-slider>
 
-        <h3>Wie motiviert sind Sie? - {{rating2}}/10</h3>
+        <h3>Wie motiviert sind Sie? {{motivation}}/10</h3>
 
-        <md-slider md-discrete ng-model="rating2" step="1" min="0" max="10" aria-label="rating"></md-slider>
+        <md-slider md-discrete ng-model="motivation" step="1" min="0" max="10" aria-label="rating"></md-slider>
 
-        <h3>Sind Sie mit ihrer bisherigen Arbeit zufrieden? {{$ctrl.group1}} </h3>
+        <h3>Sind Sie mit ihrer bisherigen Arbeit zufrieden? </h3>
 
-        <md-radio-group ng-model="$ctrl.group1">
+        <md-radio-group ng-model="data.group1">
 
-            <md-radio-button value="Ja"> Ja</md-radio-button>
+            <md-radio-button value="Ja" checked="checked"> Ja</md-radio-button>
             <md-radio-button value="Nein"> Nein</md-radio-button>
 
         </md-radio-group>
 
-        <h3>Benötigen Sie Hilfe? {{$ctrl.group2}} </h3>
+        <h3>Benötigen Sie Hilfe? </h3>
 
-        <md-radio-group ng-model="$ctrl.group2">
+        <md-radio-group ng-model="data.group2">
 
-            <md-radio-button value="Ja"> Ja</md-radio-button>
+            <md-radio-button value="Ja" checked="checked"> Ja</md-radio-button>
             <md-radio-button value="Nein"> Nein</md-radio-button>
 
         </md-radio-group>
@@ -54,7 +54,7 @@
 
         <div>
             <h3 id="done">
-                Danke fürs beantworten. Kommen Sie nächste Woche wieder!
+                {{antwort}}
             </h3>
         </div>
 
