@@ -180,7 +180,7 @@ function getLeaderIdFromProjectId(PDO $pdo){
                     if ($row = $stmt->fetch()) {
                         $leaderId = $row['fk_leaderId'];
                     }
-                    sendSuccess("Erfolgreich von projektid zu namen");
+                    //sendSuccess("Erfolgreich von projektid zu namen");
                     return $leaderId;
                 } else {
                     sendError("wait what");
@@ -190,4 +190,104 @@ function getLeaderIdFromProjectId(PDO $pdo){
     }
     return $leaderId;
 
+}
+
+/**
+ * gets all Stress values of one user and one project and returns them
+ * @param PDO $pdo
+ * @return bool|string
+ */
+function getStressForUserIdAndProjectId(PDO $pdo){
+    $stress = "";
+    $userdata = getUserIdProjectId();
+    $sql = "SELECT sliderValue_stress FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+        $param_projectId = $userdata['projectId'];
+        $param_userId = $userdata['userId'];
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            foreach ($stmt as $row) {
+               $stress .= $row['sliderValue_stress'] .= ";";
+            }
+            $stress = substr($stress, 0, -1);
+        }
+    }
+    return $stress;
+}
+
+/**
+ * gets all Motivation values of one user and one project and returns them
+ * @param PDO $pdo
+ * @return bool|string
+ */
+function getMotivationForUserIdAndProjectId(PDO $pdo){
+    $motivation = "";
+    $userdata = getUserIdProjectId();
+    $sql = "SELECT sliderValue_motivation FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+        $param_projectId = $userdata['projectId'];
+        $param_userId = $userdata['userId'];
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            foreach ($stmt as $row) {
+                $motivation .= $row['sliderValue_stress'] .= ";";
+            }
+            $motivation = substr($motivation, 0, -1);
+        }
+    }
+    return $motivation;
+}
+
+/**
+ * gets all WorkPerformance values of one user and one project and returns them
+ * @param PDO $pdo
+ * @return bool|string
+ */
+function getWorkPerformanceForUserIdAndProjectId(PDO $pdo){
+    $workperformance = "";
+    $userdata = getUserIdProjectId();
+    $sql = "SELECT work_performance_satisfied FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+        $param_projectId = $userdata['projectId'];
+        $param_userId = $userdata['userId'];
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            foreach ($stmt as $row) {
+                $workperformance .= $row['work_performance_satisfied'] .= ";";
+            }
+            $workperformance = substr($workperformance, 0, -1);
+        }
+    }
+    return $workperformance;
+}
+
+/**
+ * gets all technicalSkills values of one user and one project and returns them
+ * @param PDO $pdo
+ * @return bool|string
+ */
+function getTechnicalSkillsForUserIdAndProjectId(PDO $pdo){
+    $technicalSkills = "";
+    $userdata = getUserIdProjectId();
+    $sql = "SELECT technicalSkills FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+        $param_projectId = $userdata['projectId'];
+        $param_userId = $userdata['userId'];
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            foreach ($stmt as $row) {
+                $technicalSkills .= $row['technicalSkills'] .= ";";
+            }
+            $technicalSkills = substr($technicalSkills, 0, -1);
+        }
+    }
+    return $technicalSkills;
 }

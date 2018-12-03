@@ -109,3 +109,15 @@ function giveFeedbackInput()
         "technicalSkills" => $obj['technicalSkills']);
     return $userdata;
 }
+
+/**
+ * gets Input of an userId
+ * @return array with relevant userdata
+ */
+function getUserIdProjectId(){
+    $json = file_get_contents('php://input');
+    $obj = json_decode($json, true);
+    $userdata = array("userId" => $obj['userId'],
+                      "projectId" => $obj['projectId']);
+    return $userdata;
+}

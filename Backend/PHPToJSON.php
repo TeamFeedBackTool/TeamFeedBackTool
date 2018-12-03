@@ -71,3 +71,16 @@ function sendProjectInformationLeader($pdo){
         'fk_leaderId' =>  getLeaderIdFromProjectId($pdo)
     )));
 }
+
+/**
+ * sends all information for one project to display for Leader(including Feedbacks)
+ * @param $pdo
+ */
+function sendFeedbacksForId($pdo){
+    echo json_encode((array(
+        'stress' => getStressForUserIdAndProjectId($pdo),
+        'motivation' =>  getMotivationForUserIdAndProjectId($pdo),
+        'work_performance_satisfied' =>  getWorkPerformanceForUserIdAndProjectId($pdo),
+        'technicalSkills' =>  getTechnicalSkillsForUserIdAndProjectId($pdo)
+    )));
+}
