@@ -16,39 +16,42 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
             .cancel('Abbrechen')
 
         $mdDialog.show(confirm).then(function (result) {
-            if (result.length <= 40) {
-                let parameter = JSON.stringify({
-                    projectName: result
-                });
+                if (result.length <= 40) {
+                    let parameter = JSON.stringify({
+                        projectName: result
+                    });
 
-                let url = "../../Backend/CreateProject.php";
+                    let url = "../../Backend/CreateProject.php";
 
-                $http({
-                    method: 'POST',
-                    url: url,
-                    data: parameter
-                }).then(
-                    (response) => {
-                        console.log(response);
-                        $scope.info = response.data.infotext;
-                        console.log($scope.info);
-                    })
-            } else {
-                $scope.showPrompt(ev, 'Der Projektname darf maximal 40 Zeichen lang sein!');
+                    $http({
+                        method: 'POST',
+                        url: url,
+                        data: parameter
+                    }).then(
+                        (response) => {
+                            console.log(response);
+                            $scope.info = response.data.infotext;
+
+                            if ($scope.info === "This projectName is already taken.") {
+                                $scope.showAlert("Dieser Projektname wird bereits verwendet!");
+                            }
+                            if ($scope.info === undefined) {
+                                $scope.showAlert("Ihr Projekt wurde erstellt!");
+                            }
+                        })
+                } else {
+                    $scope.showPrompt(ev, 'Der Projektname darf maximal 40 Zeichen lang sein!');
+                }
             }
-
-            if($scope.info === "") {
-
-            }
-        });
+        );
     }
-
-    $scope.showAlert = function () {
+    $scope.showAlert = function (text) {
         $mdDialog.show(
             $mdDialog.alert()
                 .clickOutsideToClose(true)
-                .textContent('Ihr Projekt wurde erstellt')
+                .textContent(text)
                 .ok('Verstanden')
         );
     }
-});
+})
+;
