@@ -1,7 +1,6 @@
 <style>
 
     .md-fab {
-        font-size: 40px;
         position: absolute;
         bottom: 0;
         right: 0;
@@ -29,12 +28,18 @@
         background: #e81628;
     }
 
+    .plus {
+        font-size: 40px;
+    }
+
 </style>
 
 <div id="alreadyTaken"> Ihr Projektname wird bereits genutzt.</div>
 
 <div id="working"> Ihr Project wurde erstellt.</div>
 
-<md-button class="md-fab" style="background: #85003b; color: white; text-align: center" ng-click="showPrompt($event)">
-    +
+<md-button class="md-fab" style="background: #85003b; color: white;" ng-click="showPrompt($event)">
+    <div class="plus">
+        +
+    </div>
 </md-button>
