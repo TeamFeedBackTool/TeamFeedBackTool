@@ -6,6 +6,7 @@ require_once 'UsefulFunctions.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 writeIntoProject($pdo, createProjectInput());
 
 /**
@@ -45,9 +46,7 @@ function writeIntoProject(PDO $pdo, $userdata){
                         // Attempt to execute the prepared statement
                         if ($stmt->execute()) {
                             // instantly logged in if everything was fine
-                            writeIntoWorksAt($pdo, $_SESSION['email']);
-
-
+                            writeIntoWorksAt($pdo, $_SESSION['userId']);
                         } else {
                             sendError("Something went wrong. Please try again later.");
                         }
