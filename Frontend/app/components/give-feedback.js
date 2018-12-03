@@ -3,7 +3,7 @@ app.component("giveFeedback", {
     controller: "giveFeedbackController"
 });
 
-app.controller("giveFeedbackController", function ($http, $scope) {
+app.controller("giveFeedbackController", function ($http, $scope, $mdDialog) {
 
     $scope.stress = 0;
 
@@ -46,21 +46,27 @@ app.controller("giveFeedbackController", function ($http, $scope) {
             data: parameter
         }).then(
             (response) => {
-                $scope.info = response.data.infotext;
+                this.info = response.data.infotext;
                 console.log(response);
-                console.log($scope.info)
+
+                if (this.info === "You gotta wait a week buddy") {
+                    $scope.showAlert("Sie habe diese Woche bereits abgestimmt!")
+                } else if (this.info === "Feedback Submitted") {
+                    $scope.showAlert("Danke für das absimmen! Kommen Sie nächste Woch wieder!")
+                } else {
+
+                }
             }, function (error) {
                 console.log(error);
             });
+    }
 
-        if ($scope.info === undefined) {
-            $scope.antwort = "Sie haben bereits abgestimmt!";
-            document.getElementById("done").style.color = "red";
-        }
-
-        document.getElementById("done").style = "display:block; transition:";
-        new Promise((resolve) => setTimeout(resolve, 10000)).then(() => {
-            document.getElementById("done").style = "display: none";
-        });
+    $scope.showAlert = function (text) {
+        $mdDialog.show(
+            $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .textContent(text)
+                .ok('Verstanden')
+        );
     }
 });
