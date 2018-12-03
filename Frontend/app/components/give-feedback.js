@@ -5,22 +5,37 @@ app.component("giveFeedback", {
 
 app.controller("giveFeedbackController", function ($http, $scope) {
 
-    $scope.rating1 = 0;
+    $scope.stress = 0;
 
-    $scope.rating2 = 0;
+    $scope.motivation = 0;
+
+    $scope.data = {
+        group1: 'Ja',
+        group2: 'Ja'
+    }
+
+    $scope.antwort = "Danke fürs beantworten der Fragen! Kommen Sie in einer Woche wieder!";
 
     this.submit = () => {
 
-        rating11 = $scope.rating1;
+        let satisfied = 0;
 
-        rating22 = $scope.rating2;
+        let technicalSkills = 0;
+
+        if ($scope.data.group1 === "Ja") {
+            satisfied = 1;
+        }
+
+        if ($scope.data.group2 === "Ja") {
+            technicalSkills = 1;
+        }
 
         let parameter = JSON.stringify({
             projectId: 45,
-            stress: rating11,
-            motivation: rating22,
-            satisfied: this.group1,
-            technicalSkills: this.group2
+            sliderValue_stress: $scope.stress,
+            sliderValue_motivation: $scope.motivation,
+            work_performance_satisfied: satisfied,
+            technicalSkills: technicalSkills
         });
 
         let url = "../../Backend/GiveFeedback.php";
@@ -31,16 +46,16 @@ app.controller("giveFeedbackController", function ($http, $scope) {
             data: parameter
         }).then(
             (response) => {
-                this.projectId = response.data.projectId;
-                this.info = response.data.infotext;
+                $scope.info = response.data.infotext;
                 console.log(response);
-                console.log(info)
+                console.log($scope.info)
             }, function (error) {
                 console.log(error);
             });
 
-        if(info === "") {
-
+        if ($scope.info === undefined) {
+            $scope.antwort = "Sie haben bereits abgestimmt!";
+            document.getElementById("done").style.color = "red";
         }
 
         document.getElementById("done").style = "display:block; transition:";
