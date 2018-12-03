@@ -101,6 +101,7 @@ function insertIntoFeedback(PDO $pdo){
         $param_stress = $userdata['sliderValue_stress'];
         $param_satisfied = $userdata['work_performance_satisfied'];
         $param_technicalSkills = $userdata['technicalSkills'];
+        $param_motivation = $userdata['sliderValue_motivation'];
 
         // Bind variables to the prepared statement as parameters
         $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
