@@ -1,42 +1,62 @@
 <style>
-    .slider {
+    .flexbox {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 5em;
     }
+
+    .fragen {
+        width: 25em;
+    }
+
+    #done {
+        display: none;
+        color: green;
+    }
 </style>
 
-<div class="slider">
+<div class="flexbox">
 
-    <div>
+    <div class="fragen">
 
-        <h3>Rating: {{rating1}}/10 - demo of theming classes</h3>
+        <h3>Wie gestresst fühlen Sie sich? - {{rating1}}/10</h3>
 
         <md-slider md-discrete ng-model="rating1" step="1" min="0" max="10" aria-label="rating"></md-slider>
 
-        <h3>Rating: {{rating2}}/10 - demo of theming classes</h3>
+        <h3>Wie motiviert sind Sie? - {{rating2}}/10</h3>
 
         <md-slider md-discrete ng-model="rating2" step="1" min="0" max="10" aria-label="rating"></md-slider>
 
-        <h3>Selected Value: {{ data.group1 }} </h3>
+        <h3>Sind Sie mit ihrer bisherigen Arbeit zufrieden? {{$ctrl.group1}} </h3>
 
-        <md-radio-group ng-model="data.group1">
+        <md-radio-group ng-model="$ctrl.group1">
+
+            <md-radio-button value="Ja"> Ja</md-radio-button>
+            <md-radio-button value="Nein"> Nein</md-radio-button>
+
+        </md-radio-group>
+
+        <h3>Benötigen Sie Hilfe? {{$ctrl.group2}} </h3>
+
+        <md-radio-group ng-model="$ctrl.group2">
 
             <md-radio-button value="Ja"> Ja</md-radio-button>
             <md-radio-button value="Nein"> Nein</md-radio-button>
 
         </md-radio-group>
 
-        <h3>Selected Value: {{ data.group2 }} </h3>
 
-        <md-radio-group ng-model="data.group2">
+        <md-button class="md-raised login-button" ng-click="$ctrl.submit()">
+            Eingeben
+        </md-button>
 
-            <md-radio-button value="Ja"> Ja</md-radio-button>
-            <md-radio-button value="Nein"> Nein</md-radio-button>
-
-        </md-radio-group>
+        <div>
+            <h3 id="done">
+                Danke fürs beantworten. Kommen Sie nächste Woche wieder!
+            </h3>
+        </div>
 
     </div>
 
