@@ -3,6 +3,12 @@
         font-size: 1rem;
         color: #ffffff;
         margin-right: 0.8rem;
+        /* make this item unselectable */
+        -webkit-user-select: none; /* Chrome Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+        -o-user-select: none;
+        user-select: none;
     }
 
     .user-display-username {
@@ -13,7 +19,7 @@
     }
 
 </style>
-<div class="user-display-username" layout="row">
-    <span class="username">{{ $ctrl.username }}</span>
+<div class="user-display-username" layout="row" ng-click="$ctrl.toggleProfileMenue()">
+    <span class="username" ng-click="$ctrl.toggleProfileMenue()">{{ $ctrl.username }}</span>
     <user-display></user-display>
 </div>

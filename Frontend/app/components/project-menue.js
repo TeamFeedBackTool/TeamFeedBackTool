@@ -11,19 +11,61 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
     $log.debug("ProjectMenueController()");
 
     this.$onInit = function () {
-        let url = "../../Backend/uncalledPHPData.php";
+        this.projectTitles = ["Team-Feedback Tool", "Ich Heiße Florian-Projekt", "WAFD-Project dasfcdcgxwersxgtxergyryasrfd"];
+        this.projectIds = [0, 1, 2];
+        this.projects = [];
+
+        for (let i = 0; i < this.projectIds.length; i++) {
+            if (this.projectTitles[i].length > 23) {
+                this.projects.push({
+                    'id' : this.projectIds[i],
+                    'name' : this.projectTitles[i].slice(0, 23) + '...'
+                });
+            } else {
+                this.projects.push({
+                    'id' : this.projectIds[i],
+                    'name' : this.projectTitles[i]
+                });
+            }
+        }
+        console.log(this.projects);
+
+        // what project is shown in the dashboard
+        $rootScope.projectName = this.projects[0];
+
+        this.cookie = document.cookie;
+
+        this.frm_userId = cookie.split(';')[3].split('=')[1];
+        let sendingParameter = JSON.stringify({
+            userId: this.frm_userId,
+        });
+
+        let sendingUrl = '../../JSONToPHP.php';
 
         $http({
             method: 'POST',
-            url: url
+            url: sendingUrl,
+            data: sendingParameter
         }).then(
             (response) => {
-                // JSON durchgehen und mittels jQuery's .after() in das Dokument legen
+                console.log(response);
+            }, function (error) {
+                console.log(error);
+            });
+
+        let recievingUrl = "../../Backend/getProjectInformation.php";
+
+        $http({
+            method: 'POST',
+            url: recievingUrl
+        }).then(
+            (response) => {
+                this.projectTitles = response.projectNames;
             }, function (error) {
                 console.log(error);
             });
     };
-    
+
     $rootScope.$watch('projectMenueVisibility', () => {
         if ($rootScope.projectMenueVisibility) {
             let element = angular.element(document.querySelector('.project-menue-closed'));
@@ -36,8 +78,8 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
         }
     });
 
-
-
-
+    this.clickedOnProjectTitle = ($event) => {
+        $rootScope.projectId = angular.element($event.currentTarget).attr('project-id');
+    };
 
 });
