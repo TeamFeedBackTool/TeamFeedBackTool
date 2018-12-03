@@ -9,7 +9,6 @@ require_once 'PHPToJSON.php';
 require_once "UsefulFunctions.php";
 
 giveFeedback($pdo);
-//checkIfWorks($pdo);
 /**
  * @param PDO $pdo
  * for better overview
@@ -18,6 +17,7 @@ function giveFeedback(PDO $pdo)
 {
     if (checkIfOneWeekOver($pdo) == true) {
         insertIntoFeedback($pdo);
+
     } else {
         sendError("You gotta wait a week buddy");
     }
@@ -28,60 +28,6 @@ function giveFeedback(PDO $pdo)
  * checks if user has not submitted a feedback in the last seven days
  * @return bool
  */
-
-/*function checkIfOneWeekOver(PDO $pdo)
-{
-    $userdata = giveFeedbackInput();
-    //$sql = "SELECT MAX(date) FROM feedback WHERE (fk_userId = :userId AND fk_projectId = :projectId)";
-    $sql = "SELECT * FROM feedback";
-    $sql1 = "SELECT MAX(date) FROM feedback WHERE fk_userId = :userId AND fk_projectId = :projectId";
-    if ($stmt = $pdo->prepare($sql)) {
-        if ($stmt1 = $pdo->prepare($sql1)) {
-            // Bind variables to the prepared statement as parameters
-            $param_userId = $_SESSION['userId'];
-            $param_projectId = $userdata['projectId'];
-
-            $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
-            $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
-
-            $stmt1->bindParam(':userId', $param_userId, PDO::PARAM_STR);
-            $stmt1->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
-
-            if ($stmt1->execute()) {
-                // Check if they have already submitted a feedback
-                if ($stmt1->rowCount() == 1 && $stmt->rowCount() == 0) {
-                    if ($row = $stmt->fetch()) {
-                        sendSuccess($row['date']);
-                        return true;
-                    }
-                } else if ($stmt->rowCount() == 1 || ($stmt->rowCount() > 1 && $stmt1->rowCount() == 1)) {
-                    if ($row = $stmt->fetch()) {
-                        //sendSuccess($row['date']);
-                        $dateLogin = strtotime($_SESSION['date']['year']);
-                        $dateDB = strtotime($row['lastLogin']);
-                        //604800 = secs to days * 7 for 7 days apart
-                        if ($dateLogin - $dateDB >= 10) {
-                            return true;
-                        } else {
-                            sendError("test2");
-                            return false;
-                        }
-                    } else {
-                        sendError("test1");
-                        return false;
-                    }
-                }
-            }
-        } else {
-            sendError("second statement did not go well");
-            return false;
-        }
-    }
-    else{
-        sendError("first statement did not go well");
-        return false;
-    }
-}*/
 
 function checkIfOneWeekOver(PDO $pdo){
     $userdata = giveFeedbackInput();
@@ -106,6 +52,7 @@ function checkIfOneWeekOver(PDO $pdo){
                     //sendSuccess($stmt->rowCount() . " Reihen im 1. Stmt");
                     return true;
             }
+
             elseif ($stmt->rowCount() == 1 || ($stmt->rowCount() > 1 && $stmt1->rowCount() == 1)) {
                 if ($row = $stmt->fetch()) {
                     $dateNow = strtotime(date("Y-m-d"));
@@ -165,7 +112,7 @@ function insertIntoFeedback(PDO $pdo){
 
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
-            //sendSuccess("Feedback submitted");
+            sendSuccess("Feedback Submitted");
         } else {
             sendError("Something went wrong. Please try again later.");
         }
