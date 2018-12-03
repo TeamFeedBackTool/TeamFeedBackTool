@@ -103,7 +103,7 @@ function checkIfOneWeekOver(PDO $pdo){
         if ($stmt1->execute()) {
             $stmt->execute();
             if ($stmt->rowCount() == 0 && $stmt1->rowCount() == 1) {
-                    sendSuccess($stmt->rowCount() . " Reihen im 1. Stmt");
+                    //sendSuccess($stmt->rowCount() . " Reihen im 1. Stmt");
                     return true;
             }
             elseif ($stmt->rowCount() == 1 || ($stmt->rowCount() > 1 && $stmt1->rowCount() == 1)) {
@@ -111,7 +111,7 @@ function checkIfOneWeekOver(PDO $pdo){
                     $dateNow = strtotime(date("Y-m-d"));
                     $dateDB = strtotime($row['date']);
                     //604800 = secs to days * 7 for 7 days apart
-                    sendSuccess($dateNow . " " .  $dateDB);
+                    //sendSuccess($dateNow . " " .  $dateDB);
                     if ($dateNow - $dateDB >= 604800) {
                         return true;
                     } else {
