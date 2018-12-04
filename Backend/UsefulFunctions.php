@@ -133,10 +133,12 @@ function projectIdsToNames(PDO $pdo)
  * @return int
  */
 
-function projectnameToIds(PDO $pdo)
+function projectnameToIds(PDO $pdo,$userdata)
 {
     $projectId = "";
-    $userdata = createProjectInput();
+    if(!isset($userdata)){
+        $userdata = createProjectInput();
+    }
     $sql = "SELECT pk_projectId FROM project WHERE projectname = :projectName";
     if ($stmt = $pdo->prepare($sql)) {
         // Bind variables to the prepared statement as parameters
