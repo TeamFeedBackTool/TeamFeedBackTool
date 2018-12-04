@@ -40,8 +40,13 @@ function saveIntoSession($row)
  * @param PDO $pdo
  * @param $userId
  */
-function writeIntoWorksAt(PDO $pdo,$userId){
-    $param_projectId = projectnameToIds($pdo, createProjectInput());
+function writeIntoWorksAt(PDO $pdo,$userId,$projectId){
+    if($projectId == 0){
+        $param_projectId = projectnameToIds($pdo, createProjectInput());
+    }
+    else {
+        $param_projectId = $projectId;
+    }
     $param_userId = $userId;
     // Prepare an insert statement
 
