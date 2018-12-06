@@ -28,7 +28,7 @@ app.controller("RegisterController", function($http, $window) {
                     this.info = response.data.infotext;
                     let statusCode = response.data.status;
                     if(statusCode === "201"){
-                        $window.location.href = 'test.html';
+                        $window.location.href = 'dashboard';
                     }
                 }, function (error) {
                     console.log(error);
