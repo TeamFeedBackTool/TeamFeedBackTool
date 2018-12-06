@@ -9,23 +9,14 @@ app.component("userDisplayUsername", {
 });
 
 
-app.controller("UserDisplayUsernameController", function ($http, $log) {
+app.controller("UserDisplayUsernameController", function ($http, $log, Userdata) {
     $log.debug("UserDisplayUsernameController()");
 
     this.$onInit = function() {
 
-        let url = "../../Backend/IndividualProfile.php";
+        this.username = Userdata.firstname + ' ' + Userdata.surname;
 
-        $http({
-            method: 'POST',
-            url: url
-        }).then(
-            (response) => {
-                this.username = response.data.firstname + ' ' + response.data.surname;
-            }, function (error) {
-                console.log(error);
-            });
-    }
+    };
 
     this.toggleProfileMenue = () => {
         $rootScope.profileVisibility = !$rootScope.profileVisibility;
