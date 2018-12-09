@@ -7,13 +7,37 @@ app.component("projectMenue", {
 });
 
 
-app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
+app.controller("ProjectMenueController", function ($log, $rootScope, $http, Userdata) {
     $log.debug("ProjectMenueController()");
 
     this.$onInit = function () {
-        this.projectTitles = ["Team-Feedback Tool", "Ich Heiße Florian-Projekt", "WAFD-Project dasfcdcgxwersxgtxergyryasrfd"];
-        this.projectIds = [0, 1, 2];
+        let userinfo;
+        let recievingUrlUserInformation = "../../Backend/IndivudualProfile.php";
+        $http({
+            method: 'POST',
+            url: recievingUrlUserInformation
+        }).then(
+            (response) => {
+                //userinfo = new Userdata(response.data.userId, response.data.firstname, response.data.surname);
+            }, function (error) {
+                console.log(error);
+            });
+
+        console.log(userinfo);
+
         this.projects = [];
+        let recievingUrlProjectInformation = "../../Backend/sendProjects.php";
+
+        $http({
+            method: 'POST',
+            url: recievingUrlProjectInformation
+        }).then(
+            (response) => {
+                this.projectTitles = response.data.projectNames;
+                this.projectIds = response.data.projectIds;
+            }, function (error) {
+                console.log(error);
+            });
 
         for (let i = 0; i < this.projectIds.length; i++) {
             if (this.projectTitles[i].length > 23) {
@@ -33,7 +57,6 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
         // what project is shown in the dashboard
         $rootScope.projectName = this.projects[0];
 
-        this.cookie = document.cookie;
 
         this.frm_userId = cookie.split(';')[3].split('=')[1];
         let sendingParameter = JSON.stringify({
@@ -53,17 +76,6 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
                 console.log(error);
             });
 
-        let recievingUrl = "../../Backend/getProjectInformation.php";
-
-        $http({
-            method: 'POST',
-            url: recievingUrl
-        }).then(
-            (response) => {
-                this.projectTitles = response.projectNames;
-            }, function (error) {
-                console.log(error);
-            });
     };
 
     $rootScope.$watch('projectMenueVisibility', () => {

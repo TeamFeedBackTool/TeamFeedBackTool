@@ -13,7 +13,6 @@ app.controller("UserDisplayUsernameController", function ($http, $log, Userdata)
     this.$onInit = function() {
 
         this.username = Userdata.firstname + ' ' + Userdata.surname;
-        this.username = "adsjdlk";
 
     };
 
