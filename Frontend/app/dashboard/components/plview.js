@@ -66,21 +66,7 @@ app.controller("PlviewController", function($http){
                 backgroundColor: [
                     'rgba(180, 68, 0, 0.1)'],
                 borderColor: [
-                    'rgba(180, 68, 0, 1)']},
-                {
-                    label: 'Know-How benötigt',
-                    data: technicalSkills,
-                    backgroundColor: [
-                        'rgba(229, 181, 27, 0.1)'],
-                    borderColor: [
-                        'rgba(229, 181, 27, 1)']
-                },{
-                    label: 'Zufrieden mit Leistungs',
-                    data: work_performance_satisfied,
-                    backgroundColor: [
-                        'rgba(93, 63, 166, 0.1)'],
-                    borderColor: [
-                        'rgba(93, 63, 166, 1)']}
+                    'rgba(180, 68, 0, 1)']}
             ]
         },
         options: {
