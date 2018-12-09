@@ -1,0 +1,50 @@
+<style>
+
+    .logout {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        height: 3.4rem;
+        background-color: rgb(133, 0, 59);
+        position: fixed;
+        top: 0;
+        right: 0.5rem;
+        z-index: 1;
+    }
+
+    .logout .text {
+        font-size: 1rem;
+        color: #ffffff;
+        margin-right: 0.8rem;
+        cursor: pointer;
+        /* make this item unselectable */
+        -webkit-user-select: none; /* Chrome Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+        -o-user-select: none;
+        user-select: none;
+    }
+
+    .logout-button {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .logout .user-profile {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        transition: 0.3s;
+    }
+</style>
+
+<div class="logout">
+        <div class="logout-button" layout="row">
+            <span class="text" ng-click="$ctrl.submit()">Logout</span>
+            <img src="resources/baseline-person-24px.svg" class="user-profile">
+        </div>
+</div>
