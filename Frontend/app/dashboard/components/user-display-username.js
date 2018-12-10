@@ -7,11 +7,10 @@ app.component("userDisplayUsername", {
 });
 
 
-app.controller("UserDisplayUsernameController", function ($http, $log, Userdata) {
+app.controller("UserDisplayUsernameController", function ($http, $log) {
     $log.debug("UserDisplayUsernameController()");
 
     this.$onInit = function() {
-
         this.username = Userdata.firstname + ' ' + Userdata.surname;
 
     };
