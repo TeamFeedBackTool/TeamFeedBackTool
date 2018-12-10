@@ -1,5 +1,5 @@
 <style>
-    .footer {
+    .footer-without-project-menue {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -10,22 +10,39 @@
         background-color: rgb(133, 0, 59);
         position: fixed;
         bottom: 0;
-        left: 0;
+        right: 0;
         z-index: 1;
+        transition: 500ms;
     }
 
-    .footer .impressum-link {
+    .footer-with-project-menue {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 1;
+        flex-grow: 1;
+        width: calc(100% - 16rem);
+        height: 2rem;
+        background-color: rgb(133, 0, 59);
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        transition: 500ms;
+    }
+
+    .impressum-link {
         font-size: 1rem;
         font-weight: bold;
         color: white;
     }
 
-    .footer .impressum-link:hover {
+    .impressum-link:hover {
         color: #E5E5E5;
         cursor: pointer;
     }
 
 </style>
-<div class="footer">
-    <a href="#" class="impressum-link">Impressum</a>
+<div class="footer-without-project-menue">
+    <a href="impressum" class="impressum-link">Impressum</a>
 </div>

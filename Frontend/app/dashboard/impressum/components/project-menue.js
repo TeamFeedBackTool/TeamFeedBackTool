@@ -11,22 +11,22 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http, User
     $log.debug("ProjectMenueController()");
 
     this.$onInit = function () {
-        let recievingUrlUserInformation = "../../../Backend/IndividualProfile.php";
-
+        let userinfo;
+        let recievingUrlUserInformation = "../../Backend/IndivudualProfile.php";
         $http({
-                method: 'POST',
-                url: recievingUrlUserInformation
-            }).then(
-                (response) => {
-                    let userinfo = new Userdata(response.data);
-                }, function (error) {
+            method: 'POST',
+            url: recievingUrlUserInformation
+        }).then(
+            (response) => {
+                //userinfo = new Userdata(response.data.userId, response.data.firstname, response.data.surname);
+            }, function (error) {
                 console.log(error);
             });
 
+        console.log(userinfo);
 
-        /*
         this.projects = [];
-        let recievingUrlProjectInformation = "../../../Backend/sendProjects.php";
+        let recievingUrlProjectInformation = "../../Backend/sendProjects.php";
 
         $http({
             method: 'POST',
@@ -75,7 +75,6 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http, User
             }, function (error) {
                 console.log(error);
             });
-            */
 
     };
 
