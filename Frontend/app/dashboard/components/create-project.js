@@ -13,7 +13,7 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
             .targetEvent(ev)
             .required(true)
             .ok('Bestätigen!')
-            .cancel('Abbrechen')
+            .cancel('Abbrechen');
 
         $mdDialog.show(confirm).then(function (result) {
                 if (result.length <= 40) {
@@ -44,7 +44,7 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
                 }
             }
         );
-    }
+    };
     $scope.showAlert = function (text) {
         $mdDialog.show(
             $mdDialog.alert()
@@ -53,5 +53,4 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
                 .ok('Verstanden')
         );
     }
-})
-;
+});
