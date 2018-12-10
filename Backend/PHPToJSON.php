@@ -85,3 +85,13 @@ function sendFeedbacksForId($pdo){
         'dates' => getDatesForUserIdAndProjectId($pdo)
     )));
 }
+
+/**
+ * returns an array of userIds which are working at this project (without its leader)
+ * @param $pdo
+ */
+function sendAllMembersOfProjectWithoutLeader($pdo){
+    echo json_encode((array(
+        'members' => getMembersofProjectIdWithoutLeader($pdo)
+    )));
+}

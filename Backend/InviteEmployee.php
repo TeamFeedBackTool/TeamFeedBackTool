@@ -29,7 +29,7 @@ function doesUserExist(PDO $pdo, $userdata){
                 return true;
             }
         } else {
-            sendError("Oops! Something went wrong. Please try again later.");
+            //sendError("Oops! Something went wrong. Please try again later.");
             return false;
         }
         // Close statement
@@ -46,8 +46,8 @@ function doesUserExist(PDO $pdo, $userdata){
 
 function inviteEmployee(PDO $pdo, $userdata){
     if(doesUserExist($pdo,$userdata) == true){
-        writeIntoWorksAt($pdo,$userdata['userId'],$userdata['projectId']);
-        sendProjects($pdo);
+        writeIntoWorksAt($pdo, emailToUserId($pdo,$userdata), $userdata['projectId']);
+        //sendProjects($pdo);
     }
     else{
         sendError("User does not exist.");

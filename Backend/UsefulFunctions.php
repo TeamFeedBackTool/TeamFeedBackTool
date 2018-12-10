@@ -12,7 +12,8 @@ require_once 'PHPToJSON.php';
  * A simple script to write the current date into users table as lastLogin
  * @param $pdo
  */
-function setLatestDate(PDO $pdo){
+function setLatestDate(PDO $pdo)
+{
     $sql = "UPDATE users 
               SET lastLogin = now()
               WHERE email = :email";
@@ -39,17 +40,19 @@ function saveIntoSession($row)
  * Inserts into "worksat" table, so we can know which user works on which project
  * @param PDO $pdo
  * @param $userId
+ * @param $projectId
  */
-function writeIntoWorksAt(PDO $pdo,$userId,$projectId){
-    if($projectId == 0){
+function writeIntoWorksAt(PDO $pdo, $userId, $projectId)
+{
+    sendSuccess($projectId . " " . $userId);
+
+    if ($projectId == 0) {
         $param_projectId = projectnameToIds($pdo, createProjectInput());
-    }
-    else {
+    } else {
         $param_projectId = $projectId;
     }
     $param_userId = $userId;
     // Prepare an insert statement
-
     $sql = "INSERT INTO worksat(pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectId)";
 
     if ($stmt = $pdo->prepare($sql)) {
@@ -58,9 +61,9 @@ function writeIntoWorksAt(PDO $pdo,$userId,$projectId){
         $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
-            sendSuccess("ging");
+            sendSuccess("writeIntoWorksAt worked");
         } else {
-            sendError("Something went wrong. Please try again later.");
+            sendError("writeIntoWorksAt didnt work.");
         }
     }
     // Close statement
@@ -135,13 +138,14 @@ function projectIdsToNames(PDO $pdo)
 /**
  * converts a string with ProjectsIds ,";" inbetween names
  * @param PDO $pdo
+ * @param $userdata
  * @return int
  */
 
-function projectnameToIds(PDO $pdo,$userdata)
+function projectnameToIds(PDO $pdo, $userdata)
 {
     $projectId = "";
-    if(!isset($userdata)){
+    if (!isset($userdata)) {
         $userdata = createProjectInput();
     }
     $sql = "SELECT pk_projectId FROM project WHERE projectname = :projectName";
@@ -172,28 +176,29 @@ function projectnameToIds(PDO $pdo,$userdata)
  * @param PDO $pdo
  * @return string
  */
-function getLeaderIdFromProjectId(PDO $pdo){
+function getLeaderIdFromProjectId(PDO $pdo)
+{
     //deletes last char since its an ";"
     $projectId = readProjectsForUser($pdo);
     $leaderId = "";
 
-        $sql = "SELECT fk_leaderId FROM project WHERE pk_projectId = :projectId";
-        if ($stmt = $pdo->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $param_projectId = $projectId;
-            $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
-            if ($stmt->execute()) {
-                if ($stmt->rowCount() == 1) {
-                    if ($row = $stmt->fetch()) {
-                        $leaderId = $row['fk_leaderId'];
-                    }
-                    //sendSuccess("Erfolgreich von projektid zu namen");
-                    return $leaderId;
-                } else {
-                    sendError("wait what");
-                    return $leaderId;
+    $sql = "SELECT fk_leaderId FROM project WHERE pk_projectId = :projectId";
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+        $param_projectId = $projectId;
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            if ($stmt->rowCount() == 1) {
+                if ($row = $stmt->fetch()) {
+                    $leaderId = $row['fk_leaderId'];
                 }
+                //sendSuccess("Erfolgreich von projektid zu namen");
+                return $leaderId;
+            } else {
+                sendError("wait what");
+                return $leaderId;
             }
+        }
     }
     return $leaderId;
 
@@ -204,7 +209,8 @@ function getLeaderIdFromProjectId(PDO $pdo){
  * @param PDO $pdo
  * @return bool|string
  */
-function getStressForUserIdAndProjectId(PDO $pdo){
+function getStressForUserIdAndProjectId(PDO $pdo)
+{
     $stress = "";
     $userdata = getUserIdProjectId();
     $sql = "SELECT sliderValue_stress FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
@@ -216,7 +222,7 @@ function getStressForUserIdAndProjectId(PDO $pdo){
         $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
         if ($stmt->execute()) {
             foreach ($stmt as $row) {
-               $stress .= $row['sliderValue_stress'] .= ";";
+                $stress .= $row['sliderValue_stress'] .= ";";
             }
             $stress = substr($stress, 0, -1);
         }
@@ -229,7 +235,8 @@ function getStressForUserIdAndProjectId(PDO $pdo){
  * @param PDO $pdo
  * @return bool|string
  */
-function getMotivationForUserIdAndProjectId(PDO $pdo){
+function getMotivationForUserIdAndProjectId(PDO $pdo)
+{
     $motivation = "";
     $userdata = getUserIdProjectId();
     $sql = "SELECT sliderValue_motivation FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
@@ -254,7 +261,8 @@ function getMotivationForUserIdAndProjectId(PDO $pdo){
  * @param PDO $pdo
  * @return bool|string
  */
-function getWorkPerformanceForUserIdAndProjectId(PDO $pdo){
+function getWorkPerformanceForUserIdAndProjectId(PDO $pdo)
+{
     $workperformance = "";
     $userdata = getUserIdProjectId();
     $sql = "SELECT work_performance_satisfied FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
@@ -279,7 +287,8 @@ function getWorkPerformanceForUserIdAndProjectId(PDO $pdo){
  * @param PDO $pdo
  * @return bool|string
  */
-function getTechnicalSkillsForUserIdAndProjectId(PDO $pdo){
+function getTechnicalSkillsForUserIdAndProjectId(PDO $pdo)
+{
     $technicalSkills = "";
     $userdata = getUserIdProjectId();
     $sql = "SELECT technicalSkills FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
@@ -300,13 +309,13 @@ function getTechnicalSkillsForUserIdAndProjectId(PDO $pdo){
 }
 
 
-
 /**
  * gets all dates of one feedback user and one project and returns them
  * @param PDO $pdo
  * @return bool|string
  */
-function getDatesForUserIdAndProjectId(PDO $pdo){
+function getDatesForUserIdAndProjectId(PDO $pdo)
+{
     $dates = "";
     $userdata = getUserIdProjectId();
     $sql = "SELECT date FROM feedback WHERE (fk_projectId = :projectId AND fk_userId = :userId)";
@@ -325,3 +334,64 @@ function getDatesForUserIdAndProjectId(PDO $pdo){
     }
     return $dates;
 }
+
+/**
+ * returns a string with all userIds, seperated by ";"
+ * without the leader of the project though
+ * @param PDO $pdo
+ * @return string with all userIds with ";" in between
+ */
+function getMembersofProjectIdWithoutLeader(PDO $pdo)
+{
+    $userIds = "";
+    //TODO hier fehlt noch eine Überprüfung, damit leader nicht returned wird
+    $userdata = getProjectId();
+    $sql = "SELECT pk_fk_userId FROM worksat 
+            INNER JOIN project ON worksat.pk_fk_projectId = project.pk_projectId
+            WHERE pk_projectId = :projectId";
+    if ($stmt = $pdo->prepare($sql)) {
+        $param_projectId = $userdata['projectId'];
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        foreach ($stmt as $row) {
+            $userIds  .= $row['pk_fk_userId'] .= ";";
+        }
+        $userIds = substr($userIds, 0, -1);
+    }
+    return $userIds;
+}
+
+/**
+ * gets Array with a UserId, transforms it to UserId of Email
+ * @param PDO $pdo
+ * @param $userdata
+ * @return int
+ */
+function emailToUserId(PDO $pdo,$userdata){
+    $userId = 0;
+    $sql = "SELECT pk_userId FROM users WHERE email = :email";
+    if ($stmt = $pdo->prepare($sql)) {
+        $param_email = $userdata['email'];
+        $stmt->bindParam(':email', $param_email, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            sendSuccess($stmt->rowCount() . " Rows found in emailToUserId");
+            if ($row = $stmt->fetch()) {
+                $userId = $row['pk_userId'];
+            }
+        }
+
+    }
+    return $userId;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
