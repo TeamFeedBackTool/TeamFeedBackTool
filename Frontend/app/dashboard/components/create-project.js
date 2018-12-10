@@ -21,7 +21,7 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
                         projectName: result
                     });
 
-                    let url = "../../Backend/CreateProject.php";
+                    let url = "../../../Backend/CreateProject.php";
 
                     $http({
                         method: 'POST',

@@ -1,50 +1,56 @@
 <style>
-
-    .logout {
+    .logout_individualprofile {
         display: flex;
-        justify-content: space-between;
-        align-content: center;
-        height: 3.4rem;
-        background-color: rgb(133, 0, 59);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 1;
+        flex-grow: 1;
+        width: auto;
         position: fixed;
-        top: 0;
-        right: 0.5rem;
+        top: 5.9rem;
+        right: 0;
+        border-bottom-left-radius: 1rem;
+        background-color: rgb(233, 213, 222);
         z-index: 1;
     }
 
-    .logout .text {
-        font-size: 1rem;
-        color: #ffffff;
-        margin-right: 0.8rem;
-        cursor: pointer;
-        /* make this item unselectable */
-        -webkit-user-select: none; /* Chrome Safari */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* IE10+ */
-        -o-user-select: none;
-        user-select: none;
-    }
-
-    .logout-button {
+    .logout {
         display: flex;
-        justify-content: space-between;
-        flex-direction: row;
+        flex-direction: column;
+        position: relative;
+        float: right;
         align-items: center;
+        width: 15rem;
+        padding-right: 0.5rem;
+        padding-bottom: 1rem;
+        z-index: 2;
     }
 
-    .logout .user-profile {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50px;
-        background-color: #ffffff;
-        border: 1px solid #000000;
-        transition: 0.3s;
+    .logout .logout-button {
+        margin: 0;
+        background-color: rgba(133, 0, 59, 1);
+        color: white;
+        border-radius: 0.5rem;
     }
+
+    .logout .logout-button:hover {
+        color: rgba(133, 0, 59, 1);
+    }
+
+    .logout .input-container input {
+        transition: 500ms;
+    }
+
+    .logout .messages div {
+        padding-bottom: 1rem;
+    }
+
 </style>
-
-<div class="logout">
-        <div class="logout-button" layout="row">
-            <span class="text" ng-click="$ctrl.submit()">Logout</span>
-            <img src="resources/baseline-person-24px.svg" class="user-profile">
-        </div>
+<div class="logout_individualprofile">
+    <div class="logout">
+        <md-button class="md-raised logout-button" ng-click="$ctrl.submit()">
+            Ausloggen
+        </md-button>
+    </div>
 </div>
