@@ -7,21 +7,12 @@ app.component("projectMenue", {
 });
 
 
-app.controller("ProjectMenueController", function ($log, $rootScope, $http, Userdata) {
+app.controller("ProjectMenueController", function ($log, $rootScope) {
     $log.debug("ProjectMenueController()");
 
     this.$onInit = function () {
-        let recievingUrlUserInformation = "../../../Backend/IndividualProfile.php";
 
-        $http({
-                method: 'POST',
-                url: recievingUrlUserInformation
-            }).then(
-                (response) => {
-                    let userinfo = new Userdata(response.data);
-                }, function (error) {
-                console.log(error);
-            });
+
 
 
         /*

@@ -68,7 +68,7 @@ app.controller("IndividualProfileController", function ($http) {
                     console.log(error);
                 });
         }
-    }
+    };
 
     this.submitPassword = () => {
         if(this.frm_oldpassword === undefined || this.frm_newpassword === undefined){
