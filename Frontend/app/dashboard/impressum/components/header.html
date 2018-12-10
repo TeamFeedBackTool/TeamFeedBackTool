@@ -1,5 +1,5 @@
 <style>
-    .header-not-logged-in {
+    .header {
         display: flex;
         justify-content: space-between;
         align-content: center;
@@ -12,13 +12,13 @@
         z-index: 1;
     }
 
-    .header-not-logged-in .menue-button {
+    .header .menue-button {
         position: relative;
         top: 25%;
         left: 1rem;
     }
 
-    .header-not-logged-in .user-display {
+    .header .user-display-username {
         position: relative;
         right: 0.5rem;
         top: 0;
@@ -26,10 +26,11 @@
 
 
 </style>
-<div class="header-not-logged-in">
+<div class="header">
     <div class="menue-button">
+        <menue-button></menue-button>
     </div>
-    <div class="user-display">
-        <user-display></user-display>
+    <div class="user-display-username">
+        <user-display-username></user-display-username>
     </div>
 </div>

@@ -11,7 +11,7 @@ app.controller("LogoutController", function ($http) {
         $http({
             method: 'POST',
             url: url
-        })
+        });
 
         window.location.href = 'index.html';
     }
