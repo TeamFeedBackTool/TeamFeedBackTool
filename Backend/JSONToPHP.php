@@ -121,3 +121,14 @@ function getUserIdProjectId(){
                       "projectId" => $obj['projectId']);
     return $userdata;
 }
+
+/**
+ * get Input of a ProjectId
+ * @return array
+ */
+function getProjectId(){
+    $json = file_get_contents('php://input');
+    $obj = json_decode($json, true);
+    $userdata = array("userId" => $obj['userId']);
+    return $userdata;
+}
