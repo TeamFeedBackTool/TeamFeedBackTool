@@ -16,7 +16,7 @@ app.controller("RegisterController", function($http, $window) {
                 password: this.frm_password
             });
 
-            let url = "../../Backend/RegisterUser.php";
+            let url = "../../../Backend/RegisterUser.php";
 
             $http({
                 method: 'POST',

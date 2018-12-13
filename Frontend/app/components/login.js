@@ -3,7 +3,7 @@ app.component("login", {
     controller: "LoginController"
 });
 
-app.controller("LoginController", function($http){
+app.controller("LoginController", function($http, $window){
     this.submit = () => {
         if(this.frm_email === undefined){
             this.info = "Bitte überprüfen Sie ihre Email-Adresse";

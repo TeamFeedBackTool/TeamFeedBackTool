@@ -6,13 +6,13 @@ app.component("logout", {
 app.controller("LogoutController", function ($http) {
     this.submit = () => {
 
-        let url = "../../Backend/LogoutUser.php";
+        let url = "../../../Backend/LogoutUser.php";
 
         $http({
             method: 'POST',
             url: url
-        })
+        });
 
-        window.location.href = 'index.html';
+        window.location.href = '../../';
     }
 });

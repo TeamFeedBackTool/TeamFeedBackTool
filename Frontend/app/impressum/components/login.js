@@ -15,7 +15,7 @@ app.controller("LoginController", function($http){
                 email: this.frm_email,
                 password: this.frm_password
             });
-            let url = "../../Backend/LoginUser.php";
+            let url = "../../../Backend/LoginUser.php";
 
             $http({
                 method: 'POST',
