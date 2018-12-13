@@ -44,30 +44,70 @@ function saveIntoSession($row)
  */
 function writeIntoWorksAt(PDO $pdo, $userId, $projectId)
 {
-    sendSuccess($projectId . " " . $userId);
-
+    //sendSuccess($projectId . " " . $userId);
     if ($projectId == 0) {
         $param_projectId = projectnameToIds($pdo, createProjectInput());
     } else {
         $param_projectId = $projectId;
     }
-    $param_userId = $userId;
-    // Prepare an insert statement
-    $sql = "INSERT INTO worksat(pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectId)";
+    if(checkIfUserWorksAt($pdo, $userId, $param_projectId) == true) {
+        $param_userId = $userId;
+        // Prepare an insert statement
+        $sql = "INSERT INTO worksat(pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectId)";
 
-    if ($stmt = $pdo->prepare($sql)) {
-        // Bind variables to the prepared statement as parameters
-        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
-        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
-        // Attempt to execute the prepared statement
-        if ($stmt->execute()) {
-            sendSuccess("writeIntoWorksAt worked");
-        } else {
-            sendError("writeIntoWorksAt didnt work.");
+        if ($stmt = $pdo->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                sendSuccess("writeIntoWorksAt worked");
+            } else {
+                sendError("writeIntoWorksAt didnt work.");
+            }
         }
+        // Close statement
+        unset($stmt);
     }
+    else{
+        sendError("User arbeitet bereits in diesem Projekt");
+    }
+}
+
+/**
+ * This function returns true if $userId does not work in $projectId yet
+ * @param PDO $pdo
+ * @param $userId
+ * @param $projectId
+ * @return bool
+ */
+function checkIfUserWorksAt(PDO $pdo, $userId, $projectId){
+    $param_userId = $userId;
+    $param_projectId = $projectId;
+    $sql = "SELECT pk_fk_userId, pk_fk_projectId FROM worksat WHERE pk_fk_userId = :userId AND pk_fk_projectId = :projectId";
+
+    if($stmt = $pdo->prepare($sql)) {
+        // Bind variables to the prepared statement as parameters
+    $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+    $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+    // Attempt to execute the prepared statement
+    if ($stmt->execute()) {
+        if($stmt -> rowCount() == 0){
+            return true;
+        }
+        elseif($stmt -> rowCount() == 1){
+            return false;
+        }
+        else{
+            sendError("checkIfUserWorksAt returns more than 1 row");
+        }
+    } else {
+        sendError("checkIfUserWorksAt didnt work.");
+    }
+}
     // Close statement
     unset($stmt);
+    return false;
 }
 
 /**
