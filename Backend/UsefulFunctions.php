@@ -61,9 +61,9 @@ function writeIntoWorksAt(PDO $pdo, $userId, $projectId)
             $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                sendSuccess("writeIntoWorksAt worked");
+                //sendSuccess("writeIntoWorksAt worked");
             } else {
-                sendError("writeIntoWorksAt didnt work.");
+                //sendError("writeIntoWorksAt didnt work.");
             }
         }
         // Close statement
@@ -148,7 +148,7 @@ function projectIdsToNames(PDO $pdo)
     //deletes last char since its an ";"
     $projectIds = readProjectsForUser($pdo);
     $idsInArray = explode(';', $projectIds);
-    $projectNames = array();
+    $projectNames = [""];
 
     for ($x = 0; $x <= count($idsInArray); $x++) {
         $sql = "SELECT projectname FROM project WHERE pk_projectId = :projectId";
@@ -157,16 +157,10 @@ function projectIdsToNames(PDO $pdo)
             $param_projectId = $idsInArray[$x];
             $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
             if ($stmt->execute()) {
-                if ($stmt->rowCount() == 1) {
-                    if ($row = $stmt->fetch()) {
-                        array_push($projectsNames, $row['projectname']);
-                    }
-                    sendSuccess("Erfolgreich von projektid zu namen");
-                    return $projectNames;
-                } else {
-                    sendError("wait what");
-                    return $projectNames;
+                if ($row = $stmt->fetch()) {
+                    array_push($projectsNames, $row['projectname']);
                 }
+                //sendSuccess("Erfolgreich von projektid zu namen");
             }
         }
     }
@@ -417,7 +411,7 @@ function emailToUserId(PDO $pdo, $userdata)
         $param_email = $userdata['email'];
         $stmt->bindParam(':email', $param_email, PDO::PARAM_STR);
         if ($stmt->execute()) {
-            sendSuccess($stmt->rowCount() . " Rows found in emailToUserId");
+            //sendSuccess($stmt->rowCount() . " Rows found in emailToUserId");
             if ($row = $stmt->fetch()) {
                 $userId = $row['pk_userId'];
             }
