@@ -1,13 +1,6 @@
-'use strict';
-
 app.factory("Userdata", function() {
-
-    function Userdata(id, firstname, surname) {
-        this.id = id;
-        this.firstname = firstname;
-        this.surname = surname;
+    function Userdata(data) {
+        Object.assign(this, data);
     }
-
     return Userdata;
-
 });

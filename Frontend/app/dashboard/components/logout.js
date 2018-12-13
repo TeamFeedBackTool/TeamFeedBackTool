@@ -5,6 +5,10 @@ app.component("logout", {
 
 app.controller("LogoutController", function ($http, $rootScope) {
 
+    this.$onInit = function () {
+         angular.element(document.querySelector('.logout')).slideUp();
+    };
+
     $rootScope.$watch('profileVisibility', () => {
         angular.element(document.querySelector('.logout')).slideToggle();
     });
@@ -18,6 +22,6 @@ app.controller("LogoutController", function ($http, $rootScope) {
             url: url
         });
 
-        window.location.href = '../index.html';
+        window.location.href = '../';
     }
 });

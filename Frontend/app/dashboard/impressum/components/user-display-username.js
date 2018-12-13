@@ -7,15 +7,13 @@ app.component("userDisplayUsername", {
 });
 
 
-app.controller("UserDisplayUsernameController", function ($http, $log, Userdata) {
+app.controller("UserDisplayUsernameController", function ($http, $log, UserdataService, $rootScope) {
     $log.debug("UserDisplayUsernameController()");
 
-    this.$onInit = function() {
-
-        this.username = Userdata.firstname + ' ' + Userdata.surname;
-
-    };
-
+    UserdataService.getUserdata().then(x => {
+        this.username = x.firstname + ' ' + x.surname;
+    });
+    
     this.toggleProfileMenue = () => {
         $rootScope.profileVisibility = !$rootScope.profileVisibility;
     };
