@@ -5,7 +5,7 @@ app.component("individualProfile", {
 
 
 app.controller("IndividualProfileController", function ($http) {
-    let receivingUrl = "../../Backend/IndividualProfile.php";
+    let receivingUrl = "../../../Backend/IndividualProfile.php";
 
     $http({
         method: 'POST',
@@ -28,7 +28,7 @@ app.controller("IndividualProfileController", function ($http) {
             let parameter = JSON.stringify({
                 firstname: this.frm_firstname,
             });
-            let url = "../../Backend/ChangeFirstname.php";
+            let url = "../../../Backend/ChangeFirstname.php";
 
             $http({
                 method: 'POST',
@@ -53,7 +53,7 @@ app.controller("IndividualProfileController", function ($http) {
             let parameter = JSON.stringify({
                 surname: this.frm_surname,
             });
-            let url = "../../Backend/ChangeSurname.php";
+            let url = "../../../Backend/ChangeSurname.php";
 
             $http({
                 method: 'POST',
@@ -83,7 +83,7 @@ app.controller("IndividualProfileController", function ($http) {
                 oldPassword: this.frm_oldpassword,
                 newPassword: this.frm_newpassword
             });
-            let url = "../../Backend/ChangePassword.php";
+            let url = "../../../Backend/ChangePassword.php";
 
             $http({
                 method: 'POST',

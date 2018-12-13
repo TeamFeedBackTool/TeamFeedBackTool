@@ -17,7 +17,7 @@ app.controller("PlviewController", function($http){
         userId: userId,
         projectId: projectId
     });
-    let url = "../../Backend/SendFeedbackForIds.php";
+    let url = "../../../Backend/SendFeedbackForIds.php";
 
     $http({
         method: 'POST',
@@ -30,7 +30,7 @@ app.controller("PlviewController", function($http){
             console.log(error);
         });
 
-    let receivingUrl = "../../Backend/SendFeedbackForIds.php";
+    let receivingUrl = "../../../Backend/SendFeedbackForIds.php";
 
     $http({
         method: 'POST',

@@ -5,7 +5,7 @@ app.component("employeeDropdown", {
 
 app.controller("employeeDropdownController", function ($http) {
     let projId = 1;
-    let url = "../../Backend/xxx.php";
+    let url = "../../../Backend/xxx.php";
 
     let employees = [];
 

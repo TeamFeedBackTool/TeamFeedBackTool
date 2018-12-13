@@ -38,7 +38,7 @@ app.controller("giveFeedbackController", function ($http, $scope, $mdDialog) {
             technicalSkills: technicalSkills
         });
 
-        let url = "../../Backend/GiveFeedback.php";
+        let url = "../../../Backend/GiveFeedback.php";
 
         $http({
             method: 'POST',
