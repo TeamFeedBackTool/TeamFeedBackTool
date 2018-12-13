@@ -384,7 +384,7 @@ function getMembersofProjectIdWithoutLeader(PDO $pdo)
     $userIds = "";
     $userdata = getProjectId();
     /**
-     * gets all UserIds without the leaderId 
+     * gets all UserIds without the leaderId
      */
     $sql = "SELECT pk_fk_userId FROM worksat 
             INNER JOIN project ON worksat.pk_fk_projectId = project.pk_projectId
