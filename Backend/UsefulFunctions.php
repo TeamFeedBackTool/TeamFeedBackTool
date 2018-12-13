@@ -50,7 +50,7 @@ function writeIntoWorksAt(PDO $pdo, $userId, $projectId)
     } else {
         $param_projectId = $projectId;
     }
-    if(checkIfUserWorksAt($pdo, $userId, $param_projectId) == true) {
+    if (checkIfUserWorksAt($pdo, $userId, $param_projectId) == true) {
         $param_userId = $userId;
         // Prepare an insert statement
         $sql = "INSERT INTO worksat(pk_fk_userId, pk_fk_projectId) VALUES (:userId, :projectId)";
@@ -68,8 +68,7 @@ function writeIntoWorksAt(PDO $pdo, $userId, $projectId)
         }
         // Close statement
         unset($stmt);
-    }
-    else{
+    } else {
         sendError("User arbeitet bereits in diesem Projekt");
     }
 }
@@ -81,30 +80,29 @@ function writeIntoWorksAt(PDO $pdo, $userId, $projectId)
  * @param $projectId
  * @return bool
  */
-function checkIfUserWorksAt(PDO $pdo, $userId, $projectId){
+function checkIfUserWorksAt(PDO $pdo, $userId, $projectId)
+{
     $param_userId = $userId;
     $param_projectId = $projectId;
     $sql = "SELECT pk_fk_userId, pk_fk_projectId FROM worksat WHERE pk_fk_userId = :userId AND pk_fk_projectId = :projectId";
 
-    if($stmt = $pdo->prepare($sql)) {
+    if ($stmt = $pdo->prepare($sql)) {
         // Bind variables to the prepared statement as parameters
-    $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
-    $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
-    // Attempt to execute the prepared statement
-    if ($stmt->execute()) {
-        if($stmt -> rowCount() == 0){
-            return true;
+        $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+        // Attempt to execute the prepared statement
+        if ($stmt->execute()) {
+            if ($stmt->rowCount() == 0) {
+                return true;
+            } elseif ($stmt->rowCount() == 1) {
+                return false;
+            } else {
+                sendError("checkIfUserWorksAt returns more than 1 row");
+            }
+        } else {
+            sendError("checkIfUserWorksAt didnt work.");
         }
-        elseif($stmt -> rowCount() == 1){
-            return false;
-        }
-        else{
-            sendError("checkIfUserWorksAt returns more than 1 row");
-        }
-    } else {
-        sendError("checkIfUserWorksAt didnt work.");
     }
-}
     // Close statement
     unset($stmt);
     return false;
@@ -384,16 +382,21 @@ function getDatesForUserIdAndProjectId(PDO $pdo)
 function getMembersofProjectIdWithoutLeader(PDO $pdo)
 {
     $userIds = "";
-    //TODO hier fehlt noch eine Überprüfung, damit leader nicht returned wird
     $userdata = getProjectId();
+    /**
+     * gets all UserIds without the leaderId 
+     */
     $sql = "SELECT pk_fk_userId FROM worksat 
             INNER JOIN project ON worksat.pk_fk_projectId = project.pk_projectId
-            WHERE pk_projectId = :projectId";
+            WHERE pk_projectId = :projectId 
+            AND pk_fk_userId NOT IN (SELECT fk_leaderId 
+                                     FROM project 
+                                     WHERE pk_projectId = :projectId )";
     if ($stmt = $pdo->prepare($sql)) {
         $param_projectId = $userdata['projectId'];
         $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
         foreach ($stmt as $row) {
-            $userIds  .= $row['pk_fk_userId'] .= ";";
+            $userIds .= $row['pk_fk_userId'] .= ";";
         }
         $userIds = substr($userIds, 0, -1);
     }
@@ -406,7 +409,8 @@ function getMembersofProjectIdWithoutLeader(PDO $pdo)
  * @param $userdata
  * @return int
  */
-function emailToUserId(PDO $pdo,$userdata){
+function emailToUserId(PDO $pdo, $userdata)
+{
     $userId = 0;
     $sql = "SELECT pk_userId FROM users WHERE email = :email";
     if ($stmt = $pdo->prepare($sql)) {
