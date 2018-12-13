@@ -1,31 +1,22 @@
 <style>
-    .logout_individualprofile {
+    .logout {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         flex-shrink: 1;
         flex-grow: 1;
-        width: auto;
         position: fixed;
         top: 5.9rem;
         right: 0;
         border-bottom-left-radius: 1rem;
         background-color: rgb(233, 213, 222);
-        z-index: 1;
-    }
-
-    .logout {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        float: right;
-        align-items: center;
         width: 15rem;
         padding-right: 0.5rem;
         padding-bottom: 1rem;
-        z-index: 2;
+        z-index: 1;
     }
+
 
     .logout .logout-button {
         margin: 0;
@@ -38,19 +29,9 @@
         color: rgba(133, 0, 59, 1);
     }
 
-    .logout .input-container input {
-        transition: 500ms;
-    }
-
-    .logout .messages div {
-        padding-bottom: 1rem;
-    }
-
 </style>
-<div class="logout_individualprofile">
-    <div class="logout">
-        <md-button class="md-raised logout-button" ng-click="$ctrl.submit()">
-            Ausloggen
-        </md-button>
+<div class="logout">
+    <md-button class="md-raised logout-button" ng-click="$ctrl.logout()">
+        Abmelden
+    </md-button>
     </div>
-</div>

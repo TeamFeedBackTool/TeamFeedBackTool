@@ -7,17 +7,13 @@ app.component("projectMenue", {
 });
 
 
-app.controller("ProjectMenueController", function ($log, $rootScope) {
+app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
     $log.debug("ProjectMenueController()");
 
     this.$onInit = function () {
 
-
-
-
-        /*
         this.projects = [];
-        let recievingUrlProjectInformation = "../../../Backend/sendProjects.php";
+        let recievingUrlProjectInformation = "../../../Backend/SendProjects.php";
 
         $http({
             method: 'POST',
@@ -29,6 +25,8 @@ app.controller("ProjectMenueController", function ($log, $rootScope) {
             }, function (error) {
                 console.log(error);
             });
+
+        $log.debug(this.projectIds);
 
         for (let i = 0; i < this.projectIds.length; i++) {
             if (this.projectTitles[i].length > 23) {
@@ -43,7 +41,8 @@ app.controller("ProjectMenueController", function ($log, $rootScope) {
                 });
             }
         }
-        console.log(this.projects);
+        $log.debug(this.projects);
+
 
         // what project is shown in the dashboard
         $rootScope.projectName = this.projects[0];
@@ -66,7 +65,6 @@ app.controller("ProjectMenueController", function ($log, $rootScope) {
             }, function (error) {
                 console.log(error);
             });
-            */
 
     };
 

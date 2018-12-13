@@ -7,7 +7,7 @@ app.component("userDisplayUsername", {
 });
 
 
-app.controller("UserDisplayUsernameController", function ($http, $log, UserdataService) {
+app.controller("UserDisplayUsernameController", function ($http, $log, UserdataService, $rootScope) {
     $log.debug("UserDisplayUsernameController()");
 
     UserdataService.getUserdata().then(x => {

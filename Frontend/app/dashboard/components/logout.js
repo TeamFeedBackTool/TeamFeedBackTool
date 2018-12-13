@@ -6,10 +6,10 @@ app.component("logout", {
 app.controller("LogoutController", function ($http, $rootScope) {
 
     $rootScope.$watch('profileVisibility', () => {
-        angular.element(document.querySelector('.logout_individualprofile')).slideToggle();
+        angular.element(document.querySelector('.logout')).slideToggle();
     });
 
-    this.submit = () => {
+    this.logout = () => {
 
         let url = "../../../Backend/LogoutUser.php";
 
