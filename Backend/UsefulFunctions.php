@@ -140,7 +140,7 @@ function readProjectsForUser(PDO $pdo)
 /**
  * converts a string with ProjectsIds ,";" inbetween names
  * @param PDO $pdo
- * @return array
+ * @return string
  */
 
 function projectIdsToNames(PDO $pdo)
@@ -148,7 +148,7 @@ function projectIdsToNames(PDO $pdo)
     //deletes last char since its an ";"
     $projectIds = readProjectsForUser($pdo);
     $idsInArray = explode(';', $projectIds);
-    $projectNames = [""];
+    $projectNames = "";
 
     for ($x = 0; $x <= count($idsInArray); $x++) {
         $sql = "SELECT projectname FROM project WHERE pk_projectId = :projectId";
@@ -158,13 +158,13 @@ function projectIdsToNames(PDO $pdo)
             $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
             if ($stmt->execute()) {
                 if ($row = $stmt->fetch()) {
-                    array_push($projectsNames, $row['projectname']);
+                    $projectNames .= $row['projectname'] .= ";";
                 }
                 //sendSuccess("Erfolgreich von projektid zu namen");
             }
         }
     }
-    return $projectNames;
+    return substr($projectNames, 0, -1);
 }
 
 /**
