@@ -28,9 +28,31 @@
         color: rgba(133, 0, 59, 1);
     }
 
+    .logout .individualProfile {
+        margin: 0;
+        background-color: rgba(133, 0, 59, 1);
+        color: white;
+        border-radius: 0.5rem;
+    }
+
+    .logout .individualProfile:hover {
+        color: rgba(133, 0, 59, 1);
+    }
+
+    .logout .buttons {
+        display:flex;
+        flex-direction: column;
+        padding: 1em;
+    }
+
 </style>
 <div class="logout">
-    <md-button class="md-raised logout-button" ng-click="$ctrl.logout()">
-        Abmelden
-    </md-button>
+    <div class="buttons">
+        <md-button class="md-raised logout-button" ng-click="$ctrl.logout()">
+            Abmelden
+        </md-button>
+        <md-button class="md-raised individualProfile" ng-click="$ctrl.individualProfile()">
+            Userdaten
+        </md-button>
+    </div>
 </div>

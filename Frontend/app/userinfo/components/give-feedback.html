@@ -1,0 +1,52 @@
+<style>
+    .giveFeedback {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10em;
+    }
+
+    .giveFeedback .fragen {
+        width: 25em;
+    }
+</style>
+
+<div class="giveFeedback">
+
+    <div class="fragen">
+
+        <h3>Wie gestresst fühlen Sie sich? {{stress}}/10</h3>
+
+        <md-slider md-discrete ng-model="stress" step="1" min="0" max="10" aria-label="rating"></md-slider>
+
+        <h3>Wie motiviert sind Sie? {{motivation}}/10</h3>
+
+        <md-slider md-discrete ng-model="motivation" step="1" min="0" max="10" aria-label="rating"></md-slider>
+
+        <h3>Sind Sie mit ihrer bisherigen Arbeit zufrieden? </h3>
+
+        <md-radio-group ng-model="data.group1">
+
+            <md-radio-button value="Ja" checked="checked"> Ja</md-radio-button>
+            <md-radio-button value="Nein"> Nein</md-radio-button>
+
+        </md-radio-group>
+
+        <h3>Benötigen Sie Hilfe? </h3>
+
+        <md-radio-group ng-model="data.group2">
+
+            <md-radio-button value="Ja" checked="checked"> Ja</md-radio-button>
+            <md-radio-button value="Nein"> Nein</md-radio-button>
+
+        </md-radio-group>
+
+
+        <md-button class="md-raised login-button" ng-click="$ctrl.submit()">
+            Eingeben
+        </md-button>
+
+    </div>
+
+</div>

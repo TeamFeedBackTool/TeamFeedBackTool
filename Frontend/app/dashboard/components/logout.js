@@ -6,7 +6,7 @@ app.component("logout", {
 app.controller("LogoutController", function ($http, $rootScope) {
 
     this.$onInit = function () {
-         angular.element(document.querySelector('.logout')).slideUp();
+        $rootScope.profileVisibility = false;
     };
 
     $rootScope.$watch('profileVisibility', () => {
@@ -23,5 +23,10 @@ app.controller("LogoutController", function ($http, $rootScope) {
         });
 
         window.location.href = '../';
+    };
+
+    this.individualProfile = () => {
+
+        window.location.href = '../../userinfo/';
     }
 });
