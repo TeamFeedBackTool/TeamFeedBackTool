@@ -3,7 +3,7 @@ app.component("createProject", {
     controller: "createProjectController"
 });
 
-app.controller("createProjectController", function ($http, $scope, $mdDialog) {
+app.controller("createProjectController", function ($http, $scope, $mdDialog, $window) {
 
     $scope.showPrompt = function (ev, text) {
         var confirm = $mdDialog.prompt()
@@ -37,7 +37,7 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
                             }
                             if ($scope.info === "201") {
                                 $scope.showAlert("Ihr Projekt wurde erstellt!");
-                                $rootScope.newProject = !$rootScope.newProject;
+                                $window.location.href = "../dashboard";
                             }
                         })
                 } else {
