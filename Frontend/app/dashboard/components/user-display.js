@@ -16,8 +16,4 @@ app.controller("UserDisplayController", function ($log, $rootScope) {
         $rootScope.profileVisibility = false;
     };
 
-    this.toggleProfileMenue = () => {
-        $rootScope.profileVisibility = !$rootScope.profileVisibility;
-    };
-
 });
