@@ -26,11 +26,6 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
         }
     });
 
-    $rootScope.$watch('newProject', () => {
-        //loadProjects();
-        this.projectTitles.push("Kevin ist scheiße");
-    });
-
     this.clickedOnProjectTitle = ($event) => {
         $rootScope.projectId = angular.element($event.currentTarget).attr('project-id');
     };
