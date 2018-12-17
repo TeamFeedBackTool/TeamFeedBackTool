@@ -150,7 +150,7 @@ function projectIdsToNames(PDO $pdo)
     $idsInArray = explode(';', $projectIds);
     $projectNames = "";
 
-    for ($x = 0; $x <= count($idsInArray); $x++) {
+    for ($x = 0; $x < count($idsInArray); $x++) {
         $sql = "SELECT projectname FROM project WHERE pk_projectId = :projectId";
         if ($stmt = $pdo->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
