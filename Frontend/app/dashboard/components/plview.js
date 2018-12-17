@@ -3,9 +3,9 @@ app.component("plview", {
     controller: "PlviewController"
 });
 
-app.controller("PlviewController", function($http){
+app.controller("PlviewController", function($http, $rootScope){
     let userId=1;
-    let projectId=1;
+    let projectId= $rootScope.projectId;
 
     let stress = '';
     let motivation = '';
@@ -57,16 +57,25 @@ app.controller("PlviewController", function($http){
                 label: 'Stress',
                 data: [3, 5, 8, 2, 5],
                 backgroundColor: [
-                    'rgba(0, 153, 148, 0.1)'],
+                    'rgba(17, 188, 218, 0.1)'],
                 borderColor: [
-                    'rgba(0, 153, 148, 1)']
+                    'rgba(17, 188, 218, 1)']
             },{
                 label: 'Motivation',
                 data: [10, 3, 5, 6, 7],
                 backgroundColor: [
-                    'rgba(180, 68, 0, 0.1)'],
+                    'rgba(78, 155, 43, 0.1)'],
                 borderColor: [
-                    'rgba(180, 68, 0, 1)']}
+                    'rgba(78, 155, 43, 1)']},
+                {
+                    label: 'Know-How',
+                    data: [0, 0, 10, 0, 10],
+                    backgroundColor: [
+                        'rgba(244, 127, 104, 1)'],
+                    borderColor: [
+                        'rgba(244, 127, 104, 1)'],
+                    showLine: false,
+                    pointRadius: 8}
             ]
         },
         options: {

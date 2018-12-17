@@ -1,21 +1,28 @@
 <style>
-    .inviteEmployee md-input-container .messages div{
-        padding-bottom: 1rem;
-    }
-
     .inviteEmployee{
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: 10rem;
+        right: 2rem;
+        width: 13rem;
     }
 
     .inviteEmployee md-input-container{
-        width: 12rem;
+        width: 13rem;
+    }
+
+    .inviteEmployee form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inviteEmployee .button{
+        margin: 0;
+        padding: 0;
     }
 </style>
 
 <div class="inviteEmployee">
-    <form name="$ctrl.inviteEmployee" method="post" action="../../../../Backend/InviteEmployee.php">
+    <form name="$ctrl.inviteEmployee" method="post">
         <md-input-container>
             <label>Mitarbeiter-Email</label>
             <input required type="email" name="email" ng-model="$ctrl.frm_employee_email"
@@ -35,7 +42,7 @@
                 </div>
             </div>
         </md-input-container>
-        <md-button class="md-raised" ng-disabled="$ctrl.inviteEmployee.$invalid" ng-click="$ctrl.submitEmployee()">
+        <md-button class="md-raised button" ng-disabled="$ctrl.inviteEmployee.$invalid" ng-click="$ctrl.submitEmployee()">
             Mitarbeiter hinzufügen
         </md-button>
         <div class="info">
