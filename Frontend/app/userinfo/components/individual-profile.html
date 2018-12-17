@@ -1,7 +1,8 @@
 <style>
-    .idvProfile{
-        margin-top: 3rem;
-        margin-left: 3rem;
+
+    .idvProfile {
+        margin-top: 10rem;
+        margin-left: 10rem;
     }
 </style>
 
@@ -11,7 +12,7 @@
     </div>
     <br>
     <div class="change-firstname">
-        <div class="firstname"> Ihr Vorname lautet: <i>{{$ctrl.firstname}}</i> </div>
+        <div class="firstname"> Ihr Vorname lautet: <i>{{$ctrl.firstname}}</i></div>
         <md-input-container>
             <label>Vorname</label>
             <input type="text" name="firstname" ng-model="$ctrl.frm_firstname"
@@ -23,19 +24,19 @@
         {{$ctrl.infoFirstname}}
     </div>
     <div class="change-surname">
-        <div class="surname"> Ihr Nachname lautet: <i>{{$ctrl.surname}}</i> </div>
+        <div class="surname"> Ihr Nachname lautet: <i>{{$ctrl.surname}}</i></div>
         <md-input-container>
             <label>Nachname</label>
             <input type="text" name="surname" ng-model="$ctrl.frm_surname"
                    minlength="3" maxlength="100" ng-pattern="/^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/"/>
         </md-input-container>
-        <md-button class="md-raised"  ng-click="$ctrl.submitSurname()">
+        <md-button class="md-raised" ng-click="$ctrl.submitSurname()">
             Nachnamen ändern
         </md-button>
         {{$ctrl.infoSurname}}
     </div>
     <div class="change-password">
-        <div class="password"> Passwort ändern: </div>
+        <div class="password"> Passwort ändern:</div>
         <md-input-container>
             <label>Altes Passwort</label>
             <input type="password" name="oldpassword" ng-model="$ctrl.frm_oldpassword"
