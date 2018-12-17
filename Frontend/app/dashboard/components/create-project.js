@@ -30,12 +30,12 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog) {
                     }).then(
                         (response) => {
                             console.log(response);
-                            $scope.info = response.data.infotext;
+                            $scope.info = response.data.status;
 
-                            if ($scope.info === "This projectName is already taken.") {
+                            if ($scope.info === "50x") {
                                 $scope.showAlert("Dieser Projektname wird bereits verwendet!");
                             }
-                            if ($scope.info === undefined) {
+                            if ($scope.info === "201") {
                                 $scope.showAlert("Ihr Projekt wurde erstellt!");
                             }
                         })

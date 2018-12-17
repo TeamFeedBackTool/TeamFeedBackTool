@@ -27,6 +27,6 @@ app.controller("LogoutController", function ($http, $rootScope) {
 
     this.individualProfile = () => {
 
-        window.location.href = '../../userinfo/';
+        window.location.href = '../userinfo/';
     }
 });
