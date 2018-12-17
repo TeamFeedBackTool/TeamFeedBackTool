@@ -4,8 +4,9 @@
     }
 
     .inviteEmployee{
-        margin-top: 20rem;
-        margin-left: 30rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
     }
 
     .inviteEmployee md-input-container{
@@ -14,7 +15,7 @@
 </style>
 
 <div class="inviteEmployee">
-    <form name="$ctrl.inviteEmployee" method="post" action="../../../Backend/InviteEmployee.php">
+    <form name="$ctrl.inviteEmployee" method="post" action="../../../../Backend/InviteEmployee.php">
         <md-input-container>
             <label>Mitarbeiter-Email</label>
             <input required type="email" name="email" ng-model="$ctrl.frm_employee_email"

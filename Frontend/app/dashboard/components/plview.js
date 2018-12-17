@@ -52,17 +52,17 @@ app.controller("PlviewController", function($http){
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: dates,
+            labels: [1, 2, 3, 4, 5],
             datasets: [{
                 label: 'Stress',
-                data: stress,
+                data: [3, 5, 8, 2, 5],
                 backgroundColor: [
                     'rgba(0, 153, 148, 0.1)'],
                 borderColor: [
                     'rgba(0, 153, 148, 1)']
             },{
                 label: 'Motivation',
-                data: motivation,
+                data: [10, 3, 5, 6, 7],
                 backgroundColor: [
                     'rgba(180, 68, 0, 0.1)'],
                 borderColor: [
