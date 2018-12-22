@@ -4,6 +4,15 @@
 var app = angular.module("TFT", [ "ngResource", "ngMessages", "ngLocale", "ngSanitize",
     "ngAnimate", "ngMaterial", "ui.router", "ngRoute"]);
 
+// Einstellungen für Debugging
+app.config(function($logProvider, $compileProvider, $mdAriaProvider, $qProvider) {
+    $logProvider.debugEnabled(true);
+    $compileProvider.debugInfoEnabled(true);
+    $mdAriaProvider.disableWarnings();
+    $qProvider.errorOnUnhandledRejections(false);
+});
+
+
 // $routeProvider Konfiguration
 app.config(
     function ($routeProvider) {
@@ -20,22 +29,14 @@ app.config(
             .when('/impressum', {
                 templateUrl: 'templates/impressum.html'
             })
-            .when('/404', {
+            .when('/not-found.html', {
                 templateUrl: 'templates/404.html'
             })
             .otherwise({
-                redirectTo: '/404'
+                redirectTo: '/not-found.html'
             });
     });
 
-
-// Einstellungen für Debugging
-app.config(function($logProvider, $compileProvider, $mdAriaProvider, $qProvider) {
-    $logProvider.debugEnabled(true);
-    $compileProvider.debugInfoEnabled(true);
-    $mdAriaProvider.disableWarnings();
-    $qProvider.errorOnUnhandledRejections(false);
-});
 
 
 // Thema einstellen, mögliche Paletten sind:

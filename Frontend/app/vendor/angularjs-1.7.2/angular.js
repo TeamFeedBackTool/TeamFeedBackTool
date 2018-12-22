@@ -12924,7 +12924,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
     if (lowercase(method) === 'jsonp') {
       var callbackPath = callbacks.createCallback(url);
       var jsonpDone = jsonpReq(url, callbackPath, function(status, text) {
-        // jsonpReq only ever sets status to 200 (OK), 404 (ERROR) or -1 (WAITING)
+        // jsonpReq only ever sets status to 200 (OK), not-found.html (ERROR) or -1 (WAITING)
         var response = (status === 200) && callbacks.getResponse(callbackPath);
         completeRequest(callback, status, response, '', text, 'complete');
         callbacks.removeCallback(callbackPath);
