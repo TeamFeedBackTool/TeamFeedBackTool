@@ -22,6 +22,6 @@ app.controller("LogoutController", function ($http, $rootScope) {
             url: url
         });
 
-        window.location.href = '../';
+        window.location.href = '../../';
     }
 });
