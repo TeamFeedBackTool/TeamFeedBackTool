@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" ng-app="Vorlage">
+<html lang="de" ng-app="TFT">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +25,7 @@
     <script src="vendor/angularjs-1.7.2/angular-animate.min.js"></script>
     <script src="vendor/angularjs-1.7.2/angular-aria.min.js"></script>
     <script src="vendor/angularjs-1.7.2/i18n/angular-locale_de.js"></script>
+    <script src="vendor/angular-route.js"></script>
 
     <script src="vendor/angular-material-1.1.10/angular-material.min.js"></script>
     <script src="vendor/angular-ui-router-1.0.20/angular-ui-router.min.js"></script>
@@ -38,14 +39,22 @@
     <script src="components/register.js"></script>
     <script src="components/inhalt.js"></script>
     <script src="components/footer.js"></script>
+    <script src="models/Userdata.js"></script>
+    <script src="services/userdata-service.js"></script>
+    <script src="components/create-project.js"></script>
+    <script src="components/employee-dropdown.js"></script>
+    <script src="components/give-feedback.js"></script>
+    <script src="components/impressum.js"></script>
+    <script src="components/individual-profile.js"></script>
+    <script src="components/invite-employee.js"></script>
+    <script src="components/menue-button.js"></script>
+    <script src="components/plview.js"></script>
+    <script src="components/project-menue.js"></script>
+    <script src="components/user-display-username.js"></script>
+    <script src="components/header.js"></script>
+    <script src="components/logout.js"></script>
   </head>
   <body layout="column" ng-cloak>
-    <header-not-logged-in></header-not-logged-in>
-    <subheader>
-      <a href="#">Startseite</a>
-    </subheader>
-    <register-login-switch></register-login-switch>
-    <inhalt></inhalt>
-    <footer></footer>
+    <ng-view></ng-view>
   </body>
 </html>

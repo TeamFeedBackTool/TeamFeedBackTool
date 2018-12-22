@@ -13,6 +13,6 @@ app.controller("LogoutController", function ($http) {
             url: url
         });
 
-        window.location.href = 'index.html';
+        window.location.href = '#!/';
     }
 });

@@ -27,7 +27,7 @@ app.controller("LoginController", function($http, $window){
                     this.info = response.data.infotext;
                     let statusCode = response.data.status;
                     if(statusCode === "201"){
-                        $window.location.href = 'dashboard';
+                        $window.location.href = '#!/dashboard';
                     }
                 }, function (error) {
                     console.log(error);

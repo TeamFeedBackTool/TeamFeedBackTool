@@ -1,8 +1,32 @@
 "use strict";
 
 // Einziges Modul dieser App und seine Abhängigkeiten
-var app = angular.module("Vorlage", [ "ngResource", "ngMessages", "ngLocale", "ngSanitize",
-    "ngAnimate", "ngMaterial", "ui.router" ]);
+var app = angular.module("TFT", [ "ngResource", "ngMessages", "ngLocale", "ngSanitize",
+    "ngAnimate", "ngMaterial", "ui.router", "ngRoute"]);
+
+// $routeProvider Konfiguration
+app.config(
+    function ($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'templates/index.html'
+            })
+            .when('/dashboard', {
+                templateUrl: 'templates/dashboard.html'
+            })
+            .when('/userdata', {
+                templateUrl: 'templates/userdata.html'
+            })
+            .when('/impressum', {
+                templateUrl: 'templates/impressum.html'
+            })
+            .when('/404', {
+                templateUrl: 'templates/404.html'
+            })
+            .otherwise({
+                redirectTo: '/404'
+            });
+    });
 
 
 // Einstellungen für Debugging
@@ -57,7 +81,6 @@ app.config(function($localeProvider, $mdDateLocaleProvider) {
     $mdDateLocaleProvider.msgCalendar = "Kalender";
     $mdDateLocaleProvider.msgOpenCalendar = "Kalender öffnen";
 });
-
 
 // Workaround, um irreführende Fehlermeldungen von UI-Router zu unterdrücken
 app.run(function($state, $trace, $uiRouter) {
