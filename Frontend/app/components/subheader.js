@@ -14,6 +14,7 @@ app.controller("SubheaderController", function ($log, $rootScope) {
     $log.debug("SubheaderController()");
 
     this.$onInit = function() {
+        $rootScope.projectMenueVisibility = false;
         this.whereAmI = this.whereAmI || 'Achtung: Sie tummeln sich auf einem unbekannten Pfad!';
     };
 
