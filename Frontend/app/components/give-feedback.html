@@ -10,6 +10,20 @@
     .giveFeedback .fragen {
         width: 25em;
     }
+
+    .giveFeedback .fragen md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+        background-color: rgba(133, 0, 59, 1);
+    }
+
+    .giveFeedback .fragen md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
+        border-color: rgba(133, 0, 59, 1);
+    }
+
+    .giveFeedback .fragen .slider .md-thumb:after, .giveFeedback .fragen .slider .md-track-fill{
+        background-color: rgba(133, 0, 59, 1);
+        border-color: rgba(133, 0, 59, 1);
+    }
+
 </style>
 
 <div class="giveFeedback">
@@ -18,17 +32,17 @@
 
         <h3>Wie gestresst fühlen Sie sich? {{stress}}/10</h3>
 
-        <md-slider md-discrete ng-model="stress" step="1" min="0" max="10" aria-label="rating"></md-slider>
+        <md-slider class="slider" ng-model="stress" step="1" min="0" max="10" aria-label="rating"></md-slider>
 
         <h3>Wie motiviert sind Sie? {{motivation}}/10</h3>
 
-        <md-slider md-discrete ng-model="motivation" step="1" min="0" max="10" aria-label="rating"></md-slider>
+        <md-slider class="slider" ng-model="motivation" step="1" min="0" max="10" aria-label="rating"></md-slider>
 
         <h3>Sind Sie mit ihrer bisherigen Arbeit zufrieden? </h3>
 
         <md-radio-group ng-model="data.group1">
 
-            <md-radio-button value="Ja" checked="checked"> Ja</md-radio-button>
+            <md-radio-button class="radio-button" value="Ja"> Ja</md-radio-button>
             <md-radio-button value="Nein"> Nein</md-radio-button>
 
         </md-radio-group>
@@ -37,7 +51,7 @@
 
         <md-radio-group ng-model="data.group2">
 
-            <md-radio-button value="Ja" checked="checked"> Ja</md-radio-button>
+            <md-radio-button value="Ja"> Ja</md-radio-button>
             <md-radio-button value="Nein"> Nein</md-radio-button>
 
         </md-radio-group>

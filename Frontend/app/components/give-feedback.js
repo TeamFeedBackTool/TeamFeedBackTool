@@ -31,7 +31,7 @@ app.controller("giveFeedbackController", function ($http, $scope, $mdDialog, $ro
         }
 
         let parameter = JSON.stringify({
-            projectId: /*$rootScope.projectId*/ 41,
+            projectId: $rootScope.projectId,
             sliderValue_stress: $scope.stress,
             sliderValue_motivation: $scope.motivation,
             work_performance_satisfied: satisfied,
