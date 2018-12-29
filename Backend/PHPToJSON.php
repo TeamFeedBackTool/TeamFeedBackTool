@@ -95,3 +95,13 @@ function sendAllMembersOfProjectWithoutLeader($pdo){
         'members' => getMembersofProjectIdWithoutLeader($pdo)
     )));
 }
+
+/**
+ * returns to frontend if user is logged in or not
+ * @param $loginBoolean
+ */
+function isLoggedIn($loginBoolean){
+    echo json_encode((array(
+        'isLoggedIn' => $loginBoolean
+    )));
+}
