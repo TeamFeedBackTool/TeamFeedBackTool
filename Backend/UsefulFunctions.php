@@ -373,7 +373,7 @@ function getDatesForUserIdAndProjectId(PDO $pdo)
  * @param PDO $pdo
  * @return string with all userIds with ";" in between
  */
-function getMembersofProjectIdWithoutLeader(PDO $pdo)
+function getMembersOfProjectIdWithoutLeader(PDO $pdo)
 {
     $userIds = "";
     $userdata = getProjectId();
@@ -419,6 +419,38 @@ function emailToUserId(PDO $pdo, $userdata)
 
     }
     return $userId;
+}
+
+/**
+ *
+ * @param PDO $pdo
+ * @return void
+ */
+function userIdsToFirstnameSurname(PDO $pdo){
+    $userdata = getMembersOfProjectIdWithoutLeader($pdo);
+    $idsInArray = explode(';', $userdata);
+    $firstnames = "";
+    $surnames = "";
+
+    for ($x = 0; $x < count($idsInArray); $x++) {
+        $sql = "SELECT firstname, surname FROM users where pk_userId = :userId";
+        if ($stmt = $pdo->prepare($sql)) {
+            $param_userId = $idsInArray[$x];
+            $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
+            foreach ($stmt as $row) {
+                $firstnames .= $row['firstname'] .= ";";
+                $surnames .= $row['surname'] .= ";";
+            }
+            $firstnames = substr($firstnames, 0, -1);
+            $surnames = substr($surnames, 0, -1);
+        }
+    }
+
+    /**
+     * sends Firstnames and Surnames of ProjectId without Leader
+     */
+    sendFirstnameSurname($firstnames, $surnames);
+
 }
 
 

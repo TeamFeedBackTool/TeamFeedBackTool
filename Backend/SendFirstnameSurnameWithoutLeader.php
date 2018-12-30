@@ -8,4 +8,4 @@ require_once 'config.php';
 require_once 'PHPToJSON.php';
 require_once 'UsefulFunctions.php';
 
-sendSuccess(getMembersofProjectIdWithoutLeader($pdo));
+userIdsToFirstnameSurname($pdo);

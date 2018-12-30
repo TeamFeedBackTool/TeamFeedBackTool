@@ -5,25 +5,23 @@ app.component("employeeDropdown", {
 
 app.controller("employeeDropdownController", function ($http, $rootScope) {
     let projId = $rootScope.currentProject.id;
-    let url = "../../Backend/xxx.php";
+    let url = "../../Backend/SendUserIdsWithoutLeader.php";
 
     let employees = ["Dominik Novi", "Florian Gödel"];
 
+     let parameter = JSON.stringify({
+         projectId: projId
+     });
 
-    // let parameter = JSON.stringify({
-    //     projectId: projId
-    // });
-    //
-    // $http({
-    //     method: 'POST',
-    //     url: url,
-    //     data: parameter
-    // }).then(
-    //     (response) => {
-    //         console.log(response);
-    //         employees = response.data.employees;
-    //     }, function (error) {
-    //         console.log(error);
-    //     });
-
+     $http({
+         method: 'POST',
+         url: url,
+         data: parameter
+     }).then(
+         (response) => {
+            console.log(response);
+             employees = response.data.employees;
+         }, function (error) {
+             console.log(error);
+         });
 });
