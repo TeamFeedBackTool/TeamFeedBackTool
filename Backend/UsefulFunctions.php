@@ -376,7 +376,8 @@ function getDatesForUserIdAndProjectId(PDO $pdo)
 function getMembersOfProjectIdWithoutLeader(PDO $pdo)
 {
     $userIds = "";
-    $userdata = getProjectId();
+    //$userdata = getProjectId();
+    $userdata['projectId'] = 1;
     /**
      * gets all UserIds without the leaderId
      */
@@ -385,14 +386,16 @@ function getMembersOfProjectIdWithoutLeader(PDO $pdo)
             WHERE pk_projectId = :projectId 
             AND pk_fk_userId NOT IN (SELECT fk_leaderId 
                                      FROM project 
-                                     WHERE pk_projectId = :projectId )";
+                                     WHERE pk_projectId = :projectId)";
     if ($stmt = $pdo->prepare($sql)) {
         $param_projectId = $userdata['projectId'];
         $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
-        foreach ($stmt as $row) {
-            $userIds .= $row['pk_fk_userId'] .= ";";
+        if ($stmt->execute()){
+            foreach ($stmt as $row) {
+                $userIds .= $row['pk_fk_userId'] .= ";";
+            }
+            $userIds = substr($userIds, 0, -1);
         }
-        $userIds = substr($userIds, 0, -1);
     }
     return $userIds;
 }
@@ -426,7 +429,8 @@ function emailToUserId(PDO $pdo, $userdata)
  * @param PDO $pdo
  * @return void
  */
-function userIdsToFirstnameSurname(PDO $pdo){
+function userIdsToFirstnameSurname(PDO $pdo)
+{
     $userdata = getMembersOfProjectIdWithoutLeader($pdo);
     $idsInArray = explode(';', $userdata);
     $firstnames = "";
@@ -437,14 +441,17 @@ function userIdsToFirstnameSurname(PDO $pdo){
         if ($stmt = $pdo->prepare($sql)) {
             $param_userId = $idsInArray[$x];
             $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
-            foreach ($stmt as $row) {
-                $firstnames .= $row['firstname'] .= ";";
-                $surnames .= $row['surname'] .= ";";
+            if ($stmt->execute()) {
+                foreach ($stmt as $row) {
+                    $firstnames .= $row['firstname'] .= ";";
+                    $surnames .= $row['surname'] .= ";";
+                }
+                $firstnames = substr($firstnames, 0, -1);
+                $surnames = substr($surnames, 0, -1);
             }
-            $firstnames = substr($firstnames, 0, -1);
-            $surnames = substr($surnames, 0, -1);
         }
     }
+
 
     /**
      * sends Firstnames and Surnames of ProjectId without Leader
