@@ -5,7 +5,7 @@ app.component("plview", {
 
 app.controller("PlviewController", function($http, $rootScope, UserdataService){
     let userId;
-    let projectId = $rootScope.currentProject.id;
+    let projectId = 3;
     UserdataService.getUserdata().then(x => {
        userId = x.userId;
     }).then(() => {

@@ -5,7 +5,7 @@ app.component("inviteEmployee", {
 
 
 app.controller("InviteEmployeeController", function ($http, $rootScope) {
-    let projId = $rootScope.currentProject.id;
+    let projId = 3;
     let url = "../../Backend/InviteEmployee.php";
 
     this.submitEmployee = () => {

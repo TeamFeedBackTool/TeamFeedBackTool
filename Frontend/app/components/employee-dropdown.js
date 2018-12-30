@@ -4,10 +4,10 @@ app.component("employeeDropdown", {
 });
 
 app.controller("employeeDropdownController", function ($http, $rootScope) {
-    let projId = $rootScope.currentProject.id;
-    let url = "../../Backend/SendUserIdsWithoutLeader.php";
+    let projId = 3;
+    let url = "../../Backend/SendFirstnameSurnameWithoutLeader.php";
 
-    let employees = ["Dominik Novi", "Florian Gödel"];
+    let employees = [];
 
      let parameter = JSON.stringify({
          projectId: projId
@@ -20,7 +20,10 @@ app.controller("employeeDropdownController", function ($http, $rootScope) {
      }).then(
          (response) => {
             console.log(response);
-             employees = response.data.employees;
+            let firstnames = response.data.firstname.split(";");
+            let lastnames = response.data.surname.split(";");
+            console.log(firstnames);
+            console.log(lastnames);
          }, function (error) {
              console.log(error);
          });
