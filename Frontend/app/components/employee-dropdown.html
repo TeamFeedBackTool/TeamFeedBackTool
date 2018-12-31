@@ -13,7 +13,7 @@
 <div class="employeeDropdown">
     <md-input-container>
         <label>Mitarbeiter auswählen</label>
-        <md-select ng-model="employee">
+        <md-select ng-model="employee" ng-change="selectChanged()">
             <md-option ng-repeat="empl in $ctrl.employees">
                 {{empl}}
             </md-option>

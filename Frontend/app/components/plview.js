@@ -3,12 +3,21 @@ app.component("plview", {
     controller: "PlviewController"
 });
 
-app.controller("PlviewController", function($http, $rootScope, UserdataService){
-    let userId;
-    let projectId = 3;
-    UserdataService.getUserdata().then(x => {
-       userId = x.userId;
-    }).then(() => {
+app.controller("PlviewController", function($http, $rootScope){
+
+    this.$onInit = function () {
+        showChart();
+    };
+
+
+    $rootScope.$watch('currentEmployee', function() {
+            showChart();
+        });
+
+    let showChart = () => {
+        let userId = $rootScope.currentEmloyee;
+        let projectId = 3;
+
         let stress = '';
         let motivation = '';
         let work_performance_satisfied = '';
@@ -19,7 +28,7 @@ app.controller("PlviewController", function($http, $rootScope, UserdataService){
             userId: userId,
             projectId: projectId
         });
-        let url = "../../Backend/SendFeedbackForIds.php";
+        let url = "../../Backend/SendFeedbacksForIds.php";
 
         $http({
             method: 'POST',
@@ -32,7 +41,7 @@ app.controller("PlviewController", function($http, $rootScope, UserdataService){
                 console.log(error);
             });
 
-        let receivingUrl = "../../Backend/SendFeedbackForIds.php";
+        let receivingUrl = "../../Backend/SendFeedbacksForIds.php";
 
         $http({
             method: 'POST',
@@ -54,17 +63,17 @@ app.controller("PlviewController", function($http, $rootScope, UserdataService){
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [1, 2, 3, 4, 5],
+                labels: dates,
                 datasets: [{
                     label: 'Stress',
-                    data: [3, 5, 8, 2, 5],
+                    data: stress,
                     backgroundColor: [
                         'rgba(17, 188, 218, 0.1)'],
                     borderColor: [
                         'rgba(17, 188, 218, 1)']
                 }, {
                     label: 'Motivation',
-                    data: [10, 3, 5, 6, 7],
+                    data: motivation,
                     backgroundColor: [
                         'rgba(78, 155, 43, 0.1)'],
                     borderColor: [
@@ -72,7 +81,7 @@ app.controller("PlviewController", function($http, $rootScope, UserdataService){
                 },
                     {
                         label: 'Know-How nötig?',
-                        data: [0, 0, 10, 0, 10],
+                        data: technicalSkills,
                         backgroundColor: [
                             'rgba(244, 127, 104, 1)'],
                         showLine: false,
@@ -80,7 +89,7 @@ app.controller("PlviewController", function($http, $rootScope, UserdataService){
                     },
                     {
                         label: 'Leistungszufriedenheit',
-                        data: [10, 10, 0, 10, 0],
+                        data: work_performance_satisfied,
                         backgroundColor: [
                             'rgba(0, 127, 104, 1)'],
                         showLine: false,
@@ -98,5 +107,5 @@ app.controller("PlviewController", function($http, $rootScope, UserdataService){
                 }
             }
         });
-    });
+    };
 });

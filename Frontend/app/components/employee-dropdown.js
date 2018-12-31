@@ -21,10 +21,16 @@ app.controller("employeeDropdownController", function ($http, $rootScope) {
          (response) => {
             console.log(response);
             let firstnames = response.data.firstname.split(";");
-            let lastnames = response.data.surname.split(";");
-            console.log(firstnames);
-            console.log(lastnames);
+            let surnames = response.data.surname.split(";");
+             for (let i = 0; i < surnames.length; i++) {
+                 employees.push(firstnames[i] + " " + surnames[i]);
+             }
+            console.log(employees);
          }, function (error) {
              console.log(error);
          });
+
+    $scope.selectChanged = function(){
+        $rootScope.currentEmloyee = $scope.employee;
+    };
 });
