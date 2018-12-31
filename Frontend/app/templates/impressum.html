@@ -1,9 +1,11 @@
 <header></header>
 <subheader>
-  <a href="#!/dashboard">Dashboard</a>
+  <a href="#!/dashboard" ng-if="isLoggedIn">Dashboard</a>
+  <a href="#!/" ng-if="!isLoggedIn">Startseite</a>
   >
   <a href="#!/impressum">Impressum</a>
-</subheader>
+</subheader>git pus
+<register-login-switch ng-if="!isLoggedIn"></register-login-switch>
+<logout ng-if="isLoggedIn"></logout>
 <impressum-inhalt></impressum-inhalt>
-<logout></logout>
 <footer></footer>

@@ -12,12 +12,15 @@ app.controller("LogoutController", function ($log, $http, $rootScope, $timeout) 
         $rootScope.profileVisibility = false;
     };
 
-    $rootScope.$watch('profileVisibility', () => {
+    $rootScope.$watch('profileVisibility', (oldVal, newVal) => {
         if (this.initializing) {
             $timeout(() => { this.initializing = false; });
         } else {
-            angular.element(document.querySelector('.logout')).slideToggle();
-            $log.debug($rootScope.profileVisibility);
+            if (newVal) {
+                angular.element(document.querySelector('.logout')).slideDown();
+            } else {
+                angular.element(document.querySelector('.logout')).slideUp();
+            }
         }
     });
 

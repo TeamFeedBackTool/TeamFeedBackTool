@@ -14,10 +14,10 @@ app.controller("registerLoginSwitchController", function ($log, $scope, $rootSco
 
     this.$onInit = function () {
         this.initializing = true;
-        angular.element(document.querySelector('.register-login-switch')).hide();
         $rootScope.profileVisibility = false;
         $scope.registerLoginSwitch = {register: false, login: true};
         this.toggleText = 'Erstellen Sie Ihr Konto';
+        angular.element(document.querySelector('.register-login-switch')).hide();
     };
 
     this.toggleSwitch = () => {
@@ -32,11 +32,17 @@ app.controller("registerLoginSwitchController", function ($log, $scope, $rootSco
         }
     };
 
-    $rootScope.$watch('profileVisibility', () => {
+    $rootScope.$watch('profileVisibility', (oldVal, newVal) => {
         if (this.initializing) {
-            $timeout(() => { this.initializing = false; });
+            $timeout(() => {
+                this.initializing = false;
+            });
         } else {
-            angular.element(document.querySelector('.register-login-switch')).slideToggle();
+            if (newVal) {
+                angular.element(document.querySelector('.register-login-switch')).slideDown();
+            } else {
+                angular.element(document.querySelector('.register-login-switch')).slideUp();
+            }
         }
     });
 

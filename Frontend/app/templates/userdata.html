@@ -1,6 +1,9 @@
-<header></header>
+<header-not-logged-in ng-if="!isLoggedIn"></header-not-logged-in>
+<header-without-menue ng-if="isLoggedIn"></header-without-menue>
 <subheader>
-  <a href="#!/dashboard">Dashboard</a> > <a href="#!/userdata">Userinfo</a>
+  <a href="#!/dashboard">Dashboard</a>
+  >
+  <a href="#!/userdata">Userinfo</a>
 </subheader>
 <individual-profile></individual-profile>
 <logout></logout>
