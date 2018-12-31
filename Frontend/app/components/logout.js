@@ -3,14 +3,22 @@ app.component("logout", {
     controller: "LogoutController"
 });
 
-app.controller("LogoutController", function ($http, $rootScope) {
+app.controller("LogoutController", function ($log, $http, $rootScope, $timeout) {
+    $log.debug("LogoutController()");
 
     this.$onInit = function() {
+        this.initializing = true;
+        angular.element(document.querySelector('.logout')).hide();
         $rootScope.profileVisibility = false;
     };
 
     $rootScope.$watch('profileVisibility', () => {
-        angular.element(document.querySelector('.logout')).slideToggle();
+        if (this.initializing) {
+            $timeout(() => { this.initializing = false; });
+        } else {
+            angular.element(document.querySelector('.logout')).slideToggle();
+            $log.debug($rootScope.profileVisibility);
+        }
     });
 
     this.submit = () => {
