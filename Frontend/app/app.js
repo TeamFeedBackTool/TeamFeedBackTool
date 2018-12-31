@@ -18,24 +18,87 @@ app.config(
     function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'templates/index.html'
+                templateUrl: 'templates/startpage.html',
+                controller: 'StartpageController'
             })
             .when('/dashboard', {
-                templateUrl: 'templates/dashboard.html'
+                templateUrl: 'templates/dashboard.html',
+                controller: 'DashboardController'
             })
             .when('/userdata', {
-                templateUrl: 'templates/userdata.html'
+                templateUrl: 'templates/userdata.html',
+                controller: 'UserdataController'
             })
             .when('/impressum', {
-                templateUrl: 'templates/impressum.html'
+                templateUrl: 'templates/impressum.html',
+                controller: 'ImpressumController',
             })
-            .when('/not-found.html', {
-                templateUrl: 'templates/404.html'
+            .when('/not-found', {
+                templateUrl: 'templates/not-found.html',
+                controller: 'NotFoundController'
             })
             .otherwise({
-                redirectTo: '/not-found.html'
+                redirectTo: '/not-found'
             });
     });
+
+
+app.controller("StartpageController", function ($log, $http) {
+    $log.debug("StartpageController()");
+
+
+
+});
+
+app.controller("DashboardController", function ($log, $http) {
+    $log.debug("DashboardController()");
+
+    let loggedIn;
+    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
+
+    $http({
+        method: 'POST',
+        url: recievingUrlLogInStatus
+    }).then(
+        (response) => {
+            $log.debug(response.data.isLoggedIn);
+        }, function (error) {
+            console.log(error);
+        });
+
+
+
+});
+
+app.controller("UserdataController", function ($log, $http) {
+    $log.debug("UserdataController()");
+
+
+
+});
+
+app.controller("ImpressumController", function ($log, $http) {
+    $log.debug("ImpressumController()");
+
+    this.$onInit = function () {
+        let dataFromServer = true;
+
+        if (dataFromServer) {
+            angular.element().replaceWith(document.getElementById('header'), '<header></header>');
+        }
+    };
+
+
+
+
+});
+
+app.controller("NotFoundController", function ($log, $http) {
+    $log.debug("NotFoundController()");
+
+
+
+});
 
 
 
