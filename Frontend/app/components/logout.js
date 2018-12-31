@@ -3,7 +3,16 @@ app.component("logout", {
     controller: "LogoutController"
 });
 
-app.controller("LogoutController", function ($http) {
+app.controller("LogoutController", function ($http, $rootScope) {
+
+    this.$onInit = function() {
+        $rootScope.profileVisibility = false;
+    };
+
+    $rootScope.$watch('profileVisibility', () => {
+        angular.element(document.querySelector('.logout')).slideToggle();
+    });
+
     this.submit = () => {
 
         let url = "../../Backend/LogoutUser.php";
@@ -14,5 +23,9 @@ app.controller("LogoutController", function ($http) {
         });
 
         window.location.href = '#!/';
+    };
+
+    this.userdata = () => {
+        window.location.href = '#!/userdata'
     }
 });

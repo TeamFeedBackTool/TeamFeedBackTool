@@ -12,10 +12,6 @@ app.component("userDisplayUsername", {
 app.controller("UserDisplayUsernameController", function ($http, $log, UserdataService, $rootScope) {
     $log.debug("UserDisplayUsernameController()");
 
-    this.$onInit = function() {
-        $rootScope.profileVisibility = false;
-    };
-
     UserdataService.getUserdata().then(x => {
         this.username = x.firstname + ' ' + x.surname;
     });
