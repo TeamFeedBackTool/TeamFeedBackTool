@@ -107,10 +107,12 @@ function isLoggedIn($loginBoolean){
 }
 
 /**
- *
+ * @param $firstnames
+ * @param $surnames
+ * @param $pdo
  */
 
-function sendFirstnameSurname($firstnames, $surnames){
+function sendFirstnameSurname($firstnames, $surnames, $pdo){
     echo json_encode((array(
         'projectname' => projectIdsToNames($pdo),
         'fk_leaderId' =>  getLeaderIdFromProjectId($pdo)

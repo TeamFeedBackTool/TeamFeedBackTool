@@ -376,20 +376,22 @@ function getDatesForUserIdAndProjectId(PDO $pdo)
 function getMembersOfProjectIdWithoutLeader(PDO $pdo)
 {
     $userIds = "";
-    //$userdata = getProjectId();
-    $userdata['projectId'] = 1;
+    $userdata = getProjectId();
+
     /**
      * gets all UserIds without the leaderId
      */
     $sql = "SELECT pk_fk_userId FROM worksat 
             INNER JOIN project ON worksat.pk_fk_projectId = project.pk_projectId
-            WHERE pk_projectId = :projectId 
+            WHERE pk_projectId = :projectId
             AND pk_fk_userId NOT IN (SELECT fk_leaderId 
                                      FROM project 
-                                     WHERE pk_projectId = :projectId)";
+                                     WHERE pk_projectId = :projectId1)";
     if ($stmt = $pdo->prepare($sql)) {
         $param_projectId = $userdata['projectId'];
+        $param_projectId1 = $userdata['projectId'];
         $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
+        $stmt->bindParam(':projectId1', $param_projectId1, PDO::PARAM_STR);
         if ($stmt->execute()){
             foreach ($stmt as $row) {
                 $userIds .= $row['pk_fk_userId'] .= ";";
@@ -456,7 +458,7 @@ function userIdsToFirstnameSurname(PDO $pdo)
     /**
      * sends Firstnames and Surnames of ProjectId without Leader
      */
-    sendFirstnameSurname($firstnames, $surnames);
+    sendFirstnameSurname($firstnames, $surnames, $pdo);
 
 }
 
