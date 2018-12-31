@@ -1,4 +1,5 @@
-<header-not-logged-in></header-not-logged-in>
+<header-not-logged-in ng-if="!isLoggedIn"></header-not-logged-in>
+<header-without-menue ng-if="isLoggedIn"></header-without-menue>
 <subheader>
     <a href="#!/" onClick="history.go(0)">Startseite</a>
 </subheader>

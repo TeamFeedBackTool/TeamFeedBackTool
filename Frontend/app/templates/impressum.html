@@ -1,4 +1,5 @@
-<header></header>
+<header-not-logged-in ng-if="!isLoggedIn"></header-not-logged-in>
+<header-without-menue ng-if="isLoggedIn"></header-without-menue>
 <subheader>
   <a href="#!/dashboard" onClick="history.go(0)">Dashboard</a>
   >

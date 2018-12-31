@@ -9,8 +9,4 @@ app.component('notFound', {
 app.controller("NotFoundController", function ($log) {
     $log.debug("NotFoundController()");
 
-    this.$onInit = function () {
-        this.url = $location.url();
-    }
-
 });

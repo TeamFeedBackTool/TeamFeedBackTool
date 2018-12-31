@@ -43,17 +43,9 @@ app.config(
     });
 
 
-app.controller("StartpageController", function ($log, $http) {
+app.controller("StartpageController", function ($log, $http, $scope) {
     $log.debug("StartpageController()");
 
-
-
-});
-
-app.controller("DashboardController", function ($log, $http) {
-    $log.debug("DashboardController()");
-
-    let loggedIn;
     let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
 
     $http({
@@ -61,34 +53,69 @@ app.controller("DashboardController", function ($log, $http) {
         url: recievingUrlLogInStatus
     }).then(
         (response) => {
+            $scope.isLoggedIn = response.data.isLoggedIn;
             $log.debug(response.data.isLoggedIn);
         }, function (error) {
             console.log(error);
         });
 
+});
 
+app.controller("DashboardController", function ($log, $http) {
+    $log.debug("DashboardController()");
+
+    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
+
+    $http({
+        method: 'POST',
+        url: recievingUrlLogInStatus
+    }).then(
+        (response) => {
+            if (!response.data.isLoggedIn) {
+                $window.location.href = "#!/";
+            }
+            $log.debug(response.data.isLoggedIn);
+        }, function (error) {
+            console.log(error);
+        });
 
 });
 
 app.controller("UserdataController", function ($log, $http) {
     $log.debug("UserdataController()");
 
+    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
 
+    $http({
+        method: 'POST',
+        url: recievingUrlLogInStatus
+    }).then(
+        (response) => {
+            if (!response.data.isLoggedIn) {
+                $window.location.href = "#!/";
+            }
+            $log.debug(response.data.isLoggedIn);
+        }, function (error) {
+            console.log(error);
+        });
 
 });
 
-app.controller("ImpressumController", function ($log, $http) {
+app.controller("ImpressumController", function ($log, $http, $scope) {
     $log.debug("ImpressumController()");
 
-    this.$onInit = function () {
-        let dataFromServer = true;
+    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
 
-        if (dataFromServer) {
-            angular.element().replaceWith(document.getElementById('header'), '<header></header>');
-        }
-    };
-
-
+    $http({
+        method: 'POST',
+        url: recievingUrlLogInStatus
+    }).then(
+        (response) => {
+            $scope.isLoggedIn = response.data.isLoggedIn;
+            $log.debug($scope.isLoggedIn);
+        }, function (error) {
+            console.log(error);
+        });
 
 
 });
@@ -96,7 +123,18 @@ app.controller("ImpressumController", function ($log, $http) {
 app.controller("NotFoundController", function ($log, $http) {
     $log.debug("NotFoundController()");
 
+    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
 
+    $http({
+        method: 'POST',
+        url: recievingUrlLogInStatus
+    }).then(
+        (response) => {
+            $scope.isLoggedIn = response.data.isLoggedIn;
+            $log.debug($scope.isLoggedIn);
+        }, function (error) {
+            console.log(error);
+        });
 
 });
 

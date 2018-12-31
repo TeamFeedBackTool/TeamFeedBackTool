@@ -11,8 +11,8 @@ app.controller("PlviewController", function($http, $rootScope){
 
 
     $rootScope.$watch('currentEmployee', function() {
-            showChart();
-        });
+        showChart();
+    });
 
     let showChart = () => {
         let userId = $rootScope.currentEmloyee;
