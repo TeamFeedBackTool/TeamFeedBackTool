@@ -458,7 +458,7 @@ function userIdsToFirstnameSurname(PDO $pdo)
     /**
      * sends Firstnames and Surnames of ProjectId without Leader
      */
-    sendFirstnameSurname($firstnames, $surnames, $pdo);
+    sendFirstnameSurname($firstnames, $surnames);
 
 }
 

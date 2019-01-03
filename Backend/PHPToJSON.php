@@ -112,9 +112,9 @@ function isLoggedIn($loginBoolean){
  * @param $pdo
  */
 
-function sendFirstnameSurname($firstnames, $surnames, $pdo){
+function sendFirstnameSurname($firstnames, $surnames){
     echo json_encode((array(
-        'projectname' => projectIdsToNames($pdo),
-        'fk_leaderId' =>  getLeaderIdFromProjectId($pdo)
+        'firstnames' => $firstnames,
+        'surnames' =>  $surnames
     )));
 }
