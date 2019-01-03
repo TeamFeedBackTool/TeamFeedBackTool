@@ -359,7 +359,7 @@ function getDatesForUserIdAndProjectId(PDO $pdo)
         $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
         if ($stmt->execute()) {
             foreach ($stmt as $row) {
-                $dates .= $row['technicalSkills'] .= ";";
+                $dates .= $row['date'] .= ";";
             }
             $dates = substr($dates, 0, -1);
         }
