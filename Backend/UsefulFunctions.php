@@ -280,7 +280,7 @@ function getMotivationForUserIdAndProjectId(PDO $pdo)
         $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
         if ($stmt->execute()) {
             foreach ($stmt as $row) {
-                $motivation .= $row['sliderValue_stress'] .= ";";
+                $motivation .= $row['sliderValue_motivation'] .= ";";
             }
             $motivation = substr($motivation, 0, -1);
         }
