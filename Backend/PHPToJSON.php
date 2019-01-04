@@ -109,12 +109,13 @@ function isLoggedIn($loginBoolean){
 /**
  * @param $firstnames
  * @param $surnames
- * @param $pdo
+ * @param $userIds
  */
 
-function sendFirstnameSurname($firstnames, $surnames){
+function sendFirstnameSurnameUserIds($firstnames, $surnames, $userIds){
     echo json_encode((array(
         'firstnames' => $firstnames,
-        'surnames' =>  $surnames
+        'surnames' =>  $surnames,
+        'userIds' =>  $userIds
     )));
 }

@@ -437,11 +437,13 @@ function userIdsToFirstnameSurname(PDO $pdo)
     $idsInArray = explode(';', $userdata);
     $firstnames = "";
     $surnames = "";
+    $userIds = "";
 
     for ($x = 0; $x < count($idsInArray); $x++) {
         $sql = "SELECT firstname, surname FROM users where pk_userId = :userId";
         if ($stmt = $pdo->prepare($sql)) {
             $param_userId = $idsInArray[$x];
+            $userIds .= $idsInArray[$x] .= ";";
             $stmt->bindParam(':userId', $param_userId, PDO::PARAM_STR);
             if ($stmt->execute()) {
                 foreach ($stmt as $row) {
@@ -450,6 +452,7 @@ function userIdsToFirstnameSurname(PDO $pdo)
                 }
                 $firstnames = substr($firstnames, 0, -1);
                 $surnames = substr($surnames, 0, -1);
+                $userIds = substr($userIds, 0, -1);
             }
         }
     }
@@ -458,7 +461,7 @@ function userIdsToFirstnameSurname(PDO $pdo)
     /**
      * sends Firstnames and Surnames of ProjectId without Leader
      */
-    sendFirstnameSurname($firstnames, $surnames);
+    sendFirstnameSurnameUserIds($firstnames, $surnames, $userIds);
 
 }
 
