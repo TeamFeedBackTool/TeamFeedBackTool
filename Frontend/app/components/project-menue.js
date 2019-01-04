@@ -7,10 +7,12 @@ app.component("projectMenue", {
 });
 
 
-app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
+app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $http) {
     $log.debug("ProjectMenueController()");
 
     this.$onInit = function () {
+        $scope.plview = false;
+        $scope.giveFeedback = false;
         loadProjects();
     };
 
@@ -28,10 +30,31 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
 
     this.clickedOnProjectTitle = ($event) => {
         $rootScope.projectId = angular.element($event.currentTarget).attr('project-id');
+
+        let parameter = JSON.stringify({
+            projectId: $rootScope.projectId
+        });
+
+        let url = "../../Backend/SendProjects.php";
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: parameter
+        }).then(
+            (response) => {
+                $scope.leaderId = response.data.leaderId;
+            });
+        if ($scope.leaderId === "") {
+            $scope.giveFeedback = false;
+            $scope.plview = true;
+        } else {
+            $scope.giveFeedback = true;
+            $scope.plview = false;
+        }
     };
 
     let loadProjects = () => {
-        this.projects = [];
         let recievingUrlProjectInformation = "../../Backend/SendProjects.php";
 
         $http({
@@ -39,6 +62,7 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
             url: recievingUrlProjectInformation
         }).then(
             (response) => {
+                this.projects = [];
                 this.projectTitles = response.data.projectNames.split(";");
                 this.projectIds = response.data.projectIds.split(";");
             }, function (error) {
@@ -47,13 +71,13 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
             for (let i = 0; i < this.projectIds.length; i++) {
                 if (this.projectTitles[i].length > 23) {
                     this.projects.push({
-                        'id' : this.projectIds[i],
-                        'name' : this.projectTitles[i].slice(0, 23) + '...'
+                        'id': this.projectIds[i],
+                        'name': this.projectTitles[i].slice(0, 23) + '...'
                     });
                 } else {
                     this.projects.push({
-                        'id' : this.projectIds[i],
-                        'name' : this.projectTitles[i]
+                        'id': this.projectIds[i],
+                        'name': this.projectTitles[i]
                     });
                 }
             }
@@ -62,5 +86,4 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $http) {
             $rootScope.currentProject = this.projects[this.projects.length];
         });
     };
-
 });
