@@ -3,34 +3,42 @@ app.component("employeeDropdown", {
     controller: "employeeDropdownController"
 });
 
-app.controller("employeeDropdownController", function ($http, $rootScope) {
-    let projId = 3;
-    let url = "../../Backend/SendFirstnameSurnameWithoutLeader.php";
+app.controller("employeeDropdownController", function ($http, $rootScope, $scope, $log) {
 
-    let employees = [];
+    this.$onInit = function () {
+        showEmployees();
+    };
 
-     let parameter = JSON.stringify({
-         projectId: projId
-     });
+    let showEmployees = () => {
+        this.users = [];
 
-     $http({
-         method: 'POST',
-         url: url,
-         data: parameter
-     }).then(
-         (response) => {
-            console.log(response);
-            let firstnames = response.data.firstname.split(";");
-            let surnames = response.data.surname.split(";");
-             for (let i = 0; i < surnames.length; i++) {
-                 employees.push(firstnames[i] + " " + surnames[i]);
-             }
-            console.log(employees);
-         }, function (error) {
-             console.log(error);
-         });
+        let projId = 3;
+        let url = "../../Backend/SendFirstnameSurnameWithoutLeader.php";
 
-    $scope.selectChanged = function(){
-        $rootScope.currentEmloyee = $scope.employee;
+        let parameter = JSON.stringify({
+            projectId: projId
+        });
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: parameter
+        }).then(
+            (response) => {
+                console.log(response);
+            }, function (error) {
+                console.log(error);
+            }).then(() => {
+                this.firstnames = response.data.firstname.split(";");
+                this.surnames = response.data.surname.split(";");
+                for (let i = 0; i < surnames.length; i++) {
+                    this.users.push(firstnames[i] + " " + surnames[i]);
+                }
+            console.log(this.firstnames);
+        });
+
+        $scope.selectChanged = function () {
+            $rootScope.currentEmloyee = $scope.users;
+        };
     };
 });

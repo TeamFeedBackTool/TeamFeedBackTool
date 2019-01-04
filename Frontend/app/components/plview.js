@@ -15,8 +15,8 @@ app.controller("PlviewController", function($http, $rootScope){
     });
 
     let showChart = () => {
-        let userId = $rootScope.currentEmloyee;
-        let projectId = 3;
+        let userId = 3;
+        let projectId = 2;
 
         let stress = '';
         let motivation = '';
