@@ -7,7 +7,7 @@ app.component("projectMenue", {
 });
 
 
-app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $http) {
+app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $http, UserdataService) {
     $log.debug("ProjectMenueController()");
 
     this.$onInit = function () {
@@ -36,22 +36,26 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
 
         let url = "../../Backend/SendProjectInformation.php";
 
-        $http({
-            method: 'POST',
-            url: url,
-            data: parameter
-        }).then(
-            (response) => {
-                $scope.leaderId = response.data.leaderId;
-                $log.debug(response);
-            });
-        if ($scope.leaderId === "") {
-            $scope.giveFeedback = false;
-            $scope.plview = true;
-        } else {
-            $scope.giveFeedback = true;
-            $scope.plview = false;
-        }
+        let userId;
+
+        UserdataService.getUserdata().then((responseUserdata) => {
+            userId = responseUserdata.userId;
+            $http({
+                method: 'POST',
+                url: url,
+                data: parameter
+            }).then(
+                (responseLeaderId) => {
+                    $scope.leaderId = responseLeaderId.data.fk_leaderId;
+                    if ($scope.leaderId === userId) {
+                        $scope.giveFeedback = false;
+                        $scope.plview = true;
+                    } else {
+                        $scope.giveFeedback = true;
+                        $scope.plview = false;
+                    }
+                });
+        });
     };
 
     let loadProjects = () => {
