@@ -450,13 +450,9 @@ function userIdsToFirstnameSurname(PDO $pdo)
                     $firstnames .= $row['firstname'] .= ";";
                     $surnames .= $row['surname'] .= ";";
                 }
-                $firstnames = substr($firstnames, 0, -1);
-                $surnames = substr($surnames, 0, -1);
-                $userIds = substr($userIds, 0, -1);
             }
         }
     }
-
 
     /**
      * sends Firstnames and Surnames of ProjectId without Leader
