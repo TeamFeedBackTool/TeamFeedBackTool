@@ -43,98 +43,79 @@ app.config(
     });
 
 
-app.controller("StartpageController", function ($log, $http, $scope) {
+app.controller("StartpageController", function ($log, $http, $scope, UserdataService) {
     $log.debug("StartpageController()");
 
-    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
-
-    $http({
-        method: 'POST',
-        url: recievingUrlLogInStatus
-    }).then(
-        (response) => {
-            $scope.isLoggedIn = response.data.isLoggedIn;
-            $log.debug(response.data.isLoggedIn);
-        }, function (error) {
-            console.log(error);
-        });
+    UserdataService.getUserdata().then(data => {
+        $log.debug("mail " + data.email + ", " + data.userId);
+        if (data.email !== undefined && data.userId !== undefined) {
+            return true;
+        }
+    }).then(isLoggedIn => {
+        $scope.isLoggedIn = !!isLoggedIn;
+    });
 
 });
 
-app.controller("DashboardController", function ($log, $http) {
+app.controller("DashboardController", function ($log, $http, UserdataService, $window) {
     $log.debug("DashboardController()");
 
-    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
-
-    $http({
-        method: 'POST',
-        url: recievingUrlLogInStatus
-    }).then(
-        (response) => {
-            if (!response.data.isLoggedIn) {
-                $window.location.href = "#!/";
-            }
-            $log.debug(response.data.isLoggedIn);
-        }, function (error) {
-            console.log(error);
-        });
+    UserdataService.getUserdata().then(data => {
+        $log.debug("mail " + data.email + ", " + data.userId);
+        if (data.email !== undefined && data.userId !== undefined) {
+            return true;
+        }
+    }).then(isLoggedIn => {
+        if (!isLoggedIn) {
+            $window.location.href = '#!/';
+        }
+    });
 
 });
 
-app.controller("UserdataController", function ($log, $http) {
+app.controller("UserdataController", function ($log, $http, UserdataService, $window) {
     $log.debug("UserdataController()");
 
-    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
-
-    $http({
-        method: 'POST',
-        url: recievingUrlLogInStatus
-    }).then(
-        (response) => {
-            if (!response.data.isLoggedIn) {
-                $window.location.href = "#!/";
-            }
-            $log.debug(response.data.isLoggedIn);
-        }, function (error) {
-            console.log(error);
-        });
+    UserdataService.getUserdata().then(data => {
+        $log.debug("mail " + data.email + ", " + data.userId);
+        if (data.email !== undefined && data.userId !== undefined) {
+            return true;
+        }
+    }).then(isLoggedIn => {
+        if (!isLoggedIn) {
+            $window.location.href = '#!/';
+        }
+    });
 
 });
 
-app.controller("ImpressumController", function ($log, $http, $scope) {
+app.controller("ImpressumController", function ($log, $http, $scope, UserdataService) {
     $log.debug("ImpressumController()");
 
-    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
-
-    $http({
-        method: 'POST',
-        url: recievingUrlLogInStatus
-    }).then(
-        (response) => {
-            $scope.isLoggedIn = response.data.isLoggedIn;
-            $log.debug($scope.isLoggedIn);
-        }, function (error) {
-            console.log(error);
-        });
+    UserdataService.getUserdata().then(data => {
+        $log.debug("mail " + data.email + ", " + data.userId);
+        if (data.email !== undefined && data.userId !== undefined) {
+            return true;
+        }
+    }).then(isLoggedIn => {
+        $scope.isLoggedIn = !!isLoggedIn;
+    });
 
 
 });
 
-app.controller("NotFoundController", function ($log, $http) {
+app.controller("NotFoundController", function ($log, $http, UserdataService) {
     $log.debug("NotFoundController()");
 
-    let recievingUrlLogInStatus = "../../Backend/isLoggedIn.php";
+    UserdataService.getUserdata().then(data => {
+        $log.debug("mail " + data.email + ", " + data.userId);
+        if (data.email !== undefined && data.userId !== undefined) {
+            return true;
+        }
+    }).then(isLoggedIn => {
+        $scope.isLoggedIn = !!isLoggedIn;
+    });
 
-    $http({
-        method: 'POST',
-        url: recievingUrlLogInStatus
-    }).then(
-        (response) => {
-            $scope.isLoggedIn = response.data.isLoggedIn;
-            $log.debug($scope.isLoggedIn);
-        }, function (error) {
-            console.log(error);
-        });
 
 });
 

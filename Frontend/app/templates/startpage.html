@@ -3,6 +3,7 @@
 <subheader>
     <a href="#!/">Startseite</a>
 </subheader>
-<register-login-switch></register-login-switch>
+<register-login-switch ng-if="!isLoggedIn"></register-login-switch>
+<logout ng-if="isLoggedIn"></logout>
 <inhalt></inhalt>
 <footer></footer>

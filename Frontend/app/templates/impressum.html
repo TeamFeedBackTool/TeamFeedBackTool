@@ -1,4 +1,5 @@
-<header></header>
+<header-without-menue ng-if="isLoggedIn"></header-without-menue>
+<header-not-logged-in ng-if="!isLoggedIn"></header-not-logged-in>
 <subheader>
   <a href="#!/dashboard" ng-if="isLoggedIn">Dashboard</a>
   <a href="#!/" ng-if="!isLoggedIn">Startseite</a>
