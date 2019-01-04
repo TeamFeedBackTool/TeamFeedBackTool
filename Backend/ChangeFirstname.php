@@ -32,7 +32,7 @@ function ChangeFirstname(PDO $pdo){
         $_SESSION['firstname'] = $firstname;
 
         // echo a message to say the UPDATE succeeded
-        sendSuccess("ging bruda");
+        sendSuccess("Vorname wurde geändert");
         sendUserData();
     } catch (PDOException $e) {
         echo $e->getMessage();

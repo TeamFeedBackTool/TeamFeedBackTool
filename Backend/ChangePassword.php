@@ -32,7 +32,7 @@ function ChangePassword(PDO $pdo){
             $stmt->execute();
 
             // echo a message to say the UPDATE succeeded
-            sendSuccess("Password successfully changed");
+            sendSuccess("Passwort erfolgreich geändert");
 
         } catch (PDOException $e) {
             echo $e->getMessage();
