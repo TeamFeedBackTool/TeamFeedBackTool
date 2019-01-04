@@ -5,15 +5,13 @@ app.component("plview", {
 
 app.controller("PlviewController", function($http, $rootScope){
     $rootScope.$watch('currentEmployee', () => {
-        if($rootScope.currentEmloyee !== undefined){
+        if($rootScope.currentEmployee !== undefined){
             showChart();
         }
     });
 
     let showChart = () => {
-        let username = $rootScope.currentEmloyee;
-        console.log(username);
-        let userId = 3;
+        let userId = $rootScope.currentEmployee;
         let projectId = 2;
 
         let parameter = JSON.stringify({
@@ -30,11 +28,11 @@ app.controller("PlviewController", function($http, $rootScope){
         }).then(
             (response) => {
                 console.log(response);
-                this.stress = response.data.stress;
-                this.motivation = response.data.motivation;
-                this.work_performance_satisfied = response.data.work_performance_satisfied;
-                this.technicalSkills = response.data.technicalSkills;
-                this.dates = response.data.dates;
+                this.stress = JSON.parse(JSON.stringify(response.data.stress));
+                this.motivation = JSON.parse(JSON.stringify(response.data.motivation));
+                this.work_performance_satisfied = JSON.parse(JSON.stringify(response.data.work_performance_satisfied));
+                this.technicalSkills = JSON.parse(JSON.stringify(response.data.technicalSkills));
+                this.dates = JSON.parse(JSON.stringify(response.data.dates));
             }, function (error) {
                 console.log(error);
             }).then(() => {
@@ -42,17 +40,17 @@ app.controller("PlviewController", function($http, $rootScope){
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [0, 1, 2, 3, 4, 5],
+                    labels: [this.dates, 1337],
                     datasets: [{
                         label: 'Stress',
-                        data: [0, 1, 2, 3, 4, 5],
+                        data: [this.stress, 1],
                         backgroundColor: [
                             'rgba(17, 188, 218, 0.1)'],
                         borderColor: [
                             'rgba(17, 188, 218, 1)']
                     }, {
                         label: 'Motivation',
-                        data: [0, 1, 2, 3, 4, 5],
+                        data: [this.motivation, 3],
                         backgroundColor: [
                             'rgba(78, 155, 43, 0.1)'],
                         borderColor: [
@@ -60,7 +58,7 @@ app.controller("PlviewController", function($http, $rootScope){
                     },
                         {
                             label: 'Know-How nötig?',
-                            data: [0, 1, 2, 3, 4, 5],
+                            data: [this.technicalSkills, 2],
                             backgroundColor: [
                                 'rgba(244, 127, 104, 1)'],
                             showLine: false,
@@ -68,7 +66,7 @@ app.controller("PlviewController", function($http, $rootScope){
                         },
                         {
                             label: 'Leistungszufriedenheit',
-                            data: [0, 1, 2, 3, 4, 5],
+                            data: [this.work_performance_satisfied, 5],
                             backgroundColor: [
                                 'rgba(0, 127, 104, 1)'],
                             showLine: false,
