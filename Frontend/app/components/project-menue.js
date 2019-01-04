@@ -30,12 +30,11 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
 
     this.clickedOnProjectTitle = ($event) => {
         $rootScope.projectId = angular.element($event.currentTarget).attr('project-id');
-
         let parameter = JSON.stringify({
             projectId: $rootScope.projectId
         });
 
-        let url = "../../Backend/SendProjects.php";
+        let url = "../../Backend/SendProjectInformation.php";
 
         $http({
             method: 'POST',
@@ -44,6 +43,7 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
         }).then(
             (response) => {
                 $scope.leaderId = response.data.leaderId;
+                $log.debug(response);
             });
         if ($scope.leaderId === "") {
             $scope.giveFeedback = false;

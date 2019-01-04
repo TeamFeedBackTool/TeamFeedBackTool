@@ -47,7 +47,6 @@ app.controller("StartpageController", function ($log, $http, $scope, UserdataSer
     $log.debug("StartpageController()");
 
     UserdataService.getUserdata().then(data => {
-        $log.debug("mail " + data.email + ", " + data.userId);
         if (data.email !== undefined && data.userId !== undefined) {
             return true;
         }
@@ -61,7 +60,6 @@ app.controller("DashboardController", function ($log, $http, UserdataService, $w
     $log.debug("DashboardController()");
 
     UserdataService.getUserdata().then(data => {
-        $log.debug("mail " + data.email + ", " + data.userId);
         if (data.email !== undefined && data.userId !== undefined) {
             return true;
         }
@@ -77,7 +75,6 @@ app.controller("UserdataController", function ($log, $http, UserdataService, $wi
     $log.debug("UserdataController()");
 
     UserdataService.getUserdata().then(data => {
-        $log.debug("mail " + data.email + ", " + data.userId);
         if (data.email !== undefined && data.userId !== undefined) {
             return true;
         }
@@ -93,7 +90,6 @@ app.controller("ImpressumController", function ($log, $http, $scope, UserdataSer
     $log.debug("ImpressumController()");
 
     UserdataService.getUserdata().then(data => {
-        $log.debug("mail " + data.email + ", " + data.userId);
         if (data.email !== undefined && data.userId !== undefined) {
             return true;
         }
@@ -108,7 +104,6 @@ app.controller("NotFoundController", function ($log, $http, UserdataService) {
     $log.debug("NotFoundController()");
 
     UserdataService.getUserdata().then(data => {
-        $log.debug("mail " + data.email + ", " + data.userId);
         if (data.email !== undefined && data.userId !== undefined) {
             return true;
         }
