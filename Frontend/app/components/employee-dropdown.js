@@ -3,7 +3,7 @@ app.component("employeeDropdown", {
     controller: "employeeDropdownController"
 });
 
-app.controller("employeeDropdownController", function ($http, $rootScope, $scope, $log) {
+app.controller("employeeDropdownController", function ($http, $rootScope, $scope) {
 
     this.$onInit = function () {
         showEmployees();
@@ -26,19 +26,18 @@ app.controller("employeeDropdownController", function ($http, $rootScope, $scope
         }).then(
             (response) => {
                 console.log(response);
+                this.firstnames = response.data.firstnames.split(";");
+                this.surnames = response.data.surnames.split(";");
             }, function (error) {
                 console.log(error);
             }).then(() => {
-                this.firstnames = response.data.firstname.split(";");
-                this.surnames = response.data.surname.split(";");
-                for (let i = 0; i < surnames.length; i++) {
-                    this.users.push(firstnames[i] + " " + surnames[i]);
+                for (let i = 0; i < this.surnames.length; i++) {
+                    this.users.push(this.firstnames[i] + " " + this.surnames[i]);
                 }
-            console.log(this.firstnames);
         });
 
         $scope.selectChanged = function () {
-            $rootScope.currentEmloyee = $scope.users;
+            $rootScope.currentEmloyee = $scope.selectedUser;
         };
     };
 });

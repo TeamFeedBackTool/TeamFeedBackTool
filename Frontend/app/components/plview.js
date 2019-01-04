@@ -4,13 +4,7 @@ app.component("plview", {
 });
 
 app.controller("PlviewController", function($http, $rootScope){
-
-    this.$onInit = function () {
-        showChart();
-    };
-
-
-    $rootScope.$watch('currentEmployee', function() {
+    $rootScope.$watch('currentEmployee', () => {
         showChart();
     });
 
@@ -18,16 +12,11 @@ app.controller("PlviewController", function($http, $rootScope){
         let userId = 3;
         let projectId = 2;
 
-        let stress = '';
-        let motivation = '';
-        let work_performance_satisfied = '';
-        let technicalSkills = '';
-        let dates = '';
-
         let parameter = JSON.stringify({
             userId: userId,
             projectId: projectId
         });
+
         let url = "../../Backend/SendFeedbacksForIds.php";
 
         $http({
@@ -37,75 +26,62 @@ app.controller("PlviewController", function($http, $rootScope){
         }).then(
             (response) => {
                 console.log(response);
+                this.stress = response.data.stress;
+                this.motivation = response.data.motivation;
+                this.work_performance_satisfied = response.data.work_performance_satisfied;
+                this.technicalSkills = response.data.technicalSkills;
+                this.dates = response.data.dates;
             }, function (error) {
                 console.log(error);
-            });
-
-        let receivingUrl = "../../Backend/SendFeedbacksForIds.php";
-
-        $http({
-            method: 'POST',
-            url: receivingUrl
-        }).then(
-            (response) => {
-                console.log(response);
-                stress = response.data.stress;
-                motivation = response.data.motivation;
-                work_performance_satisfied = response.data.work_performance_satisfied;
-                technicalSkills = response.data.technicalSkills;
-                dates = response.data.dates;
-            }, function (error) {
-                console.log(error);
-            });
-
-
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dates,
-                datasets: [{
-                    label: 'Stress',
-                    data: stress,
-                    backgroundColor: [
-                        'rgba(17, 188, 218, 0.1)'],
-                    borderColor: [
-                        'rgba(17, 188, 218, 1)']
-                }, {
-                    label: 'Motivation',
-                    data: motivation,
-                    backgroundColor: [
-                        'rgba(78, 155, 43, 0.1)'],
-                    borderColor: [
-                        'rgba(78, 155, 43, 1)']
-                },
-                    {
-                        label: 'Know-How nötig?',
-                        data: technicalSkills,
+            }).then(() => {
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [0, 1, 2, 3, 4, 5],
+                    datasets: [{
+                        label: 'Stress',
+                        data: [0, 1, 2, 3, 4, 5],
                         backgroundColor: [
-                            'rgba(244, 127, 104, 1)'],
-                        showLine: false,
-                        pointRadius: 8
+                            'rgba(17, 188, 218, 0.1)'],
+                        borderColor: [
+                            'rgba(17, 188, 218, 1)']
+                    }, {
+                        label: 'Motivation',
+                        data: [0, 1, 2, 3, 4, 5],
+                        backgroundColor: [
+                            'rgba(78, 155, 43, 0.1)'],
+                        borderColor: [
+                            'rgba(78, 155, 43, 1)']
                     },
-                    {
-                        label: 'Leistungszufriedenheit',
-                        data: work_performance_satisfied,
-                        backgroundColor: [
-                            'rgba(0, 127, 104, 1)'],
-                        showLine: false,
-                        pointRadius: 8
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+                        {
+                            label: 'Know-How nötig?',
+                            data: [0, 1, 2, 3, 4, 5],
+                            backgroundColor: [
+                                'rgba(244, 127, 104, 1)'],
+                            showLine: false,
+                            pointRadius: 8
+                        },
+                        {
+                            label: 'Leistungszufriedenheit',
+                            data: [0, 1, 2, 3, 4, 5],
+                            backgroundColor: [
+                                'rgba(0, 127, 104, 1)'],
+                            showLine: false,
+                            pointRadius: 8
                         }
-                    }]
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
                 }
-            }
+            });
         });
     };
 });
