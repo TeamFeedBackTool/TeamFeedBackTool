@@ -5,10 +5,14 @@ app.component("plview", {
 
 app.controller("PlviewController", function($http, $rootScope){
     $rootScope.$watch('currentEmployee', () => {
-        showChart();
+        if($rootScope.currentEmloyee !== undefined){
+            showChart();
+        }
     });
 
     let showChart = () => {
+        let username = $rootScope.currentEmloyee;
+        console.log(username);
         let userId = 3;
         let projectId = 2;
 
