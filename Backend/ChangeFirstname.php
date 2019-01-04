@@ -33,7 +33,6 @@ function ChangeFirstname(PDO $pdo){
 
         // echo a message to say the UPDATE succeeded
         sendSuccess("Vorname wurde geändert");
-        sendUserData();
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
