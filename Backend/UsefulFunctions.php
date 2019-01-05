@@ -211,7 +211,7 @@ function projectnameToIds(PDO $pdo, $userdata)
 function getLeaderIdFromProjectId(PDO $pdo)
 {
     //deletes last char since its an ";"
-    $projectId = readProjectsForUser($pdo);
+    $projectId = getProjectId();
     $leaderId = "";
 
     $sql = "SELECT fk_leaderId FROM project WHERE pk_projectId = :projectId";
