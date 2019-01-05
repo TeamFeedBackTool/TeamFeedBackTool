@@ -14,7 +14,7 @@ app.controller("giveFeedbackController", function ($http, $scope, $mdDialog, $ro
         group2: 'Ja'
     };
 
-    $scope.antwort = "Danke fürs beantworten der Fragen! Kommen Sie in einer Woche wieder!";
+    $scope.antwort = "Danke für das Beantworten der Fragen! Kommen Sie in einer Woche wieder!";
 
     this.submit = () => {
 
@@ -52,7 +52,7 @@ app.controller("giveFeedbackController", function ($http, $scope, $mdDialog, $ro
                 if (this.info === "You gotta wait a week buddy") {
                     $scope.showAlert("Sie habe diese Woche bereits abgestimmt!")
                 } else if (this.info === "Feedback Submitted") {
-                    $scope.showAlert("Danke für das absimmen! Kommen Sie nächste Woche wieder!")
+                    $scope.showAlert("Danke für das Abstimmen! Kommen Sie nächste Woche wieder!")
                 } else {
 
                 }

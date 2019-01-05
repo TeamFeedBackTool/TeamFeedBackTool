@@ -25,11 +25,12 @@ app.controller("PlviewController", function($http, $rootScope){
         }).then(
             (response) => {
                 console.log(response);
-                this.stress = JSON.parse(JSON.stringify(response.data.stress));
-                this.motivation = JSON.parse(JSON.stringify(response.data.motivation));
-                this.work_performance_satisfied = JSON.parse(JSON.stringify(response.data.work_performance_satisfied));
-                this.technicalSkills = JSON.parse(JSON.stringify(response.data.technicalSkills));
-                this.dates = JSON.parse(JSON.stringify(response.data.dates));
+                this.stress = response.data.stress.split(";");
+                this.motivation = response.data.motivation.split(";");
+                this.work_performance_satisfied = response.data.work_performance_satisfied.split(";");
+                this.technicalSkills = response.data.technicalSkills.split(";");
+                this.dates = response.data.dates.split(";");
+                console.log(this.dates);
             }, function (error) {
                 console.log(error);
             }).then(() => {
@@ -37,17 +38,17 @@ app.controller("PlviewController", function($http, $rootScope){
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [this.dates],
+                    labels: this.dates,
                     datasets: [{
                         label: 'Stress',
-                        data: [this.stress],
+                        data: this.stress,
                         backgroundColor: [
                             'rgba(17, 188, 218, 0.1)'],
                         borderColor: [
                             'rgba(17, 188, 218, 1)']
                     }, {
                         label: 'Motivation',
-                        data: [this.motivation],
+                        data: this.motivation,
                         backgroundColor: [
                             'rgba(78, 155, 43, 0.1)'],
                         borderColor: [
@@ -55,7 +56,7 @@ app.controller("PlviewController", function($http, $rootScope){
                     },
                         {
                             label: 'Know-How nötig?',
-                            data: [this.technicalSkills],
+                            data: this.technicalSkills,
                             backgroundColor: [
                                 'rgba(244, 127, 104, 1)'],
                             showLine: false,
@@ -63,7 +64,7 @@ app.controller("PlviewController", function($http, $rootScope){
                         },
                         {
                             label: 'Leistungszufriedenheit',
-                            data: [this.work_performance_satisfied],
+                            data: this.work_performance_satisfied,
                             backgroundColor: [
                                 'rgba(0, 127, 104, 1)'],
                             showLine: false,

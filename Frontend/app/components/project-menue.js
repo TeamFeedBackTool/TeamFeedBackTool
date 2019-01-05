@@ -46,6 +46,7 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
                 data: parameter
             }).then(
                 (responseLeaderId) => {
+                    console.log(responseLeaderId);
                     $scope.leaderId = responseLeaderId.data.fk_leaderId;
                     if ($scope.leaderId === userId) {
                         $scope.giveFeedback = false;
