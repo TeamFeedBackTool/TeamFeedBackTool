@@ -47,10 +47,9 @@ function doesUserExist(PDO $pdo, $userdata){
 function inviteEmployee(PDO $pdo, $userdata){
     if(doesUserExist($pdo,$userdata) == true){
         writeIntoWorksAt($pdo, emailToUserId($pdo,$userdata), $userdata['projectId']);
-        sendProjects($pdo);
-        sendSuccess("User added");
+        sendSuccess("Mitarbeiter wurde hinzugefügt");
     }
     else{
-        sendError("User does not exist.");
+        sendError("Nutzer existiert nicht");
     }
 }
