@@ -30,7 +30,6 @@ app.controller("PlviewController", function($http, $rootScope){
                 this.work_performance_satisfied = response.data.work_performance_satisfied.split(";");
                 this.technicalSkills = response.data.technicalSkills.split(";");
                 this.dates = response.data.dates.split(";");
-                console.log(this.dates);
             }, function (error) {
                 console.log(error);
             }).then(() => {
