@@ -217,7 +217,7 @@ function getLeaderIdFromProjectId(PDO $pdo)
     $sql = "SELECT fk_leaderId FROM project WHERE pk_projectId = :projectId";
     if ($stmt = $pdo->prepare($sql)) {
         // Bind variables to the prepared statement as parameters
-        $param_projectId = $projectId;
+        $param_projectId = $projectId['projectId'];
         $stmt->bindParam(':projectId', $param_projectId, PDO::PARAM_STR);
         if ($stmt->execute()) {
             if ($stmt->rowCount() == 1) {
