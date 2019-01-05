@@ -86,6 +86,24 @@
         user-select: none;
     }
 
+    .dashboard-icon {
+        position: absolute;
+        top: 30%;
+        width: 25rem;
+        height: 25rem;
+    }
+
+    .dashboard-icon-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .currentProjectBlock {
+        background-color: rgb(133, 0, 59);
+    }
+
 
 </style>
 <div class="project-menue-closed">
@@ -93,7 +111,7 @@
         <span class="project-heading">Projekte</span>
     </div>
     <div class="project-names">
-        <div class="project-block" ng-click="$ctrl.clickedOnProjectTitle($event)" ng-repeat="project in $ctrl.projects track by $index" project-id="{{ project.id }}" >
+        <div class="project-block" ng-class="{ currentProjectBlock: $index == pressedIndex }" ng-click="$ctrl.clickedOnProjectTitle($event, $index)" ng-repeat="project in $ctrl.projects track by $index" project-id="{{ project.id }}" >
             <span class="project-name">{{ project.name }}</span>
         </div>
     </div>
@@ -101,3 +119,6 @@
 
 <plview ng-show="plview"></plview>
 <give-feedback ng-show="giveFeedback"></give-feedback>
+<div class="dashboard-icon-container">
+    <img src="resources/dashboard-icon.png" class="dashboard-icon" ng-show="!plview && !giveFeedback">
+</div>

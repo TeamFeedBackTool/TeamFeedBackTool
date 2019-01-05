@@ -27,7 +27,6 @@ app.controller("employeeDropdownController", function ($http, $rootScope, $scope
             data: parameter
         }).then(
             (response) => {
-                console.log(response);
                 this.firstnames = response.data.firstnames.split(";");
                 this.surnames = response.data.surnames.split(";");
                 this.userIds = response.data.userIds.split(";");
@@ -52,7 +51,6 @@ app.controller("employeeDropdownController", function ($http, $rootScope, $scope
                 data: parameter
             }).then(
                 (response) => {
-                    console.log(response);
                     this.firstnames = response.data.firstnames.split(";");
                     this.surnames = response.data.surnames.split(";");
                     this.userIds = response.data.userIds.split(";");

@@ -3,6 +3,10 @@ app.component("inhalt", {
     controller: "InhaltController"
 });
 
-app.controller("InhaltController", function() {
+app.controller("InhaltController", function($log, $window) {
+
+    this.openDashboard = () => {
+        $window.location.href = "#!/dashboard";
+    };
 
 });

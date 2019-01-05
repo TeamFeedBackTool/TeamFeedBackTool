@@ -3,7 +3,7 @@ app.component("logout", {
     controller: "LogoutController"
 });
 
-app.controller("LogoutController", function ($log, $http, $rootScope, $timeout, $window, $route) {
+app.controller("LogoutController", function ($log, $http, $rootScope, $timeout, $window) {
     $log.debug("LogoutController()");
 
     this.$onInit = function() {
@@ -33,8 +33,8 @@ app.controller("LogoutController", function ($log, $http, $rootScope, $timeout, 
             url: url
         });
 
-        $window.location.href = '#!/';
-        $route.reload();
+        location.reload();
+
 
     };
 

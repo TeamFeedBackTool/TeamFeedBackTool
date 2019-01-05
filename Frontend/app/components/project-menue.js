@@ -13,6 +13,7 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
     this.$onInit = function () {
         $scope.plview = false;
         $scope.giveFeedback = false;
+        $scope.pressedIndex = NaN;
         loadProjects();
     };
 
@@ -28,7 +29,7 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
         }
     });
 
-    this.clickedOnProjectTitle = ($event) => {
+    this.clickedOnProjectTitle = ($event, index) => {
         $rootScope.projectId = angular.element($event.currentTarget).attr('project-id');
         let parameter = JSON.stringify({
             projectId: $rootScope.projectId
@@ -57,6 +58,8 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
                     }
                 });
         });
+
+        $scope.pressedIndex = index;
     };
 
     let loadProjects = () => {
@@ -89,6 +92,8 @@ app.controller("ProjectMenueController", function ($log, $rootScope, $scope, $ht
         }).then(() => {
             // what project is shown in the dashboard
             $rootScope.currentProject = this.projects[this.projects.length];
+            angular.element(document.getElementById());
         });
+
     };
 });
