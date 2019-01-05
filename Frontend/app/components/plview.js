@@ -77,7 +77,7 @@ app.controller("PlviewController", function($http, $rootScope){
                             backgroundColor: [
                                 'rgba(244, 127, 104, 1)'],
                             showLine: false,
-                            pointRadius: 8
+                            pointRadius: 5
                         },
                         {
                             label: 'Leistungszufriedenheit',
@@ -85,7 +85,7 @@ app.controller("PlviewController", function($http, $rootScope){
                             backgroundColor: [
                                 'rgba(0, 127, 104, 1)'],
                             showLine: false,
-                            pointRadius: 8
+                            pointRadius: 5
                         }
                     ]
                 },
