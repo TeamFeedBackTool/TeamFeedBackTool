@@ -5,18 +5,37 @@ app.component("employeeDropdown", {
 
 app.controller("employeeDropdownController", function ($http, $rootScope, $scope) {
 
-    this.$onInit = function () {
-        showEmployees();
-    };
+    this.users = [];
 
-    let showEmployees = () => {
-        this.users = [];
+    let url = "../../Backend/SendFirstnameSurnameWithoutLeader.php";
 
-        let projId = 3;
+    let parameter = JSON.stringify({
+        projectId: $rootScope.projectId
+    });
+
+    $http({
+        method: 'POST',
+        url: url,
+        data: parameter
+    }).then(
+        (response) => {
+            console.log(response);
+            this.firstnames = response.data.firstnames.split(";");
+            this.surnames = response.data.surnames.split(";");
+            this.userIds = response.data.userIds.split(";");
+        }, function (error) {
+            console.log(error);
+        }).then(() => {
+        for (let i = 0; i < this.surnames.length; i++) {
+            this.users.push((this.firstnames[i] + " " + this.surnames[i]));
+        }
+    });
+
+    $scope.selectChanged = function () {
         let url = "../../Backend/SendFirstnameSurnameWithoutLeader.php";
 
         let parameter = JSON.stringify({
-            projectId: projId
+            projectId: $rootScope.projectId
         });
 
         $http({
@@ -32,37 +51,11 @@ app.controller("employeeDropdownController", function ($http, $rootScope, $scope
             }, function (error) {
                 console.log(error);
             }).then(() => {
-                for (let i = 0; i < this.surnames.length; i++) {
-                    this.users.push((this.firstnames[i] + " " + this.surnames[i]));
+            for (let i = 0; i < this.surnames.length; i++) {
+                if ($scope.selectedUser === (this.firstnames[i] + " " + this.surnames[i])) {
+                    $rootScope.currentEmployee = this.userIds[i];
                 }
+            }
         });
-        $scope.selectChanged = function () {
-            let projId = 3;
-            let url = "../../Backend/SendFirstnameSurnameWithoutLeader.php";
-
-            let parameter = JSON.stringify({
-                projectId: projId
-            });
-
-            $http({
-                method: 'POST',
-                url: url,
-                data: parameter
-            }).then(
-                (response) => {
-                    console.log(response);
-                    this.firstnames = response.data.firstnames.split(";");
-                    this.surnames = response.data.surnames.split(";");
-                    this.userIds = response.data.userIds.split(";");
-                }, function (error) {
-                    console.log(error);
-                }).then(() => {
-                for (let i = 0; i < this.surnames.length; i++) {
-                    if ($scope.selectedUser === (this.firstnames[i] + " " + this.surnames[i])){
-                        $rootScope.currentEmployee = this.userIds[i];
-                    }
-                }
-            });
-        };
     };
 });

@@ -5,13 +5,12 @@ app.component("inviteEmployee", {
 
 
 app.controller("InviteEmployeeController", function ($http, $rootScope) {
-    let projId = 3;
     let url = "../../Backend/InviteEmployee.php";
 
     this.submitEmployee = () => {
         let parameter = JSON.stringify({
             email: this.frm_employee_email,
-            projectId: projId
+            projectId: $rootScope.projectId
         });
 
         $http({

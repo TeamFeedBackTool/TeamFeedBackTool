@@ -11,12 +11,9 @@ app.controller("PlviewController", function($http, $rootScope){
     });
 
     let showChart = () => {
-        let userId = $rootScope.currentEmployee;
-        let projectId = 2;
-
         let parameter = JSON.stringify({
-            userId: userId,
-            projectId: projectId
+            userId: $rootScope.currentEmployee,
+            projectId: $rootScope.projectId
         });
 
         let url = "../../Backend/SendFeedbacksForIds.php";
@@ -40,17 +37,17 @@ app.controller("PlviewController", function($http, $rootScope){
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [this.dates, 1337],
+                    labels: [this.dates],
                     datasets: [{
                         label: 'Stress',
-                        data: [this.stress, 1],
+                        data: [this.stress],
                         backgroundColor: [
                             'rgba(17, 188, 218, 0.1)'],
                         borderColor: [
                             'rgba(17, 188, 218, 1)']
                     }, {
                         label: 'Motivation',
-                        data: [this.motivation, 3],
+                        data: [this.motivation],
                         backgroundColor: [
                             'rgba(78, 155, 43, 0.1)'],
                         borderColor: [
@@ -58,7 +55,7 @@ app.controller("PlviewController", function($http, $rootScope){
                     },
                         {
                             label: 'Know-How nötig?',
-                            data: [this.technicalSkills, 2],
+                            data: [this.technicalSkills],
                             backgroundColor: [
                                 'rgba(244, 127, 104, 1)'],
                             showLine: false,
@@ -66,7 +63,7 @@ app.controller("PlviewController", function($http, $rootScope){
                         },
                         {
                             label: 'Leistungszufriedenheit',
-                            data: [this.work_performance_satisfied, 5],
+                            data: [this.work_performance_satisfied],
                             backgroundColor: [
                                 'rgba(0, 127, 104, 1)'],
                             showLine: false,
