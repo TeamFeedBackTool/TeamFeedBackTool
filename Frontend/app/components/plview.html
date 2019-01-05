@@ -1,16 +1,26 @@
 <style>
- .plview{
-     position: absolute;
-     margin-top: 15rem;
-     margin-bottom: 2rem;
-     margin-left: 20rem;
-     width: 70%;
-     height: 40vh;
- }
+    .chart1 {
+        position: absolute;
+        margin-top: 10rem;
+        margin-bottom: 2rem;
+        margin-left: 17rem;
+        width: 70%;
+    }
+
+    .chart2 {
+        position: absolute;
+        margin-top: 50rem;
+        margin-bottom: 4rem;
+        margin-left: 17rem;
+        width: 70%;
+    }
 </style>
 <div>
-    <div class="plview">
+    <div class="chart1">
         <canvas id="myChart"></canvas>
+    </div>
+    <div class="chart2">
+        <canvas id="myChart2" height="50"></canvas>
     </div>
     <employee-dropdown></employee-dropdown>
     <invite-employee></invite-employee>

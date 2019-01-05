@@ -52,7 +52,25 @@ app.controller("PlviewController", function($http, $rootScope){
                             'rgba(78, 155, 43, 0.1)'],
                         borderColor: [
                             'rgba(78, 155, 43, 1)']
-                    },
+                    }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            var ctx2 = document.getElementById("myChart2");
+            var myChart2 = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: this.dates,
+                    datasets: [
                         {
                             label: 'Know-How nötig?',
                             data: this.technicalSkills,
@@ -75,7 +93,8 @@ app.controller("PlviewController", function($http, $rootScope){
                     scales: {
                         yAxes: [{
                             ticks: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                stepSize: 1
                             }
                         }]
                     }
