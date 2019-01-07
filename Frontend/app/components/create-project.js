@@ -12,7 +12,7 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog, $w
             .placeholder('Projektname')
             .targetEvent(ev)
             .required(true)
-            .ok('Bestätigen!')
+            .ok('Erstellen!')
             .cancel('Abbrechen');
 
         $mdDialog.show(confirm).then(function (result) {
