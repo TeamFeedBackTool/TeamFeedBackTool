@@ -30,13 +30,13 @@ function registerUser(PDO $pdo){
         // Attempt to execute the prepared statement
         if ($stmt->execute()) {
             if ($stmt->rowCount() == 1) {
-                sendError("This email is already taken.");
+                sendError("Diese Email Adresse ist schon in Verwendung.");
             } else {
                 $_SESSION["email"] = trim($userdata["email"]);
                 //assigning SESSION Variables for later use, if is valid
             }
         } else {
-            sendError("Oops! Something went wrong. Please try again later.");
+            sendError("Ein Fehler ist aufgetreten.");
         }
         // Close statement
         unset($stmt);
@@ -56,7 +56,7 @@ function registerUser(PDO $pdo){
             //assigning SESSION Variables for later use, if is valid
             $_SESSION["firstname"] = trim($userdata["firstname"]);
         } else {
-            sendError("Oops! Something went wrong. Please try again later.");
+            sendError("Ein Fehler ist aufgetreten.");
         }
         // Close statement
         unset($stmt);
@@ -76,7 +76,7 @@ function registerUser(PDO $pdo){
             //assigning SESSION Variables for later use, if is valid
             $_SESSION["surname"] = trim($userdata["surname"]);
         } else {
-            sendError("Oops! Something went wrong. Please try again later.");
+            sendError("Ein Fehler ist aufgetreten.");
         }
         // Close statement
         unset($stmt);
@@ -116,9 +116,9 @@ function registerUser(PDO $pdo){
                         }
                     }
                 }
-                sendSuccess("you were registered");
+                sendSuccess("Sie wurden erfolgreich registriert.");
             } else {
-                sendError("Something went wrong. Please try again later.");
+                sendError("Ein Fehler ist aufgetreten.");
             }
 
             unset($stmt);

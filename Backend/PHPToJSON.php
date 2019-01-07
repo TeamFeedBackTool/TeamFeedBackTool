@@ -17,7 +17,7 @@ function SendUserData(){
 }
 
 /**
- * Gives back JSON, has an "infotext", dies at the end (kind of bad, but good enough)
+ * Gives back JSON, has an "infotext"
  * @param $errorText
  */
 function sendError($errorText){
@@ -29,7 +29,7 @@ function sendError($errorText){
 }
 
 /**
- * Gives back regular JSON if a success occurs, has an "infotext", dies at the end (kind of bad, but good enough)
+ * Gives back regular JSON if a success occurs, has an "infotext"
  * @param $successText
  */
 function sendSuccess($successText){
