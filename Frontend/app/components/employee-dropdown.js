@@ -8,6 +8,7 @@ app.controller("employeeDropdownController", function ($http, $rootScope, $scope
     $rootScope.$watch('projectId', () => {
         if($rootScope.projectId !== undefined){
             getEmployees();
+            $scope.selectedUser = "";
         }
     });
 

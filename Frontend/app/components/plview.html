@@ -16,10 +16,10 @@
     }
 </style>
 <div>
-    <div class="chart1">
+    <div ng-show="$ctrl.chartShow" class="chart1">
         <canvas id="myChart"></canvas>
     </div>
-    <div class="chart2">
+    <div ng-show="$ctrl.chartShow" class="chart2">
         <canvas id="myChart2" height="50"></canvas>
     </div>
     <employee-dropdown></employee-dropdown>
