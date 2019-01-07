@@ -40,18 +40,18 @@ function LoginUser(PDO $pdo){
                         save the email, firstname, surname to the session for later use*/
                         saveIntoSession($row);
                         setLatestDate($pdo);
-                        sendSuccess("You were logged in");
+                        sendSuccess("Sie wurden erfolgreich eingeloggt.");
 
                     } else {
                         // Send an error message if password is not valid
-                        sendError('The password you entered was not valid.');
+                        sendError('Das eingegebene Passwort ist nicht korrekt.');
                     }
                 }
             } else {
-                sendError('No account found with that email.');
+                sendError('Es wurde kein Account mit dieser Email gefunden.');
             }
         } else {
-            sendError("Oops! Something went wrong. Please try again later.");
+            sendError("Ein Fehler ist aufgetreten.");
         }
     }
     // Close connection
