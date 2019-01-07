@@ -37,7 +37,6 @@ app.controller("createProjectController", function ($http, $scope, $mdDialog, $w
                             }
 
                             if ($scope.info === "201") {
-                                $scope.showAlert("Ihr Projekt wurde erstellt!");
                                 $window.location.reload(true);
                             }
                         })
