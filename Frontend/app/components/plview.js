@@ -34,6 +34,7 @@ app.controller("PlviewController", function ($http, $rootScope, $log) {
                         this.work_performance_satisfied = response.data.work_performance_satisfied.split(";");
                         this.technicalSkills = response.data.technicalSkills.split(";");
                         this.dates = response.data.dates.split(";");
+                        console.log(response);
                     } else {
                         this.stress = response.data.stress;
                         this.motivation = response.data.motivation;
